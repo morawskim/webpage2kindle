@@ -27,6 +27,16 @@ class Job extends EventSourcedAggregateRoot
         return (string) $this->jobId;
     }
 
+    public function getUrlToFetch(): string
+    {
+        return $this->urlToFetch;
+    }
+
+    public function getWebPageContent(): string
+    {
+        return $this->webPageContent;
+    }
+
     private function new(JobId $jobId, string $urlToFetch): void
     {
         $this->apply(
