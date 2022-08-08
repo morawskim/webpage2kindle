@@ -22,3 +22,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Broadway\EventStore\Dbal\DBALEventStore: '@broadway.event_store.dbal'
+    Broadway\CommandHandling\CommandBus: '@broadway.command_handling.event_dispatching_command_bus'
+    Broadway\UuidGenerator\UuidGeneratorInterface: '@broadway.uuid.generator'
+    Broadway\EventStore\EventStore: '@broadway.event_store.dbal'
+    Broadway\EventHandling\EventBus: '@broadway.event_handling.event_bus'
+
+    App\Job\JobCommandHandler:
+        tags:
+            - { name: broadway.command_handler }
+    App\Job\Domain\JobRepository:
+        arguments:
+            $eventStreamDecorators:
+              - '@broadway.metadata_enriching_event_stream_decorator'
