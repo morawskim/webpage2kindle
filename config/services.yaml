@@ -35,3 +35,18 @@ services:
         arguments:
             $eventStreamDecorators:
               - '@broadway.metadata_enriching_event_stream_decorator'
+
+    # prometheus metrics
+    App\Job\PageContentFetcher\GoReadabilitySynchronousPageContentFetcher: ~
+    App\Job\PageContentFetcher\PrometheusMetricDecorator:
+        arguments:
+            $pageContentFetcher: '@App\Job\PageContentFetcher\GoReadabilitySynchronousPageContentFetcher'
+            $prometheusAdapterLabel: 'GoReadability'
+    App\Job\PageContentFetcher\PageContentFetcherInterface: '@App\Job\PageContentFetcher\PrometheusMetricDecorator'
+    prometheus_storage:
+        class: Prometheus\Storage\APC
+    Prometheus\CollectorRegistry:
+        class: Prometheus\CollectorRegistry
+        arguments:
+            $storageAdapter: '@prometheus_storage'
+    Prometheus\RenderTextFormat: ~
