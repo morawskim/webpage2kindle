@@ -37,7 +37,9 @@ services:
               - '@broadway.metadata_enriching_event_stream_decorator'
 
     # prometheus metrics
-    App\Job\PageContentFetcher\GoReadabilitySynchronousPageContentFetcher: ~
+    App\Job\PageContentFetcher\GoReadabilitySynchronousPageContentFetcher:
+        arguments:
+            $pathToCommand: '%env(GO_READABILITY_PATH)%'
     App\Job\PageContentFetcher\PrometheusMetricDecorator:
         arguments:
             $pageContentFetcher: '@App\Job\PageContentFetcher\GoReadabilitySynchronousPageContentFetcher'
