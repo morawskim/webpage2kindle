@@ -52,3 +52,5 @@ services:
         arguments:
             $storageAdapter: '@prometheus_storage'
     Prometheus\RenderTextFormat: ~
+    App\Controller\MetricController:
+        tags: ['controller.service_arguments']
