@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <form method="post" action="{{ url('push_to_kindle_synchronous') }}">
+    <form method="post" action="{{ path('push_to_kindle_synchronous') }}">
         <div class="mb-3">
             <label for="urlInput" class="form-label">Url to process</label>
             <input name="url" type="url" class="form-control" id="urlInput">
