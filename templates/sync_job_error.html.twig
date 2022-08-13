@@ -1,0 +1,12 @@
+{# @var reason string #}
+{# @var url string #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Error</h1>
+<div class="alert alert-danger" role="alert">
+    Cannot fetch content of page "<a target="_blank" href="{{ url }}">{{ url }}</a>".
+    <br />
+    Message: {{ reason }}
+</div>
+{% endblock %}

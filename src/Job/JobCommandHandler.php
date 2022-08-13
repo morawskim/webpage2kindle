@@ -2,6 +2,7 @@
 
 namespace App\Job;
 
+use App\Job\Command\MarkJobAsFailedCommand;
 use App\Job\Command\SetWebPageContentCommand;
 use App\Job\Command\CreateJobCommand;
 use App\Job\Command\SetPushToKindleUrlCommand;
@@ -26,6 +27,15 @@ class JobCommandHandler extends SimpleCommandHandler
         /** @var Job $job */
         $job = $this->jobRepository->load($command->getJobId());
         $job->setWebPageContent($command->getContent());
+
+        $this->jobRepository->save($job);
+    }
+
+    public function handleMarkJobAsFailedCommand(MarkJobAsFailedCommand $command): void
+    {
+        /** @var Job $job */
+        $job = $this->jobRepository->load($command->getJobId());
+        $job->markAsFailed($command->getReason());
 
         $this->jobRepository->save($job);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Job\Exception\CannotGetPageContentException;
 use App\Service\SynchronousPushToKindleFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,8 +22,12 @@ class IndexController extends AbstractController
     public function sync(Request $request, SynchronousPushToKindleFacade $pushToKindleFacade): Response
     {
         $url = $request->request->get('url');
-        $pushToKindleUrl = $pushToKindleFacade->run($url);
+        try {
+            $pushToKindleUrl = $pushToKindleFacade->run($url);
 
-        return new RedirectResponse($pushToKindleUrl);
+            return new RedirectResponse($pushToKindleUrl);
+        } catch (CannotGetPageContentException $e) {
+            return $this->render('sync_job_error.html.twig', ['reason' => $e->getMessage(), 'url' => $url]);
+        }
     }
 }

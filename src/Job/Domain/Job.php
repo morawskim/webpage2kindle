@@ -2,6 +2,7 @@
 
 namespace App\Job\Domain;
 
+use App\Job\Event\JobMarkedAsFailed;
 use App\Job\Event\JobWasCreated;
 use App\Job\Event\PushToKindleUrlSet;
 use App\Job\Event\WebPageContentUpdated;
@@ -13,6 +14,7 @@ class Job extends EventSourcedAggregateRoot
     private string $urlToFetch;
     private string $webPageContent = '';
     private string $pushToKindleUrl = '';
+    private string $failedReason = '';
 
     public static function newJob(JobId $jobId, string $urlToFetch): self
     {
@@ -52,6 +54,11 @@ class Job extends EventSourcedAggregateRoot
         ));
     }
 
+    public function markAsFailed(string $reason): void
+    {
+        $this->apply(new JobMarkedAsFailed($this->jobId, $reason));
+    }
+
     public function setPushToKindleUrl(string $url): void
     {
         $this->apply(new PushToKindleUrlSet(
@@ -69,6 +76,11 @@ class Job extends EventSourcedAggregateRoot
     protected function applyWebPageContentUpdated(WebPageContentUpdated $event): void
     {
         $this->webPageContent = $event->getContent();
+    }
+
+    protected function applyJobMarkedAsFailed(JobMarkedAsFailed $event): void
+    {
+        $this->failedReason = $event->getReason();
     }
 
     protected function applyPushToKindleUrlSet(PushToKindleUrlSet $event): void

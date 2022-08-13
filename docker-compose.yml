@@ -4,8 +4,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - WITH_XDEBUG=1
     volumes:
       - ./:/app
     command: ["php", "-S", "0.0.0.0:4200", "-t", "/app/public"]
     ports:
       - "4200:4200"
+    environment:
+      XDEBUG_TRIGGER: "default_no_matter"
+      XDEBUG_MODE: develop,debug
+      XDEBUG_CONFIG: "client_host=${MY_IP:-172.17.0.1} discover_client_host=0 client_port=9000"
+      PHP_IDE_CONFIG: "serverName=${DEV_SERVER_NAME:-webpage2content}"

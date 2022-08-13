@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Job\Domain\JobRepository;
+use App\Job\Exception\CannotGetPageContentException;
 use App\Job\PushToKindlePipelineService;
 
 class SynchronousPushToKindleFacade
@@ -14,6 +15,9 @@ class SynchronousPushToKindleFacade
     {
     }
 
+    /**
+     * @throws CannotGetPageContentException
+     */
     public function run(string $url): string
     {
         $jobId = $this->jobRepository->createNextJobId();
