@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{# @var data App\Job\Domain\NewestJobItem[] #}
+{% block body %}
+    <h1>Newest created jobs</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr><th>JobId</th><th>Created at</th><th>Url</th></tr>
+        </thead>
+        <tbody>
+            {% if data is not empty %}
+                {% for item in data %}
+                    {# @var item \App\Job\Domain\NewestJobItem #}
+                    <tr>
+                        <td>{{ item.jobId }}</td>
+                        <td>{{ item.createdAt | date('Y-m-d H:i:s') }}</td>
+                        <td><a target="_blank" href="{{ item.url }}">{{ item.url }}</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">No data</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

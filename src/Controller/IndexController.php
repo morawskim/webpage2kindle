@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Job\Domain\GetNewestJobsInterface;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Service\SynchronousPushToKindleFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,5 +30,13 @@ class IndexController extends AbstractController
         } catch (CannotGetPageContentException $e) {
             return $this->render('sync_job_error.html.twig', ['reason' => $e->getMessage(), 'url' => $url]);
         }
+    }
+
+    #[Route("/newest-jobs", name: 'list_newest_jobs', methods: ['GET'])]
+    public function newestJobs(GetNewestJobsInterface $getNewestJobs): Response
+    {
+        $data = $getNewestJobs->getNewestJobs();
+
+        return $this->render('newest.html.twig', ['data' => $data]);
     }
 }

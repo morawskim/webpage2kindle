@@ -27,6 +27,7 @@ services:
     Broadway\UuidGenerator\UuidGeneratorInterface: '@broadway.uuid.generator'
     Broadway\EventStore\EventStore: '@broadway.event_store.dbal'
     Broadway\EventHandling\EventBus: '@broadway.event_handling.event_bus'
+    Broadway\EventStore\Management\EventStoreManagement: '@broadway.event_store.dbal'
 
     App\Job\JobCommandHandler:
         tags:
@@ -35,6 +36,13 @@ services:
         arguments:
             $eventStreamDecorators:
               - '@broadway.metadata_enriching_event_stream_decorator'
+    App\Job\DbalGetNewestJobs:
+        arguments:
+            $connection: '@doctrine.dbal.default_connection'
+            $payloadSerializer: '@broadway.serializer.payload'
+            $metadataSerializer: '@broadway.serializer.metadata'
+            $useBinary: false
+            $tableName: 'events'
 
     # prometheus metrics
     App\Job\PageContentFetcher\GoReadabilitySynchronousPageContentFetcher:
