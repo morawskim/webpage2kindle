@@ -5,7 +5,7 @@ namespace App\Job\Event;
 use App\Job\Domain\JobId;
 use Broadway\Serializer\Serializable;
 
-class WebPageContentUpdated implements Serializable
+class WebPageContentUpdated implements Serializable, EventHumanDescriptionInterface
 {
     public function __construct(private readonly JobId $jobId, private readonly string $content)
     {
@@ -32,5 +32,10 @@ class WebPageContentUpdated implements Serializable
             'jobId' => (string) $this->jobId,
             'content' => $this->content,
         ];
+    }
+
+    public function humanDescription(): string
+    {
+        return sprintf('A webpage content has been fetched. Total bytes "%d"', strlen($this->content));
     }
 }

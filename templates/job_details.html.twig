@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{# @var records \App\Job\Domain\JobChangelog[] #}
+
+{% block body %}
+    <a href="{{ path('list_newest_jobs') }}">Back to list of newest job</a>
+
+    <table class="table table-stripped mt-3">
+        <thead><tr><th>Created at</th><th>Message</th></tr></thead>
+        <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record.createdAt | date('Y-m-d H:i:s') }}</td>
+                    <td>{{ record.message }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

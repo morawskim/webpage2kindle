@@ -12,7 +12,7 @@
                 {% for item in data %}
                     {# @var item \App\Job\Domain\NewestJobItem #}
                     <tr>
-                        <td>{{ item.jobId }}</td>
+                        <td><a href="{{ path('job_details', {jobId: item.jobId}) }}">{{ item.jobId }}</a></td>
                         <td>{{ item.createdAt | date('Y-m-d H:i:s') }}</td>
                         <td><a target="_blank" href="{{ item.url }}">{{ item.url }}</a></td>
                     </tr>

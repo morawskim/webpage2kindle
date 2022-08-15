@@ -5,7 +5,7 @@ namespace App\Job\Event;
 use App\Job\Domain\JobId;
 use Broadway\Serializer\Serializable;
 
-class PushToKindleUrlSet implements Serializable
+class PushToKindleUrlSet implements Serializable, EventHumanDescriptionInterface
 {
     public function __construct(private readonly JobId $jobId, private readonly string $url)
     {
@@ -29,5 +29,10 @@ class PushToKindleUrlSet implements Serializable
     public static function deserialize(array $data): self
     {
         return new self(new JobId($data['jobId']), $data['url']);
+    }
+
+    public function humanDescription(): string
+    {
+        return 'A PushToKindle url has been set';
     }
 }

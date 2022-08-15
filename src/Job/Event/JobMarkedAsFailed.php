@@ -5,7 +5,7 @@ namespace App\Job\Event;
 use App\Job\Domain\JobId;
 use Broadway\Serializer\Serializable;
 
-class JobMarkedAsFailed implements Serializable
+class JobMarkedAsFailed implements Serializable, EventHumanDescriptionInterface
 {
     public function __construct(private readonly JobId $jobId, private readonly string $reason)
     {
@@ -32,5 +32,10 @@ class JobMarkedAsFailed implements Serializable
             'jobId' => (string) $this->jobId,
             'reason' => $this->reason,
         ];
+    }
+
+    public function humanDescription(): string
+    {
+        return sprintf('A job has been marked as failed because "%s"', $this->reason);
     }
 }

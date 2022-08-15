@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Job\Domain\GetNewestJobsInterface;
+use App\Job\Domain\JobId;
+use App\Job\Domain\JobRepository;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Service\SynchronousPushToKindleFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,5 +40,13 @@ class IndexController extends AbstractController
         $data = $getNewestJobs->getNewestJobs();
 
         return $this->render('newest.html.twig', ['data' => $data]);
+    }
+
+    #[Route('/details/{jobId}', name: 'job_details')]
+    public function jobChangelog(string $jobId, JobRepository $jobRepository): Response
+    {
+        $records = $jobRepository->getJobDetailsAsStream(new JobId($jobId));
+
+        return $this->render('job_details.html.twig', ['records' => $records]);
     }
 }
