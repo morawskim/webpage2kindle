@@ -25,6 +25,12 @@ class IndexController extends AbstractController
     public function sync(Request $request, SynchronousPushToKindleFacade $pushToKindleFacade): Response
     {
         $url = $request->request->get('url');
+
+        if (empty($url)) {
+            $this->addFlash('error', 'URL cannot be empty');
+            return $this->redirectToRoute('homepage');
+        }
+
         try {
             $pushToKindleUrl = $pushToKindleFacade->run($url);
 
