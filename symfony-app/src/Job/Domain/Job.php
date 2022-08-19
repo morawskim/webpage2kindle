@@ -3,6 +3,7 @@
 namespace App\Job\Domain;
 
 use App\Job\Event\JobMarkedAsFailed;
+use App\Job\Event\JobToProcessWebPageWasCreated;
 use App\Job\Event\JobWasCreated;
 use App\Job\Event\PushToKindleUrlSet;
 use App\Job\Event\WebPageContentUpdated;
@@ -20,6 +21,14 @@ class Job extends EventSourcedAggregateRoot
     {
         $job = new self();
         $job->new($jobId, $urlToFetch);
+
+        return $job;
+    }
+
+    public static function newJobToProcessPage(JobId $jobId, string $url, string $webPageContent): self
+    {
+        $job = new self();
+        $job->newJobToProcessWebPage($jobId, $url, $webPageContent);
 
         return $job;
     }
@@ -43,6 +52,13 @@ class Job extends EventSourcedAggregateRoot
     {
         $this->apply(
             new JobWasCreated($jobId, $urlToFetch)
+        );
+    }
+
+    private function newJobToProcessWebPage(JobId $jobId, string $url, string $webPageContent): void
+    {
+        $this->apply(
+            new JobToProcessWebPageWasCreated($jobId, $url, $webPageContent)
         );
     }
 
@@ -71,6 +87,13 @@ class Job extends EventSourcedAggregateRoot
     {
         $this->jobId = $event->getJobId();
         $this->urlToFetch = $event->getUrlToFetch();
+    }
+
+    protected function applyJobToProcessWebPageWasCreated(JobToProcessWebPageWasCreated $event): void
+    {
+        $this->jobId = $event->getJobId();
+        $this->urlToFetch = $event->getUrl();
+        $this->webPageContent = $event->getWebPageContent();
     }
 
     protected function applyWebPageContentUpdated(WebPageContentUpdated $event): void

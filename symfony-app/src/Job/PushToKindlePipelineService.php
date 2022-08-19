@@ -3,6 +3,7 @@
 namespace App\Job;
 
 use App\Job\Command\CreateJobCommand;
+use App\Job\Command\CreateJobToProcessWebPageContentCommand;
 use App\Job\Command\MarkJobAsFailedCommand;
 use App\Job\Command\SetPushToKindleUrlCommand;
 use App\Job\Command\SetWebPageContentCommand;
@@ -29,6 +30,12 @@ class PushToKindlePipelineService
     public function addNewJob(JobId $jobId, string $url): void
     {
         $command = new CreateJobCommand($jobId, $url);
+        $this->commandBus->dispatch($command);
+    }
+
+    public function addNewJobToProcessBody(JobId $jobId, string$url, string $body): void
+    {
+        $command = new CreateJobToProcessWebPageContentCommand($jobId, $url, $body);
         $this->commandBus->dispatch($command);
     }
 

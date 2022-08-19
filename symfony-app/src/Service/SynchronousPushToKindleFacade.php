@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Job\Domain\JobId;
 use App\Job\Domain\JobRepository;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Job\PushToKindlePipelineService;
@@ -25,5 +26,13 @@ class SynchronousPushToKindleFacade
         $this->pushToKindlePipeline->fetchPageContentForJob($jobId);
 
         return $this->pushToKindlePipeline->createPushToKindleUrl($jobId);
+    }
+
+    public function processWebPageContent(string $url, string $webPageContent): JobId
+    {
+        $jobId = $this->jobRepository->createNextJobId();
+        $this->pushToKindlePipeline->addNewJobToProcessBody($jobId, $url, $webPageContent);
+
+        return $jobId;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Job;
 
 use App\Job\Domain\GetNewestJobsInterface;
 use App\Job\Domain\NewestJobItem;
+use App\Job\Event\JobToProcessWebPageWasCreated;
 use App\Job\Event\JobWasCreated;
 use Broadway\Domain\DateTime;
 use Broadway\Domain\DomainMessage;
@@ -30,15 +31,18 @@ class DbalGetNewestJobs implements GetNewestJobsInterface
     public function getNewestJobs(): array
     {
         $acceptedInvitesCriteria = Criteria::create()
-            ->withEventTypes([str_replace('\\', '.', JobWasCreated::class)]);
+            ->withEventTypes([
+                str_replace('\\', '.', JobWasCreated::class),
+                str_replace('\\', '.', JobToProcessWebPageWasCreated::class),
+            ]);
 
         $data = [];
         $this->visitEvents($acceptedInvitesCriteria, new CallableEventVisitor(function (DomainMessage $domainMessage) use (&$data) {
-            /** @var JobWasCreated $payload */
+            /** @var JobWasCreated|JobToProcessWebPageWasCreated $payload */
             $payload = $domainMessage->getPayload();
             $data[] = new NewestJobItem(
                 $payload->getJobId(),
-                $payload->getUrlToFetch(),
+                $payload instanceof JobWasCreated ? $payload->getUrlToFetch() : $payload->getUrl(),
                 $domainMessage->getRecordedOn()->toNative()
             );
         }));

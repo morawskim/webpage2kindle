@@ -2,6 +2,7 @@
 
 namespace App\Job;
 
+use App\Job\Command\CreateJobToProcessWebPageContentCommand;
 use App\Job\Command\MarkJobAsFailedCommand;
 use App\Job\Command\SetWebPageContentCommand;
 use App\Job\Command\CreateJobCommand;
@@ -19,6 +20,12 @@ class JobCommandHandler extends SimpleCommandHandler
     public function handleCreateJobCommand(CreateJobCommand $command): void
     {
         $job = Job::newJob($command->getJobId(), $command->getUrl());
+        $this->jobRepository->save($job);
+    }
+
+    public function handleCreateJobToProcessWebPageContentCommand(CreateJobToProcessWebPageContentCommand $command): void
+    {
+        $job = Job::newJobToProcessPage($command->getJobId(), $command->getUrl(), $command->getWebPageContent());
         $this->jobRepository->save($job);
     }
 
