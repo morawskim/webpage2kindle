@@ -33,6 +33,6 @@ class PushToKindleUrlSet implements Serializable, EventHumanDescriptionInterface
 
     public function humanDescription(): string
     {
-        return 'A PushToKindle url has been set';
+        return 'A PushToKindle url has been set - ' . $this->url;
     }
 }

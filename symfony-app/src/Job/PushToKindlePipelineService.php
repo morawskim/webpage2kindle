@@ -10,9 +10,11 @@ use App\Job\Command\SetWebPageContentCommand;
 use App\Job\Domain\Job;
 use App\Job\Domain\JobId;
 use App\Job\Domain\JobRepository;
+use App\Job\Exception\CannotCreateReadableVersionException;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Job\PageContentFetcher\PageContentFetcherInterface;
 use App\Job\PushToKindleUrlGenerator\PushToKindleUrlGeneratorInterface;
+use App\Job\ReadablePageContent\CreateReadablePageContentInterface;
 use Broadway\CommandHandling\CommandBus;
 use Psr\Log\LoggerInterface;
 
@@ -23,7 +25,8 @@ class PushToKindlePipelineService
         private readonly CommandBus $commandBus,
         private readonly PageContentFetcherInterface $pageContentFetcher,
         private readonly PushToKindleUrlGeneratorInterface $kindleUrlGenerator,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly CreateReadablePageContentInterface $createReadablePageContent,
     ) {
     }
 
@@ -50,6 +53,23 @@ class PushToKindlePipelineService
             $content = $this->pageContentFetcher->getPageContent($job->getUrlToFetch());
             $this->commandBus->dispatch(new SetWebPageContentCommand($jobId, $content));
         } catch (CannotGetPageContentException $e) {
+            $this->commandBus->dispatch(new MarkJobAsFailedCommand($jobId, $e->getMessage()));
+            $this->logger->error($e);
+            throw $e;
+        }
+    }
+
+    public function createReadableVersionOfContent(JobId $jobId): void
+    {
+        /** @var Job $job */
+        $job = $this->jobRepository->load($jobId);
+        try {
+            $body = $this->createReadablePageContent->createReadableVersionOfWebPageContent(
+                $job->getWebPageContent(),
+                $job->getUrlToFetch()
+            );
+            $this->commandBus->dispatch(new SetWebPageContentCommand($jobId, $body));
+        } catch (CannotCreateReadableVersionException $e) {
             $this->commandBus->dispatch(new MarkJobAsFailedCommand($jobId, $e->getMessage()));
             $this->logger->error($e);
             throw $e;

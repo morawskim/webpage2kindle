@@ -13,10 +13,11 @@ class WebExtensionController extends AbstractController
     #[Route('/web-extension', name: 'web_extension', methods: ['POST'])]
     public function process(Request $request, SynchronousPushToKindleFacade $pushToKindleFacade): JsonResponse
     {
+        // todo mmo validation
         $url = $request->request->get('url');
         $body = $request->request->get('body');
-        $jobId = $pushToKindleFacade->processWebPageContent($url, $body);
+        $pushToKindleUrl = $pushToKindleFacade->processWebPageContent($url, $body);
 
-        return new JsonResponse(['jobId' => $jobId]);
+        return new JsonResponse(['pushToKindleUrl' => $pushToKindleUrl]);
     }
 }
