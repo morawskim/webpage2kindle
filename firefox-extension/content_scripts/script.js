@@ -13,7 +13,10 @@
     const body = document.body.outerHTML;
     // todo mmo remove hardcoded value when webpack will be added
     fetch('http://127.0.0.1:4200/web-extension', {
-        body: `body=${body}&url=${window.location}`,
+        body: new URLSearchParams({
+            "body": body,
+            "url": window.location
+        }),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
