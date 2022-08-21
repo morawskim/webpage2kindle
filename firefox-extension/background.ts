@@ -1,4 +1,15 @@
-function isSupportedProtocol(urlString) {
+import browser from "webextension-polyfill";
+
+interface ResultSuccess {
+    success: true;
+    pushToKindleUrl: string;
+}
+
+interface ResultFailed {
+    success: false;
+}
+
+function isSupportedProtocol(urlString: string) {
     const supportedProtocols = ["https:", "http:"];
     const url = document.createElement('a');
     url.href = urlString;
@@ -6,7 +17,7 @@ function isSupportedProtocol(urlString) {
     return supportedProtocols.indexOf(url.protocol) !== -1;
 }
 
-function notify(message) {
+function notify(message: ResultSuccess|ResultFailed) {
     if (message.success) {
         browser.notifications.create({
             type: 'basic',
@@ -31,13 +42,13 @@ function notify(message) {
 
 browser.runtime.onMessage.addListener(notify);
 browser.browserAction.onClicked.addListener((tab) => {
-    if (!isSupportedProtocol(tab.url)) {
+    if (!tab.url || !isSupportedProtocol(tab.url)) {
         console.info(`The url ("${tab.url}") of your active tab is not supported`);
         return;
     }
 
     console.info('The extension script will be registered');
-    browser.tabs.executeScript({ file: '/content_scripts/script.js' })
+    browser.tabs.executeScript({ file: '/contentScript.js' })
         .then(() => console.info('The script has been registered'))
-        .catch((error) => console.error('Cannot register script', error));
+        .catch((error: unknown) => console.error('Cannot register script', error));
 });

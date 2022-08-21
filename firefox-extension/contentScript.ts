@@ -1,3 +1,11 @@
+import browser from "webextension-polyfill";
+
+declare global {
+    interface Window {
+        hasRun: boolean;
+    }
+}
+
 (function () {
     /**
      * Check and set a global guard variable.
@@ -15,7 +23,7 @@
     fetch('http://127.0.0.1:4200/web-extension', {
         body: new URLSearchParams({
             "body": body,
-            "url": window.location
+            "url": window.location.toString(),
         }),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
