@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     mode: "production",
@@ -30,6 +31,9 @@ module.exports = {
                 {from: "icons/", to: "icons/", },
                 {from: "manifest.json", to: ".", },
             ]
+        }),
+        new webpack.EnvironmentPlugin({
+            SYMFONY_ENDPOINT_URL: 'http://127.0.0.1:4200/web-extension',
         }),
     ],
 };

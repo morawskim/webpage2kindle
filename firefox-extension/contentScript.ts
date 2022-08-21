@@ -19,8 +19,7 @@ declare global {
     console.log('Init webpage2kindle web browser extension');
 
     const body = document.body.outerHTML;
-    // todo mmo remove hardcoded value when webpack will be added
-    fetch('http://127.0.0.1:4200/web-extension', {
+    fetch(process.env.SYMFONY_ENDPOINT_URL!, {
         body: new URLSearchParams({
             "body": body,
             "url": window.location.toString(),
