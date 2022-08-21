@@ -22,11 +22,14 @@
         },
         method: 'POST',
         mode: 'cors',
-    }).then(
-        (response) => {
-            console.log('Success', response);
-            //window.location = 'https://google.com'
-        },
-        (error) => console.error('Error', error),
-    );
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.pushToKindleUrl);
+            browser.runtime.sendMessage({success: true, pushToKindleUrl: data.pushToKindleUrl});
+        })
+        .catch((error) => {
+            console.error('Error', error);
+            browser.runtime.sendMessage({success: false});
+        });
 })();
