@@ -53,6 +53,14 @@ services:
             $pageContentFetcher: '@App\Job\PageContentFetcher\GoReadabilitySynchronousPageContentFetcher'
             $prometheusAdapterLabel: 'GoReadability'
     App\Job\PageContentFetcher\PageContentFetcherInterface: '@App\Job\PageContentFetcher\PrometheusMetricDecorator'
+
+    App\Job\ReadablePageContent\NodeMicroserviceCreateReadablePageContent: ~
+    App\Job\ReadablePageContent\PrometheusMetricDecorator:
+        arguments:
+            $createReadablePageContent: '@App\Job\ReadablePageContent\NodeMicroserviceCreateReadablePageContent'
+            $prometheusAdapterLabel: 'NodeMicroservice'
+    App\Job\ReadablePageContent\CreateReadablePageContentInterface: '@App\Job\ReadablePageContent\PrometheusMetricDecorator'
+
     prometheus_storage:
         class: Prometheus\Storage\APC
     Prometheus\CollectorRegistry:
