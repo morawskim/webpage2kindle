@@ -15,6 +15,7 @@
         "promphp/prometheus_client_php": "^2.6",
         "ramsey/uuid": "^4.4",
         "sentry/sentry-symfony": "^4.3",
+        "symfony/asset": "6.1.*",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.1.*",
         "symfony/flex": "^2",
