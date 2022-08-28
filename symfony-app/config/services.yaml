@@ -61,6 +61,9 @@ services:
             $prometheusAdapterLabel: 'NodeMicroservice'
     App\Job\ReadablePageContent\CreateReadablePageContentInterface: '@App\Job\ReadablePageContent\PrometheusMetricDecorator'
 
+    App\Job\PushToKindleUrlGenerator\PastePadUrlGenerator: ~
+    App\Job\PushToKindleUrlGenerator\PushToKindleUrlGeneratorInterface: '@App\Job\PushToKindleUrlGenerator\PastePadUrlGenerator'
+
     prometheus_storage:
         class: Prometheus\Storage\APC
     Prometheus\CollectorRegistry:
