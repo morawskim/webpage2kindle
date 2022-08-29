@@ -3,14 +3,16 @@
 namespace App\Tests\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class HomepageContext implements Context
 {
     private Crawler $response;
 
-    public function __construct(private KernelBrowser $client)
+    public function __construct(private KernelBrowser $client, private KernelInterface $kernel)
     {
     }
 
@@ -38,12 +40,19 @@ class HomepageContext implements Context
     }
 
     /**
-     * @Then /^the response should contains link "([^"]*)"$/
+     * @Then /^the response should contains link "([^"]*)" to download extension$/
      */
     public function theResponseShouldContainsLink($link): void
     {
         if (1 !== $this->response->selectLink($link)->count()) {
             throw new \RuntimeException('Link not found');
+        }
+
+        $href = $this->response->selectLink($link)->attr('href');
+        $filePath = $this->kernel->getProjectDir() . '/public' . $href;
+
+        if (!file_exists($filePath)) {
+            throw new \RuntimeException('Extension not exists');
         }
     }
 

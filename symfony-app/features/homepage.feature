@@ -14,4 +14,4 @@ Feature:
 
   Scenario: Download firefox extension
     Given I navigate to "/"
-    Then the response should contains link "Download firefox extension"
+    Then the response should contains link "Download firefox extension" to download extension
