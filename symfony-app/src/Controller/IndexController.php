@@ -31,6 +31,11 @@ class IndexController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
+        if (false === filter_var($url, FILTER_VALIDATE_URL)) {
+            $this->addFlash('error', sprintf('URL "%s" is invalid', $url));
+            return $this->redirectToRoute('homepage');
+        }
+
         try {
             $pushToKindleUrl = $pushToKindleFacade->run($url);
 

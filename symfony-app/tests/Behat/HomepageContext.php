@@ -61,16 +61,44 @@ class HomepageContext implements Context
      */
     public function iSubmitFormWithUrl($txt, $url): void
     {
-        $this->client->submitForm($txt, ['url' => $url]);
+        $this->response = $this->client->submitForm($txt, ['url' => $url]);
     }
 
     /**
-     * @Then /^I will be redirected to external page$/
+     * @Then /^I will be redirected to external page "([^"]*)"$/
      */
-    public function iWillBeRedirectedToExternalPage(): void
+    public function iWillBeRedirectedToExternalPage(string $expectedLocation): void
     {
         if ($this->client->getResponse()->getStatusCode() !== 302) {
             throw new \RuntimeException('Response code is unexpected');
         }
+
+        $location = $this->client->getResponse()->headers->get('Location');
+
+        if ($location !== $expectedLocation) {
+            throw new \RuntimeException(sprintf('The actual location is "%s" not "%s"', $location, $expectedLocation));
+        }
+    }
+
+    /**
+     * @Given /^I will see flash message "(.*?)"$/
+     */
+    public function iWillSeeFlashMessage($message): void
+    {
+        if (1 !== $this->response->filter('.alert')->count()) {
+            throw new \RuntimeException('Flash message element not found');
+        }
+
+        if (!str_contains($this->response->filter('.alert')->text(), $message)) {
+            throw new \RuntimeException(sprintf('Flash message with content "%s" not found', $message));
+        }
+    }
+
+    /**
+     * @Given /^I follow redirects/
+     */
+    public function iFollowRedirection(): void
+    {
+        $this->client->followRedirects(true);
     }
 }
