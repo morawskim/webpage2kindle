@@ -33,7 +33,11 @@ declare global {
         .then(response => response.json())
         .then(data => {
             console.log(data.pushToKindleUrl);
-            browser.runtime.sendMessage({success: true, pushToKindleUrl: data.pushToKindleUrl});
+            browser.runtime.sendMessage({
+                success: true,
+                pushToKindleUrl: data.pushToKindleUrl,
+                title: document.title
+            });
         })
         .catch((error) => {
             console.error('Error', error);

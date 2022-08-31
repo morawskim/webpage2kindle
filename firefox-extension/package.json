@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "webpack --config webpack-web-extension.config.mjs",
-    "start:firefox": "web-ext run --source-dir ./dist/"
+    "start:firefox": "web-ext run --source-dir ./dist/",
+    "sign": "web-ext sign"
   },
   "devDependencies": {
     "@types/webextension-polyfill": "^0.9.0",

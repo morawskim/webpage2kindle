@@ -3,6 +3,7 @@ import browser from "webextension-polyfill";
 interface ResultSuccess {
     success: true;
     pushToKindleUrl: string;
+    title: string;
 }
 
 interface ResultFailed {
@@ -22,7 +23,7 @@ function notify(message: ResultSuccess|ResultFailed) {
         browser.notifications.create({
             type: 'basic',
             iconUrl: 'icons/icon-48.png',
-            title: 'Link is ready',
+            title: `Link is ready (${message.title})`,
             message: message.pushToKindleUrl,
             priority: 0,
         });
