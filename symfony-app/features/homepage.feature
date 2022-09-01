@@ -11,6 +11,10 @@ Feature:
     When I submit form "Process" with url "http://example.com"
     Then I will be redirected to external page "https://fake-push-to-kindle.com"
 
+  Scenario: Get readable version of page passed as parameter
+    Given I navigate to "/?url=https%3A%2F%2Fexample.com%2Fhello-world"
+    Then the url field should contain value "https://example.com/hello-world"
+
   Scenario: URL is empty
     Given I navigate to "/"
     And I follow redirects

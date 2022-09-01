@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{# @var $url string #}
+
 {% block body %}
     {% for message in app.flashes('error') %}
         <div class="alert alert-danger my-2">
@@ -10,7 +12,7 @@
     <form method="post" action="{{ path('push_to_kindle_synchronous') }}">
         <div class="mb-3">
             <label for="urlInput" class="form-label">Url to process</label>
-            <input required name="url" type="url" class="form-control" id="urlInput">
+            <input required name="url" type="url" class="form-control" id="urlInput" autofocus value="{{ url }}">
         </div>
         <button type="submit" class="btn btn-primary">Process</button>
     </form>

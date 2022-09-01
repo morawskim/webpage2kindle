@@ -16,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     #[Route("/", name: 'homepage', methods: ['GET'])]
-    public function home(): Response
+    public function home(Request $request): Response
     {
-        return $this->render('homepage.html.twig');
+        return $this->render('homepage.html.twig', ['url' => urldecode($request->get('url', ''))]);
     }
 
     #[Route("/synchronous", name: 'push_to_kindle_synchronous', methods: ['POST'])]

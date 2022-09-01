@@ -3,7 +3,6 @@
 namespace App\Tests\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -100,5 +99,21 @@ class HomepageContext implements Context
     public function iFollowRedirection(): void
     {
         $this->client->followRedirects(true);
+    }
+
+    /**
+     * @Then /^the url field should contain value "([^"]*)"$/
+     */
+    public function theUrlFieldShouldContainValue($url): void
+    {
+        $field = $this->response->filter("input#urlInput");
+
+        if ($field->count() !== 1) {
+            throw new \RuntimeException('Field not found');
+        }
+
+        if ($url !== $actualValue = $field->attr('value')) {
+            throw new \RuntimeException(sprintf('The url field should have a value "%s" but have "%s"', $url, $actualValue));
+        }
     }
 }
