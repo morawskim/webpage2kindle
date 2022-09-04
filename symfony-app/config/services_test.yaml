@@ -15,3 +15,6 @@ services:
 
     App\Job\PushToKindleUrlGenerator\FakePushToKindleUrlGenerator: ~
     App\Job\PushToKindleUrlGenerator\PushToKindleUrlGeneratorInterface: '@App\Job\PushToKindleUrlGenerator\FakePushToKindleUrlGenerator'
+
+    App\Job\ReadablePageContent\StaticReadablePageContent: ~
+    App\Job\ReadablePageContent\CreateReadablePageContentInterface: '@App\Job\ReadablePageContent\StaticReadablePageContent'
