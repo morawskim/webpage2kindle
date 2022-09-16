@@ -2,7 +2,7 @@ when@prod:
     sentry:
         dsn: '%env(SENTRY_DSN)%'
         options:
-            traces_sample_rate: 1.0
+            traces_sampler: 'App\Service\SentrySampleRateRule'
 #        If you are using Monolog, you also need these additional configuration and services to log the errors correctly:
 #        https://docs.sentry.io/platforms/php/guides/symfony/#monolog-integration
         register_error_listener: false
@@ -15,3 +15,4 @@ when@prod:
     services:
         Monolog\Processor\PsrLogMessageProcessor:
             tags: { name: monolog.processor, handler: sentry }
+        App\Service\SentrySampleRateRule: ~
