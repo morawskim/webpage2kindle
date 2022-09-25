@@ -27,8 +27,17 @@ function notify(message: ResultSuccess|ResultFailed) {
             message: message.pushToKindleUrl,
             priority: 0,
         });
-        browser.tabs.create({
+        browser.tabs.update({
             url: message.pushToKindleUrl,
+        }).catch((e) => {
+            console.error(e);
+            browser.notifications.create({
+                type: 'basic',
+                iconUrl: 'icons/icon-48.png',
+                title: 'Cannot update tab URL',
+                message: `Check also console.log. Error message: "${e.message}"`,
+                priority: 0,
+            });
         });
     } else {
         browser.notifications.create({
