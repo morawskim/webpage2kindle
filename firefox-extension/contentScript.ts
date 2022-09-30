@@ -55,7 +55,8 @@ function createLoaderElement() {
             browser.runtime.sendMessage({
                 success: true,
                 pushToKindleUrl: data.pushToKindleUrl,
-                title: document.title
+                title: document.title,
+                tabUrl: window.location.href,
             });
         })
         .catch((error) => {

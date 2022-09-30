@@ -4,6 +4,7 @@ interface ResultSuccess {
     success: true;
     pushToKindleUrl: string;
     title: string;
+    tabUrl: string;
 }
 
 interface ResultFailed {
@@ -18,7 +19,7 @@ function isSupportedProtocol(urlString: string) {
     return supportedProtocols.indexOf(url.protocol) !== -1;
 }
 
-function notify(message: ResultSuccess|ResultFailed) {
+async function notify(message: ResultSuccess|ResultFailed) {
     if (message.success) {
         browser.notifications.create({
             type: 'basic',
@@ -27,18 +28,28 @@ function notify(message: ResultSuccess|ResultFailed) {
             message: message.pushToKindleUrl,
             priority: 0,
         });
-        browser.tabs.update({
-            url: message.pushToKindleUrl,
-        }).catch((e) => {
-            console.error(e);
-            browser.notifications.create({
-                type: 'basic',
-                iconUrl: 'icons/icon-48.png',
-                title: 'Cannot update tab URL',
-                message: `Check also console.log. Error message: "${e.message}"`,
-                priority: 0,
+
+        const tabs = await browser.tabs.query({ url: message.tabUrl});
+        if (tabs.length) {
+            const tabId = tabs[0].id;
+
+            browser.tabs.update(tabId, {
+                url: message.pushToKindleUrl,
+            }).catch((e) => {
+                console.error(e);
+                browser.notifications.create({
+                    type: 'basic',
+                    iconUrl: 'icons/icon-48.png',
+                    title: 'Cannot update tab URL',
+                    message: `Check also console.log. Error message: "${e.message}"`,
+                    priority: 0,
+                });
             });
-        });
+        } else {
+            browser.tabs.create({
+                url: message.pushToKindleUrl,
+            });
+        }
     } else {
         browser.notifications.create({
             type: 'basic',
