@@ -4,7 +4,7 @@ RUN go get -u -v github.com/go-shiori/go-readability/cmd/...
 FROM php:8.1-cli
 ARG WITH_XDEBUG=0
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions apcu
+RUN install-php-extensions apcu sockets
 COPY --from=go-readability /go/bin/go-readability /usr/local/bin/
 COPY --chown=nobody:root . /app
 RUN test $WITH_XDEBUG -eq 1 && install-php-extensions xdebug-^3.1 || true
