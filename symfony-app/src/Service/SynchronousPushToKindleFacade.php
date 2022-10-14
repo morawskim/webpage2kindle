@@ -12,8 +12,7 @@ class SynchronousPushToKindleFacade
     public function __construct(
         private readonly PushToKindlePipelineService $pushToKindlePipeline,
         private readonly JobRepository $jobRepository
-    )
-    {
+    ) {
     }
 
     /**
