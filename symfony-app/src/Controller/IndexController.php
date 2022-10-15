@@ -6,6 +6,7 @@ use App\Job\Domain\GetNewestJobsInterface;
 use App\Job\Domain\JobId;
 use App\Job\Domain\JobRepository;
 use App\Job\Exception\CannotGetPageContentException;
+use App\Service\AsyncPushToKindleFacade;
 use App\Service\SynchronousPushToKindleFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -43,6 +44,27 @@ class IndexController extends AbstractController
         } catch (CannotGetPageContentException $e) {
             return $this->render('sync_job_error.html.twig', ['reason' => $e->getMessage(), 'url' => $url]);
         }
+    }
+
+    #[Route("/async-and-wait", name: 'push_to_kindle_async_and_wait', methods: ['POST'])]
+    public function asyncAndWait(Request $request, AsyncPushToKindleFacade $asyncPushToKindleFacade)
+    {
+        $url = $request->request->get('url');
+
+        if (empty($url)) {
+            $this->addFlash('error', 'URL cannot be empty');
+            return $this->redirectToRoute('homepage');
+        }
+
+        if (false === filter_var($url, FILTER_VALIDATE_URL)) {
+            $this->addFlash('error', sprintf('URL "%s" is invalid', $url));
+            return $this->redirectToRoute('homepage');
+        }
+
+        $jobId = $asyncPushToKindleFacade->publishNewJob($url);
+        sleep(1);
+
+        return $this->redirectToRoute('job_details', ['jobId' => (string) $jobId]);
     }
 
     #[Route("/newest-jobs", name: 'list_newest_jobs', methods: ['GET'])]
