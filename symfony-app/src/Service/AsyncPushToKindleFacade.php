@@ -3,23 +3,17 @@
 namespace App\Service;
 
 use App\Job\Domain\JobId;
-use App\Job\Domain\JobRepository;
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use App\Web\Domain\Contract\NewJobProducerInterface;
 
 class AsyncPushToKindleFacade
 {
     public function __construct(
-        private readonly JobRepository $jobRepository,
-        private readonly Producer $producer
+        private readonly NewJobProducerInterface $newJobProducer,
     ) {
     }
 
     public function publishNewJob(string $url): JobId
     {
-        $jobId = $this->jobRepository->createNextJobId();
-
-        $this->producer->publish(json_encode(['jobId' => (string) $jobId, 'url' => $url]));
-
-        return $jobId;
+        return $this->newJobProducer->publishNewJob($url);
     }
 }
