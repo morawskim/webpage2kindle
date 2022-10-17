@@ -4,23 +4,26 @@ namespace App\Consumer;
 
 use App\Job\Domain\JobId;
 use App\Job\PushToKindlePipelineService;
+use App\Web\Application\Message\NewJobMessage;
+use App\Web\Domain\Contract\FetchPageContentProducerInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use PhpAmqpLib\Message\AMQPMessage;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class NewJobConsumer implements ConsumerInterface
 {
     public function __construct(
         private readonly PushToKindlePipelineService $pushToKindlePipeline,
-        private readonly Producer $producer,
+        private readonly FetchPageContentProducerInterface $fetchPageContentProducer,
+        private readonly SerializerInterface $serializer,
     ) {
     }
 
     public function execute(AMQPMessage $msg)
     {
-        $body = json_decode($msg->body, true);
+        $dto = $this->serializer->deserialize($msg->body, NewJobMessage::class, 'json');
 
-        $this->pushToKindlePipeline->addNewJob(new JobId($body['jobId']), $body['url']);
-        $this->producer->publish(json_encode(['jobId' => $body['jobId']]));
+        $this->pushToKindlePipeline->addNewJob($dto->jobId, $dto->url);
+        $this->fetchPageContentProducer->publishFetchPageContent($dto->jobId);
     }
 }

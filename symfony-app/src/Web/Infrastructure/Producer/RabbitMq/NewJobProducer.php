@@ -4,6 +4,7 @@ namespace App\Web\Infrastructure\Producer\RabbitMq;
 
 use App\Job\Domain\JobId;
 use App\Job\Domain\JobRepository;
+use App\Web\Application\Message\NewJobMessage;
 use App\Web\Domain\Contract\NewJobProducerInterface;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -22,7 +23,7 @@ class NewJobProducer implements NewJobProducerInterface
     public function publishNewJob(string $url): JobId
     {
         $jobId = $this->jobRepository->createNextJobId();
-        $dto = ['jobId' => (string) $jobId, 'url' => $url];
+        $dto = new NewJobMessage($jobId, $url);
 
         $this->producer->publish($this->serializer->serialize($dto, 'json'));
 
