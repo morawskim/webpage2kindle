@@ -29,10 +29,6 @@ services:
     Broadway\EventHandling\EventBus: '@broadway.event_handling.event_bus'
     Broadway\EventStore\Management\EventStoreManagement: '@broadway.event_store.dbal'
 
-    App\Consumer\FetchPageContentConsumer:
-        arguments:
-            $producer: '@old_sound_rabbit_mq.push_to_kindle_url_producer'
-
     App\Job\JobCommandHandler:
         tags:
             - { name: broadway.command_handler }

@@ -2,26 +2,30 @@
 
 namespace App\Consumer;
 
-use App\Job\Domain\JobId;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Job\PushToKindlePipelineService;
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use App\Web\Application\Message\FetchPageContentMessage;
+use App\Web\Domain\Contract\PushToKindleProducerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class FetchPageContentConsumer
 {
     public function __construct(
         private readonly PushToKindlePipelineService $pushToKindlePipeline,
-        private readonly Producer $producer,
+        private readonly PushToKindleProducerInterface $pushToKindleProducer,
+        private readonly SerializerInterface $serializer,
     ) {
     }
 
-    public function execute(AMQPMessage $msg)
+    public function execute(AMQPMessage $msg): void
     {
         try {
-            $body = json_decode($msg->body, true);
-            $this->pushToKindlePipeline->fetchPageContentForJob(new JobId($body['jobId']));
-            $this->producer->publish(json_encode(['jobId' => $body['jobId']]));
+            /** @var FetchPageContentMessage $dto */
+            $dto = $this->serializer->deserialize($msg->body, FetchPageContentMessage::class, 'json');
+
+            $this->pushToKindlePipeline->fetchPageContentForJob($dto->jobId);
+            $this->pushToKindleProducer->publishPushToKindle($dto->jobId);
         } catch (CannotGetPageContentException $e) {
         }
     }
