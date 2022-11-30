@@ -12,7 +12,16 @@ when@prod:
                 type: sentry
                 level: !php/const Monolog\Logger::ERROR
                 hub_id: Sentry\State\HubInterface
+            # this one acts like fingers_crossed
+            sentry_breadcrumbs:
+                type: service
+                name: sentry_breadcrumbs
+                id: Sentry\Monolog\BreadcrumbHandler
     services:
         Monolog\Processor\PsrLogMessageProcessor:
             tags: { name: monolog.processor, handler: sentry }
         App\Service\SentrySampleRateRule: ~
+        Sentry\Monolog\BreadcrumbHandler:
+            arguments:
+                - '@Sentry\State\HubInterface'
+                - !php/const Monolog\Logger::DEBUG
