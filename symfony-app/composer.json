@@ -89,6 +89,6 @@
         "behat/behat": "^3.11",
         "friends-of-behat/symfony-extension": "^2.3",
         "symfony/browser-kit": "6.1.*",
-        "symfony/css-selector": "6.1.*"
+        "symfony/css-selector": "6.2.*"
     }
 }
