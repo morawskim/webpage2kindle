@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/firefox-extension"
+    schedule:
+      interval: "weekly"
+      day: "thursday"
+    commit-message:
+      prefix: "[extension]"
+  - package-ecosystem: npm
+    directory: "/node-readability"
+    schedule:
+      interval: "weekly"
+      day: "thursday"
+    commit-message:
+      prefix: "[node]"
+  - package-ecosystem: composer
+    directory: "/symfony-app"
+    target-branch: "develop"
+    schedule:
+      interval: weekly
+      day: "thursday"
+    commit-message:
+      prefix: "[app]"
+
+  - package-ecosystem: "docker"
+    directory: "/symfony-app"
+    schedule:
+      interval: weekly
+      day: "thursday"
+    commit-message:
+      prefix: "[app]"
+  - package-ecosystem: "docker"
+    directory: "/node-readability"
+    schedule:
+      interval: weekly
+      day: "thursday"
+    commit-message:
+      prefix: "[readability]"
