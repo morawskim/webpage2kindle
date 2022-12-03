@@ -6,22 +6,21 @@ updates:
       interval: "weekly"
       day: "thursday"
     commit-message:
-      prefix: "[extension]"
+      prefix: "[dependabot]"
   - package-ecosystem: npm
     directory: "/node-readability"
     schedule:
       interval: "weekly"
       day: "thursday"
     commit-message:
-      prefix: "[node]"
+      prefix: "[dependabot]"
   - package-ecosystem: composer
     directory: "/symfony-app"
-    target-branch: "develop"
     schedule:
       interval: weekly
       day: "thursday"
     commit-message:
-      prefix: "[app]"
+      prefix: "[dependabot]"
 
   - package-ecosystem: "docker"
     directory: "/symfony-app"
@@ -29,11 +28,11 @@ updates:
       interval: weekly
       day: "thursday"
     commit-message:
-      prefix: "[app]"
+      prefix: "[dependabot]"
   - package-ecosystem: "docker"
     directory: "/node-readability"
     schedule:
       interval: weekly
       day: "thursday"
     commit-message:
-      prefix: "[readability]"
+      prefix: "[dependabot]"
