@@ -1,4 +1,4 @@
-FROM golang:1.14 as go-readability
+FROM golang:1.19 as go-readability
 RUN go get -u -v github.com/go-shiori/go-readability/cmd/...
 
 FROM php:8.1-cli
