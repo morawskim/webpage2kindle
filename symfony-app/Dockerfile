@@ -1,5 +1,5 @@
-FROM golang:1.14 as go-readability
-RUN go get -u -v github.com/go-shiori/go-readability/cmd/...
+FROM golang:1.19 as go-readability
+RUN go install github.com/go-shiori/go-readability/cmd/go-readability@latest
 
 FROM php:8.1-cli
 ARG WITH_XDEBUG=0
