@@ -1,0 +1,12 @@
+:80 {
+    root * /app/public
+    php_fastcgi php:9000
+    file_server
+
+    log {
+        output stdout
+        format json
+    }
+
+    metrics /caddy-metrics
+}
