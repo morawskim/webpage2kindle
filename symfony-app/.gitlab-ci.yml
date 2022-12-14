@@ -1,0 +1,35 @@
+stages:
+  - prepare
+  - qa
+  - build
+
+variables:
+  PHP_EXTENSIONS: apcu sockets pdo_sqlite sqlite3
+
+composer:
+  stage: prepare
+  image: composer:2
+  before_script:
+    - composer config -g cache-dir "$CI_PROJECT_DIR/.composer-cache"
+  script:
+    - cd symfony-app/
+    - composer install --ignore-platform-reqs --optimize-autoloader --no-interaction --no-progress --no-ansi
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .composer-cache
+  artifacts:
+    paths:
+      - symfony-app/vendor/
+    expire_in: 30 days
+    when: on_success
+
+behat:
+  stage: qa
+  image: thecodingmachine/php:8.1-v4-cli-node16
+  script:
+    - cd symfony-app/
+    - bin/console --env=test broadway:event-store:create
+    - ./vendor/bin/behat
+  dependencies:
+    - composer

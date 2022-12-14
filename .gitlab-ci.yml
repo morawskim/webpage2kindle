@@ -1,0 +1,16 @@
+stages:
+  - prepare
+
+symfony_pipeline:
+  stage: prepare
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+      changes:
+        - symfony-app/*
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: manual
+      allow_failure: true
+  trigger:
+    include:
+      - local: symfony-app/.gitlab-ci.yml
+    strategy: depend
