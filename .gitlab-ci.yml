@@ -14,3 +14,17 @@ symfony_pipeline:
     include:
       - local: symfony-app/.gitlab-ci.yml
     strategy: depend
+
+node_pipeline:
+  stage: prepare
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+      changes:
+        - node-readability/*
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: manual
+      allow_failure: true
+  trigger:
+    include:
+      - local: node-readability/.gitlab-ci.yml
+    strategy: depend
