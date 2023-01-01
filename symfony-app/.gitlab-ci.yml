@@ -38,6 +38,8 @@ behat:
 
 docker/main:
   extends: .docker
+  dependencies:
+    - composer
   script:
     - >
       [[ "$CI_COMMIT_BRANCH" -eq "main" ]] && IMAGE_TAG=latest || IMAGE_TAG=`echo $CI_COMMIT_BRANCH  | tr ' /_' '-' | tr -cd 'a-zA-Z0-9-' | tr -s '-' `

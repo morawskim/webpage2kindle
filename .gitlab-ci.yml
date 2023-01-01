@@ -28,3 +28,17 @@ node_pipeline:
     include:
       - local: node-readability/.gitlab-ci.yml
     strategy: depend
+
+caddy_pipeline:
+  stage: prepare
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+      changes:
+        - caddy/*
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: manual
+      allow_failure: true
+  trigger:
+    include:
+      - local: caddy/.gitlab-ci.yml
+    strategy: depend
