@@ -1,7 +1,7 @@
 FROM golang:1.19 as go-readability
 RUN go install github.com/go-shiori/go-readability/cmd/go-readability@latest
 
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 ARG WITH_XDEBUG=0
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions apcu sockets
