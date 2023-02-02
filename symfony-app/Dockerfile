@@ -1,4 +1,4 @@
-FROM golang:1.19 as go-readability
+FROM golang:1.20 as go-readability
 RUN go install github.com/go-shiori/go-readability/cmd/go-readability@latest
 
 FROM php:8.2-fpm
