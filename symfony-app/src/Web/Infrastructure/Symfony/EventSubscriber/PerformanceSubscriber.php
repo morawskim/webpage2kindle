@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class PerformanceSubscriber implements EventSubscriberInterface
 {
-    private array $data;
+    private array $data = [];
 
     public function __construct(private readonly PrometheusHelper $prometheusHelper)
     {
