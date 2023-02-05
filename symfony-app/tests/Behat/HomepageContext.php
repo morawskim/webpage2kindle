@@ -22,7 +22,11 @@ class HomepageContext implements Context
     {
         $this->response = $this->client->request('GET', $path);
         if (200 !== $this->client->getResponse()->getStatusCode()) {
-            throw new \RuntimeException('Response code is unexpected');
+            throw new \RuntimeException(sprintf(
+                'Expected response code 200, but got %d. Response body: "%s"',
+                $this->client->getResponse()->getStatusCode(),
+                $this->client->getResponse()->getContent())
+            );
         }
     }
 
@@ -69,7 +73,10 @@ class HomepageContext implements Context
     public function iWillBeRedirectedToExternalPage(string $expectedLocation): void
     {
         if ($this->client->getResponse()->getStatusCode() !== 302) {
-            throw new \RuntimeException('Response code is unexpected');
+            throw new \RuntimeException(sprintf(
+                'Expected 302 as response code, but got %d',
+                $this->client->getResponse()->getStatusCode())
+            );
         }
 
         $location = $this->client->getResponse()->headers->get('Location');
