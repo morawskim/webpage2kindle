@@ -4,35 +4,38 @@ updates:
     directory: "/firefox-extension"
     schedule:
       interval: "weekly"
-      day: "thursday"
+      day: "monday"
     commit-message:
       prefix: "[dependabot]"
+      prefix-development: "[dependabot-dev]"
   - package-ecosystem: npm
     directory: "/node-readability"
     schedule:
       interval: "weekly"
-      day: "thursday"
+      day: "monday"
     commit-message:
       prefix: "[dependabot]"
+      prefix-development: "[dependabot-dev]"
   - package-ecosystem: composer
     directory: "/symfony-app"
     schedule:
       interval: weekly
-      day: "thursday"
+      day: "monday"
     commit-message:
       prefix: "[dependabot]"
+      prefix-development: "[dependabot-dev]"
 
   - package-ecosystem: "docker"
     directory: "/symfony-app"
     schedule:
       interval: weekly
-      day: "thursday"
+      day: "monday"
     commit-message:
       prefix: "[dependabot]"
   - package-ecosystem: "docker"
     directory: "/node-readability"
     schedule:
       interval: weekly
-      day: "thursday"
+      day: "monday"
     commit-message:
       prefix: "[dependabot]"
