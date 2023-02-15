@@ -6,7 +6,7 @@ symfony_pipeline:
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
       changes:
-        - symfony-app/*
+        - symfony-app/**/*
     - if: $CI_PIPELINE_SOURCE == "push"
       when: manual
       allow_failure: true
@@ -20,7 +20,7 @@ node_pipeline:
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
       changes:
-        - node-readability/*
+        - node-readability/**/*
     - if: $CI_PIPELINE_SOURCE == "push"
       when: manual
       allow_failure: true
@@ -34,8 +34,8 @@ caddy_pipeline:
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
       changes:
-        - caddy/*
-        - symfony-app/*
+        - caddy/**/*
+        - symfony-app/**/*
     - if: $CI_PIPELINE_SOURCE == "push"
       when: manual
       allow_failure: true
