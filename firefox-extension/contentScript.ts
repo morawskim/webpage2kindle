@@ -24,6 +24,36 @@ function createLoaderElement() {
     return loader;
 }
 
+function toDataURL(image: HTMLImageElement): string {
+    const canvas = document.createElement('canvas');
+
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+
+    canvas.getContext('2d')?.drawImage(image, 0, 0);
+
+    return canvas.toDataURL();
+}
+
+function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
+    let promises: Promise<void>[] = [];
+
+    nodes.forEach(el => {
+        if (el.complete) {
+            el.src = toDataURL(el);
+        } else {
+            promises.push(new Promise((resolve) => {
+                el.onload = function () {
+                    el.src = toDataURL(el);
+                    resolve();
+                }
+            }))
+        }
+    });
+
+    return Promise.all(promises);
+}
+
 (function () {
     /**
      * Check and set a global guard variable.
@@ -37,30 +67,40 @@ function createLoaderElement() {
     console.log('Init webpage2kindle web browser extension');
     document.body.appendChild(createLoaderElement());
 
-    const body = document.body.outerHTML;
-    fetch(process.env.SYMFONY_ENDPOINT_URL!, {
-        body: new URLSearchParams({
-            "body": body,
-            "url": window.location.toString(),
-        }),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        mode: 'cors',
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.pushToKindleUrl);
-            browser.runtime.sendMessage({
-                success: true,
-                pushToKindleUrl: data.pushToKindleUrl,
-                title: document.title,
-                tabUrl: window.location.href,
-            });
-        })
-        .catch((error) => {
-            console.error('Error', error);
-            browser.runtime.sendMessage({success: false});
+    // at the moment pushtokindle not support img tags with dataurl
+    // convertImagesToDataUrl(document.querySelectorAll('img'))
+    Promise.resolve()
+        .then(function () {
+            const body = document.body.outerHTML;
+
+            const el = document.createElement('div')
+            el.textContent = body;
+            document.body.appendChild(el);
+
+            fetch(process.env.SYMFONY_ENDPOINT_URL!, {
+                body: new URLSearchParams({
+                    "body": body,
+                    "url": window.location.toString(),
+                }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                mode: 'cors',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.pushToKindleUrl);
+                    browser.runtime.sendMessage({
+                        success: true,
+                        pushToKindleUrl: data.pushToKindleUrl,
+                        title: document.title,
+                        tabUrl: window.location.href,
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error', error);
+                    browser.runtime.sendMessage({success: false});
+                });
         });
 })();
