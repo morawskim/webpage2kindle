@@ -4,14 +4,10 @@ namespace App\Web\Infrastructure\Symfony\EventSubscriber;
 
 use App\Job\PrometheusHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class PerformanceSubscriber implements EventSubscriberInterface
 {
-    private array $data = [];
-
     public function __construct(private readonly PrometheusHelper $prometheusHelper)
     {
     }
@@ -19,30 +15,8 @@ class PerformanceSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            TerminateEvent::class => ['onKernelTerminate', -1024],
-            RequestEvent::class => ['onKernelRequest', -1024],
-            ExceptionEvent::class => ['onKernelException', 0],
+            TerminateEvent::class => ['onKernelTerminate', 1024],
         ];
-    }
-
-    public function onKernelRequest(RequestEvent $event): void
-    {
-        if (!$event->isMainRequest()) {
-            return;
-        }
-
-        $this->data['route'] = $event->getRequest()->get('_route') ?? 'unknown-route';
-        $this->data['method'] = $event->getRequest()->getRealMethod();
-    }
-
-    public function onKernelException(ExceptionEvent $event): void
-    {
-        if (!$event->isMainRequest()) {
-            return;
-        }
-
-        $this->data['route'] = $event->getRequest()->get('_route') ?? 'unknown-route';
-        $this->data['method'] = $event->getRequest()->getRealMethod();
     }
 
     public function onKernelTerminate(TerminateEvent $event): void
@@ -51,8 +25,15 @@ class PerformanceSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $data = $this->data;
+        $data['route'] = $event->getRequest()->get('_route') ?? $event->getRequest()->getPathInfo();
+        $data['method'] = $event->getRequest()->getRealMethod();
         $data['status_code'] = $event->getResponse()->getStatusCode();
+
+        // prevent storing a lot of unique entries in prometheus when user try to open not existing page
+        if (404 === $data['status_code'] && null === $event->getRequest()->get('_route')) {
+            $data['route'] = 'unknown-route';
+        }
+
         $duration = ceil((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000);
         $memoryPeak = memory_get_peak_usage(true);
 
