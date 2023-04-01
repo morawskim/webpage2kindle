@@ -81,6 +81,7 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
                 body: new URLSearchParams({
                     "body": body,
                     "url": window.location.toString(),
+                    "title": document.title,
                 }),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

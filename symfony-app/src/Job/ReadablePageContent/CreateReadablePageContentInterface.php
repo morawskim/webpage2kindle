@@ -9,5 +9,5 @@ interface CreateReadablePageContentInterface
     /**
      * @throws CannotCreateReadableVersionException
      */
-    public function createReadableVersionOfWebPageContent(string $body, string $url): string;
+    public function createReadableVersionOfWebPageContent(string $body, string $url, string $title): string;
 }

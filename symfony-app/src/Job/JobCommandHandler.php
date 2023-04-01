@@ -25,7 +25,7 @@ class JobCommandHandler extends SimpleCommandHandler
 
     public function handleCreateJobToProcessWebPageContentCommand(CreateJobToProcessWebPageContentCommand $command): void
     {
-        $job = Job::newJobToProcessPage($command->getJobId(), $command->getUrl(), $command->getWebPageContent());
+        $job = Job::newJobToProcessPage($command->getJobId(), $command->getUrl(), $command->getWebPageContent(), $command->getTitle());
         $this->jobRepository->save($job);
     }
 

@@ -13,10 +13,10 @@ class NodeMicroserviceCreateReadablePageContent implements CreateReadablePageCon
     {
     }
 
-    public function createReadableVersionOfWebPageContent(string $body, string $url): string
+    public function createReadableVersionOfWebPageContent(string $body, string $url, string $title): string
     {
         $options = (new HttpOptions())
-            ->setBody(['body' => $body, 'url' => $url])
+            ->setBody(['body' => $body, 'url' => $url, 'title' => $title])
             ->toArray();
         try {
             $body = $this->nodeMicroserviceClient->request('POST', '/process-webpage', $options)->toArray();

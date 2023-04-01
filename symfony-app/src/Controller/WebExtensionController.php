@@ -16,7 +16,8 @@ class WebExtensionController extends AbstractController
         // todo mmo validation
         $url = $request->request->get('url');
         $body = $request->request->get('body');
-        $pushToKindleUrl = $pushToKindleFacade->processWebPageContent($url, $body);
+        $title = $request->request->get('title');
+        $pushToKindleUrl = $pushToKindleFacade->processWebPageContent($url, $body, $title);
 
         return new JsonResponse(['pushToKindleUrl' => $pushToKindleUrl]);
     }

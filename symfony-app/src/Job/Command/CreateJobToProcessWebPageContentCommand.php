@@ -9,7 +9,8 @@ class CreateJobToProcessWebPageContentCommand
     public function __construct(
         private readonly JobId $jobId,
         private readonly string $url,
-        private readonly string $webPageContent
+        private readonly string $webPageContent,
+        private readonly string $title,
     ) {
     }
 
@@ -26,5 +27,10 @@ class CreateJobToProcessWebPageContentCommand
     public function getWebPageContent(): string
     {
         return $this->webPageContent;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 }

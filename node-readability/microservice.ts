@@ -24,19 +24,19 @@ app.use(Sentry.Handlers.tracingHandler());
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 app.post('/process-webpage', (req: Request, res: Response) => {
-    const {body, url} = req.body;
+    const {body, url, title} = req.body;
     const doc = new JSDOM(body, {
-        url: url
+        url: url,
     });
     const reader = new Readability(doc.window.document);
     const article = reader.parse();
+    const articleContent = (article && article.content) ? `<h1>${title}</h1>` + article.content : '';
 
     const responseObject = {
         'success': !!(article && article.content.length),
-        'body': article && article.content
+        'body': articleContent,
     };
 
-    res.setHeader('X-Foo', 'abc');
     res.json(responseObject);
 });
 

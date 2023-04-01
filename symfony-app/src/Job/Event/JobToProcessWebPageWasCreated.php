@@ -10,7 +10,7 @@ class JobToProcessWebPageWasCreated implements Serializable, EventHumanDescripti
     public function __construct(
         private readonly JobId $jobId,
         private readonly string $url,
-        private readonly string $webPageContent
+        private readonly string $webPageContent,
     ) {
     }
 

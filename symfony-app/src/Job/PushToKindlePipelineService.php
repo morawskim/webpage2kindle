@@ -36,9 +36,9 @@ class PushToKindlePipelineService
         $this->commandBus->dispatch($command);
     }
 
-    public function addNewJobToProcessBody(JobId $jobId, string$url, string $body): void
+    public function addNewJobToProcessBody(JobId $jobId, string$url, string $body, string $title): void
     {
-        $command = new CreateJobToProcessWebPageContentCommand($jobId, $url, $body);
+        $command = new CreateJobToProcessWebPageContentCommand($jobId, $url, $body, $title);
         $this->commandBus->dispatch($command);
     }
 
@@ -63,10 +63,13 @@ class PushToKindlePipelineService
     {
         /** @var Job $job */
         $job = $this->jobRepository->load($jobId);
+        [$title, $content] = JobUtils::extractWebPageContentAndTitle($job->getWebPageContent());
+
         try {
             $body = $this->createReadablePageContent->createReadableVersionOfWebPageContent(
-                $job->getWebPageContent(),
-                $job->getUrlToFetch()
+                $content,
+                $job->getUrlToFetch(),
+                $title
             );
             $this->commandBus->dispatch(new SetWebPageContentCommand($jobId, $body));
         } catch (CannotCreateReadableVersionException $e) {

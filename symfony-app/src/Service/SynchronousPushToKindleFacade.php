@@ -27,10 +27,10 @@ class SynchronousPushToKindleFacade
         return $this->pushToKindlePipeline->createPushToKindleUrl($jobId);
     }
 
-    public function processWebPageContent(string $url, string $webPageContent): string
+    public function processWebPageContent(string $url, string $webPageContent, string $title): string
     {
         $jobId = $this->jobRepository->createNextJobId();
-        $this->pushToKindlePipeline->addNewJobToProcessBody($jobId, $url, $webPageContent);
+        $this->pushToKindlePipeline->addNewJobToProcessBody($jobId, $url, $webPageContent, $title);
         $this->pushToKindlePipeline->createReadableVersionOfContent($jobId);
 
         return $this->pushToKindlePipeline->createPushToKindleUrl($jobId);

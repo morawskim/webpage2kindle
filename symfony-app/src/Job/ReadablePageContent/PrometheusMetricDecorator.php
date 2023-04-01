@@ -13,9 +13,9 @@ class PrometheusMetricDecorator implements CreateReadablePageContentInterface
     ) {
     }
 
-    public function createReadableVersionOfWebPageContent(string $body, string $url): string
+    public function createReadableVersionOfWebPageContent(string $body, string $url, string $title): string
     {
-        $content = $this->createReadablePageContent->createReadableVersionOfWebPageContent($body, $url);
+        $content = $this->createReadablePageContent->createReadableVersionOfWebPageContent($body, $url, $title);
         $this->prometheusHelper->publishProcessedArticleMetrics($this->prometheusAdapterLabel, strlen($content));
 
         return $content;

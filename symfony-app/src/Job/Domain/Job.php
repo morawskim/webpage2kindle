@@ -7,6 +7,7 @@ use App\Job\Event\JobToProcessWebPageWasCreated;
 use App\Job\Event\JobWasCreated;
 use App\Job\Event\PushToKindleUrlSet;
 use App\Job\Event\WebPageContentUpdated;
+use App\Job\JobUtils;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 
 class Job extends EventSourcedAggregateRoot
@@ -25,10 +26,10 @@ class Job extends EventSourcedAggregateRoot
         return $job;
     }
 
-    public static function newJobToProcessPage(JobId $jobId, string $url, string $webPageContent): self
+    public static function newJobToProcessPage(JobId $jobId, string $url, string $webPageContent, string $title = ''): self
     {
         $job = new self();
-        $job->newJobToProcessWebPage($jobId, $url, $webPageContent);
+        $job->newJobToProcessWebPage($jobId, $url, $webPageContent, $title);
 
         return $job;
     }
@@ -55,10 +56,11 @@ class Job extends EventSourcedAggregateRoot
         );
     }
 
-    private function newJobToProcessWebPage(JobId $jobId, string $url, string $webPageContent): void
+    private function newJobToProcessWebPage(JobId $jobId, string $url, string $webPageContent, string $title): void
     {
+        $content = JobUtils::joinTitleAndWebContent($title, $webPageContent);
         $this->apply(
-            new JobToProcessWebPageWasCreated($jobId, $url, $webPageContent)
+            new JobToProcessWebPageWasCreated($jobId, $url, $content)
         );
     }
 
