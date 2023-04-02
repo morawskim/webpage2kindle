@@ -5,7 +5,7 @@ Feature:
   Scenario: The button to process webpage is visible
     Given I send POST request to "/web-extension" with body:
     """
-url=example.com&body=lorem-ipsum
+url=example.com&body=lorem-ipsum&title=TitleOfWebPage
     """
     Then I get a response with status "200" and body:
   """
