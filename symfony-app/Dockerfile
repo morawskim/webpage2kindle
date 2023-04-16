@@ -7,7 +7,7 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 RUN install-php-extensions apcu sockets
 COPY --from=go-readability /go/bin/go-readability /usr/local/bin/
 COPY --chown=www-data:www-data . /app
-RUN test $WITH_XDEBUG -eq 1 && install-php-extensions xdebug-^3.1 || true
+RUN test $WITH_XDEBUG -eq 1 && install-php-extensions xdebug-^3.2 || true
 
 USER www-data
 RUN /app/bin/console broadway:event-store:create
