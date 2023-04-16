@@ -30,9 +30,6 @@ class WebExtensionContext implements Context
             [],
             ['Content-Type' => 'application/x-www-form-urlencoded'],
         );
-        if (200 !== $this->client->getResponse()->getStatusCode()) {
-            throw new \RuntimeException('Response code is unexpected');
-        }
     }
 
     /**
@@ -44,12 +41,20 @@ class WebExtensionContext implements Context
             throw new \RuntimeException(sprintf('Expected HTTP status code "%d" got "%d"', $httpResponseCode, $actualHttpResponseCode));
         }
 
-        if ($this->client->getResponse()->getContent() !== $expectedResponseBody->getRaw()) {
+
+        if ($this->prettifyJson($this->client->getResponse()->getContent()) !== $this->prettifyJson($expectedResponseBody->getRaw())) {
             throw new \RuntimeException(sprintf(
                 'Response body does not match. Expected "%s" got "%s"',
                 $expectedResponseBody->getRaw(),
                 $this->client->getResponse()->getContent()
             ));
         }
+    }
+
+    private function prettifyJson(string $json): string
+    {
+        $decodedJson = json_decode($json, false, flags: JSON_THROW_ON_ERROR);
+
+        return json_encode($decodedJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 }
