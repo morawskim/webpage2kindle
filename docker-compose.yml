@@ -60,3 +60,10 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+  go-readability-api:
+    build:
+      context: ./go-readability-api
+      dockerfile: Dockerfile
+    command:
+      - --http
+      - :8080

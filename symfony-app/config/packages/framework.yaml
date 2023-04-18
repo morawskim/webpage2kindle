@@ -21,6 +21,8 @@ framework:
 
     http_client:
         scoped_clients:
+            go_readability_microservice.client:
+                base_uri: '%env(GO_READABILITY_MICROSERVICE_URL)%'
             node_microservice.client:
                 base_uri: '%env(NODE_MICROSERVICE_URL)%'
             push_to_kindle.client:
