@@ -43,3 +43,17 @@ caddy_pipeline:
     include:
       - local: caddy/.gitlab-ci.yml
     strategy: depend
+
+goreadability_pipeline:
+  stage: prepare
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+      changes:
+        - go-readability-api/**/*
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: manual
+      allow_failure: true
+  trigger:
+    include:
+      - local: go-readability-api/.gitlab-ci.yml
+    strategy: depend

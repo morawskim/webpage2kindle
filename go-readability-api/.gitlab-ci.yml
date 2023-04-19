@@ -1,0 +1,27 @@
+include: '/.gitlab/docker-template.yaml'
+
+stages:
+  - prepare
+  - docker
+
+nothing:
+  stage: prepare
+  image: thecodingmachine/php:8.1-v4-cli-node16
+  script:
+    - cd go-readability-api/
+
+docker/main:
+  extends: .docker
+  script:
+    - >
+      [[ "$CI_COMMIT_BRANCH" -eq "main" ]] && IMAGE_TAG=latest || IMAGE_TAG=`echo $CI_COMMIT_BRANCH  | tr ' /_' '-' | tr -cd 'a-zA-Z0-9-' | tr -s '-' `
+    - echo "IMAGE_TAG - $IMAGE_TAG (CI_COMMIT_BRANCH - $CI_COMMIT_BRANCH)"
+    - /kaniko/executor --context $CI_PROJECT_DIR/go-readability-api --dockerfile $CI_PROJECT_DIR/go-readability-api/Dockerfile --destination ${CI_REGISTRY}/${CI_PROJECT_PATH}/go-microservice:$IMAGE_TAG
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_PIPELINE_SOURCE == "parent_pipeline"
+      when: manual
+      allow_failure: true
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: manual
+      allow_failure: true
