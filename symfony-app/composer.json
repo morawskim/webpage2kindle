@@ -19,7 +19,7 @@
         "ramsey/uuid": "^4.4",
         "sentry/sentry-symfony": "^4.3",
         "symfony/asset": "6.2.*",
-        "symfony/console": "6.2.*",
+        "symfony/console": "6.3.*",
         "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.2.*",
