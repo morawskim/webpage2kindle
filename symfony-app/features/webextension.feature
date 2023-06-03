@@ -27,6 +27,7 @@ url=https://example.com/foo/article&body=lorem-ipsum&title=TitleOfWebPage
     {
       "propertyPath": "url",
       "title": "This value should not be blank.",
+      "template": "This value should not be blank.",
       "parameters": {
         "{{ value }}": "null"
       },
@@ -35,6 +36,7 @@ url=https://example.com/foo/article&body=lorem-ipsum&title=TitleOfWebPage
     {
       "propertyPath": "body",
       "title": "This value should not be blank.",
+      "template": "This value should not be blank.",
       "parameters": {
         "{{ value }}": "null"
       },
@@ -43,6 +45,7 @@ url=https://example.com/foo/article&body=lorem-ipsum&title=TitleOfWebPage
     {
       "propertyPath": "title",
       "title": "This value should not be blank.",
+      "template": "This value should not be blank.",
       "parameters": {
         "{{ value }}": "null"
       },
@@ -66,6 +69,7 @@ url=https://example.com/foo/article&body=lorem-ipsum&title=TitleOfWebPage
     {
       "propertyPath": "url",
       "title": "This value is not a valid URL.",
+      "template": "This value is not a valid URL.",
       "parameters": {
         "{{ value }}": "\u0022example.com\/foo\/article\u0022"
       },
