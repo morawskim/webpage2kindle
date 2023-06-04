@@ -28,7 +28,7 @@ class WebExtensionContext implements Context
             $path,
             $params,
             [],
-            ['Content-Type' => 'application/x-www-form-urlencoded'],
+            ['Content-Type' => 'application/x-www-form-urlencoded', 'HTTP_ACCEPT' => 'application/json'],
         );
     }
 

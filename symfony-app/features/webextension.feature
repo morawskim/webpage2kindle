@@ -17,11 +17,12 @@ url=https://example.com/foo/article&body=lorem-ipsum&title=TitleOfWebPage
     """
     foo=abc
     """
-    Then I get a response with status "400" and body:
+    Then I get a response with status "422" and body:
     """
     {
   "type": "https:\/\/symfony.com\/errors\/validation",
   "title": "Validation Failed",
+  "status":422,
   "detail": "url: This value should not be blank.\nbody: This value should not be blank.\ntitle: This value should not be blank.",
   "violations": [
     {
@@ -59,11 +60,12 @@ url=https://example.com/foo/article&body=lorem-ipsum&title=TitleOfWebPage
     """
     url=example.com/foo/article&body=lorem-ipsum&title=TitleOfWebPage
     """
-    Then I get a response with status "400" and body:
+    Then I get a response with status "422" and body:
     """
     {
   "type": "https:\/\/symfony.com\/errors\/validation",
   "title": "Validation Failed",
+  "status":422,
   "detail": "url: This value is not a valid URL.",
   "violations": [
     {

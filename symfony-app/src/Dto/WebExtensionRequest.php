@@ -2,12 +2,11 @@
 
 namespace App\Dto;
 
-use Nelexa\RequestDtoBundle\Dto\RequestObjectInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
 
-class  WebExtensionRequest implements RequestObjectInterface
+class  WebExtensionRequest
 {
     #[NotBlank()]
     #[Url()]
