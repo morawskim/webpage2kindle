@@ -84,7 +84,8 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
                     "title": document.title,
                 }),
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json',
                 },
                 method: 'POST',
                 mode: 'cors',
