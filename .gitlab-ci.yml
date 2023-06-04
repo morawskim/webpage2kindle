@@ -1,6 +1,11 @@
 stages:
   - prepare
 
+display_pipeline_source:
+  stage: prepare
+  script:
+    - echo CI_PIPELINE_SOURCE "'$CI_PIPELINE_SOURCE'"
+
 symfony_pipeline:
   stage: prepare
   rules:
