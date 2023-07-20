@@ -71,6 +71,11 @@ class PushToKindlePipelineService
                 $job->getUrlToFetch(),
                 $title
             );
+
+            if ('' === $body) {
+                throw new CannotCreateReadableVersionException('The readable content is empty');
+            }
+
             $this->commandBus->dispatch(new SetWebPageContentCommand($jobId, $body));
         } catch (CannotCreateReadableVersionException $e) {
             $this->commandBus->dispatch(new MarkJobAsFailedCommand($jobId, $e->getMessage()));
