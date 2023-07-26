@@ -9,10 +9,10 @@ display_pipeline_source:
 symfony_pipeline:
   stage: prepare
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       changes:
         - symfony-app/**/*
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       when: manual
       allow_failure: true
   trigger:
@@ -23,10 +23,10 @@ symfony_pipeline:
 node_pipeline:
   stage: prepare
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       changes:
         - node-readability/**/*
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       when: manual
       allow_failure: true
   trigger:
@@ -37,11 +37,11 @@ node_pipeline:
 caddy_pipeline:
   stage: prepare
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       changes:
         - caddy/**/*
         - symfony-app/**/*
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       when: manual
       allow_failure: true
   trigger:
@@ -52,10 +52,10 @@ caddy_pipeline:
 goreadability_pipeline:
   stage: prepare
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       changes:
         - go-readability-api/**/*
-    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
       when: manual
       allow_failure: true
   trigger:
