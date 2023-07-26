@@ -49,4 +49,14 @@ class PrometheusHelper
         );
         $histogram->observe((int)($memoryPeakBytes / 1024 / 1024), array_values($data));
     }
+
+    public function webExtensionVersionMetric(string $webExtensionVersion): void
+    {
+        $this->collectorRegistry->getOrRegisterCounter(
+            $this->metricNamespace,
+            'web_extension_version',
+            'Total',
+            ['version']
+        )->inc([$webExtensionVersion]);
+    }
 }

@@ -1,4 +1,5 @@
 import browser from "webextension-polyfill";
+import webExtensionManifest from './manifest.json';
 
 declare global {
     interface Window {
@@ -64,7 +65,7 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
         return;
     }
     window.hasRun = true;
-    console.log('Init webpage2kindle web browser extension');
+    console.log(`Init webpage2kindle web browser extension (version: ${webExtensionManifest.version})`);
     document.body.appendChild(createLoaderElement());
 
     // at the moment pushtokindle not support img tags with dataurl
@@ -86,6 +87,7 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json',
+                    'X-Extension-Version': webExtensionManifest.version,
                 },
                 method: 'POST',
                 mode: 'cors',
