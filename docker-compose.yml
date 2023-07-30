@@ -67,3 +67,11 @@ services:
     command:
       - --http
       - :8080
+  redis:
+      image: redis:7.0-alpine
+  redis-web:
+      image: rediscommander/redis-commander:latest
+      environment:
+          - REDIS_HOSTS=local:redis:6379
+      ports:
+        - "8081:8081"
