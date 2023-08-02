@@ -38,8 +38,8 @@ framework:
     rate_limiter:
         api:
             policy: 'token_bucket'
-            limit: 30
-            rate: { interval: '1 minute', amount: 10 }
+            limit: 150
+            rate: { interval: '1 minute', amount: 60 }
             cache_pool: 'cache.rate_limiter_api'
 when@test:
     framework:
