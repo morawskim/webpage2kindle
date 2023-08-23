@@ -16,33 +16,33 @@ services:
       XDEBUG_MODE: develop,debug
       XDEBUG_CONFIG: "client_host=${MY_IP:-172.17.0.1} discover_client_host=0 client_port=9000"
       PHP_IDE_CONFIG: "serverName=${DEV_SERVER_NAME:-webpage2content}"
-  worker-new-job:
-    build:
-      context: ./symfony-app
-      dockerfile: Dockerfile
-    volumes:
-      - ./symfony-app:/app
-    depends_on:
-      - rabbitmq
-    command: [ "/app/bin/wait-for-it.sh", "rabbitmq:5672", "--", "php", "-d", "apc.enable_cli=1", "/app/bin/console", "rabbitmq:consume", "-m", "10", "new_job" ]
-  worker-fetch-page-content:
-    build:
-      context: ./symfony-app
-      dockerfile: Dockerfile
-    volumes:
-      - ./symfony-app:/app
-    depends_on:
-      - rabbitmq
-    command: [ "/app/bin/wait-for-it.sh", "rabbitmq:5672", "--", "php", "-d", "apc.enable_cli=1", "/app/bin/console", "rabbitmq:consume", "-m", "10", "fetch_page_content" ]
-  worker-create-url:
-    build:
-      context: ./symfony-app
-      dockerfile: Dockerfile
-    volumes:
-      - ./symfony-app:/app
-    depends_on:
-      - rabbitmq
-    command: [ "/app/bin/wait-for-it.sh", "rabbitmq:5672", "--", "php", "-d", "apc.enable_cli=1", "/app/bin/console", "rabbitmq:consume", "-m", "10", "push_to_kindle_url" ]
+#  worker-new-job:
+#    build:
+#      context: ./symfony-app
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./symfony-app:/app
+#    depends_on:
+#      - rabbitmq
+#    command: [ "/app/bin/wait-for-it.sh", "rabbitmq:5672", "--", "php", "-d", "apc.enable_cli=1", "/app/bin/console", "rabbitmq:consume", "-m", "10", "new_job" ]
+#  worker-fetch-page-content:
+#    build:
+#      context: ./symfony-app
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./symfony-app:/app
+#    depends_on:
+#      - rabbitmq
+#    command: [ "/app/bin/wait-for-it.sh", "rabbitmq:5672", "--", "php", "-d", "apc.enable_cli=1", "/app/bin/console", "rabbitmq:consume", "-m", "10", "fetch_page_content" ]
+#  worker-create-url:
+#    build:
+#      context: ./symfony-app
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./symfony-app:/app
+#    depends_on:
+#      - rabbitmq
+#    command: [ "/app/bin/wait-for-it.sh", "rabbitmq:5672", "--", "php", "-d", "apc.enable_cli=1", "/app/bin/console", "rabbitmq:consume", "-m", "10", "push_to_kindle_url" ]
   node:
     build:
       context: ./node-readability

@@ -34,21 +34,6 @@ node_pipeline:
       - local: node-readability/.gitlab-ci.yml
     strategy: depend
 
-caddy_pipeline:
-  stage: prepare
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
-      changes:
-        - caddy/**/*
-        - symfony-app/**/*
-    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
-      when: manual
-      allow_failure: true
-  trigger:
-    include:
-      - local: caddy/.gitlab-ci.yml
-    strategy: depend
-
 goreadability_pipeline:
   stage: prepare
   rules:
