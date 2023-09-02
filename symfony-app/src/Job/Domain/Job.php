@@ -85,6 +85,21 @@ class Job extends EventSourcedAggregateRoot
         ));
     }
 
+    public function isFailed(): bool
+    {
+        return $this->failedReason !== '';
+    }
+
+    public function getFailedReason(): string
+    {
+        return $this->failedReason;
+    }
+
+    public function getPushToKindleUrl(): string
+    {
+        return $this->pushToKindleUrl;
+    }
+
     protected function applyJobWasCreated(JobWasCreated $event): void
     {
         $this->jobId = $event->getJobId();

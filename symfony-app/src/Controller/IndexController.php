@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Job\Domain\GetNewestJobsInterface;
+use App\Job\Domain\Job;
 use App\Job\Domain\JobId;
 use App\Job\Domain\JobRepository;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Service\AsyncPushToKindleFacade;
 use App\Service\SynchronousPushToKindleFacade;
+use Broadway\Repository\AggregateNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,9 +64,8 @@ class IndexController extends AbstractController
         }
 
         $jobId = $asyncPushToKindleFacade->publishNewJob($url);
-        sleep(1);
 
-        return $this->redirectToRoute('job_details', ['jobId' => (string) $jobId]);
+        return $this->redirectToRoute('redirect_if_job_completed', ['jobId' => (string) $jobId]);
     }
 
     #[Route("/newest-jobs", name: 'list_newest_jobs', methods: ['GET'])]
@@ -81,5 +82,23 @@ class IndexController extends AbstractController
         $records = $jobRepository->getJobDetailsAsStream(new JobId($jobId));
 
         return $this->render('job_details.html.twig', ['records' => $records]);
+    }
+
+    #[Route('/redirect/{jobId}', name: 'redirect_if_job_completed')]
+    public function redirectIfReady(string $jobId, JobRepository $jobRepository): Response
+    {
+        try {
+            /** @var Job $job */
+            $job = $jobRepository->load($jobId);
+            if (!$job->isFailed() && $pushToKindleUrl = $job->getPushToKindleUrl()) {
+                return new RedirectResponse($pushToKindleUrl);
+            }
+
+            $records = $jobRepository->getJobDetailsAsStream(new JobId($jobId));
+            return $this->render('job_details.html.twig', ['records' => $records]);
+
+        } catch (AggregateNotFoundException $e) {
+            throw $this->createNotFoundException();
+        }
     }
 }
