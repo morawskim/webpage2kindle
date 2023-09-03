@@ -5,6 +5,7 @@ old_sound_rabbit_mq:
     producers:
         # use 'old_sound_rabbit_mq.<name>_producer' service to send data.
         new_job:
+            class: App\Infrastructure\RabbitMq\ProducerRequestIdStamp
             connection:       default
             exchange_options: { name: 'pipeline', type: direct }
             default_content_type: 'application/json'
