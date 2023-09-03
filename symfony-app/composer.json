@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "broadway/broadway-bundle": "^0.6.1",
         "broadway/event-store-dbal": "^0.6.0",
+        "chrisguitarguy/request-id-bundle": "^5.1",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",

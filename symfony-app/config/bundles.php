@@ -14,4 +14,5 @@ return [
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['all' => true],
     Nelexa\RequestDtoBundle\RequestDtoBundle::class => ['all' => true],
+    Chrisguitarguy\RequestId\ChrisguitarguyRequestIdBundle::class => ['all' => true],
 ];

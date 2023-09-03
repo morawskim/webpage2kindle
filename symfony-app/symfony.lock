@@ -23,6 +23,9 @@
             "config/packages/broadway_event_store_dbal.yaml"
         ]
     },
+    "chrisguitarguy/request-id-bundle": {
+        "version": "v5.1.0"
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.9",
         "recipe": {
