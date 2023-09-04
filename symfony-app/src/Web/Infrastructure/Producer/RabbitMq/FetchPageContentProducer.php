@@ -14,12 +14,12 @@ class FetchPageContentProducer implements FetchPageContentProducerInterface
     public function __construct(
         #[Autowire(service: 'old_sound_rabbit_mq.fetch_page_content_producer')]
         private readonly Producer $producer,
-        private readonly SerializerInterface $serializer,
+        private readonly SerializerInterface $encrypterSerializer,
     ) {
     }
 
     public function publishFetchPageContent(JobId $jobId): void
     {
-        $this->producer->publish($this->serializer->serialize(new FetchPageContentMessage($jobId), 'json'));
+        $this->producer->publish($this->encrypterSerializer->serialize(new FetchPageContentMessage($jobId), 'json'));
     }
 }

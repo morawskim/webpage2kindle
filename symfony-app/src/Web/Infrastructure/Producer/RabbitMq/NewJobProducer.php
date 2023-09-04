@@ -16,7 +16,7 @@ class NewJobProducer implements NewJobProducerInterface
         private readonly JobRepository $jobRepository,
         #[Autowire(service: 'old_sound_rabbit_mq.new_job_producer')]
         private readonly Producer $producer,
-        private readonly SerializerInterface $serializer,
+        private readonly SerializerInterface $encrypterSerializer,
     ) {
     }
 
@@ -25,7 +25,9 @@ class NewJobProducer implements NewJobProducerInterface
         $jobId = $this->jobRepository->createNextJobId();
         $dto = new NewJobMessage($jobId, $url);
 
-        $this->producer->publish($this->serializer->serialize($dto, 'json'));
+        $this->producer->publish(
+            $this->encrypterSerializer->serialize($dto, 'json'),
+        );
 
         return $jobId;
     }

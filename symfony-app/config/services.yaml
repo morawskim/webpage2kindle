@@ -11,6 +11,9 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            Symfony\Component\Serializer\SerializerInterface $encrypterSerializer: '@App\Infrastructure\Symfony\Serializer\EncrypterSerializerDecorator'
+
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -29,6 +32,14 @@ services:
     Broadway\EventStore\EventStore: '@broadway.event_store.dbal'
     Broadway\EventHandling\EventBus: '@broadway.event_handling.event_bus'
     Broadway\EventStore\Management\EventStoreManagement: '@broadway.event_store.dbal'
+
+    App\Service\Encrypter:
+        arguments:
+            $key: '%env(APP_SECRET)%'
+    App\Infrastructure\Symfony\Serializer\EncrypterSerializerDecorator:
+        arguments:
+            $serializer: '@serializer'
+
 
     App\Job\JobCommandHandler:
         tags:

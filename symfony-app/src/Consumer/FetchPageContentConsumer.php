@@ -14,7 +14,7 @@ class FetchPageContentConsumer
     public function __construct(
         private readonly PushToKindlePipelineService $pushToKindlePipeline,
         private readonly PushToKindleProducerInterface $pushToKindleProducer,
-        private readonly SerializerInterface $serializer,
+        private readonly SerializerInterface $encrypterSerializer,
     ) {
     }
 
@@ -22,7 +22,7 @@ class FetchPageContentConsumer
     {
         try {
             /** @var FetchPageContentMessage $dto */
-            $dto = $this->serializer->deserialize($msg->body, FetchPageContentMessage::class, 'json');
+            $dto = $this->encrypterSerializer->deserialize($msg->body, FetchPageContentMessage::class, 'json');
 
             $this->pushToKindlePipeline->fetchPageContentForJob($dto->jobId);
             $this->pushToKindleProducer->publishPushToKindle($dto->jobId);

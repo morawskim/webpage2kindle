@@ -12,14 +12,14 @@ class CreatePushToKindleUrlConsumer implements ConsumerInterface
 {
     public function __construct(
         private readonly PushToKindlePipelineService $pushToKindlePipeline,
-        private readonly SerializerInterface $serializer,
+        private readonly SerializerInterface $encrypterSerializer,
     ) {
     }
 
     public function execute(AMQPMessage $msg): void
     {
         /** @var CreatePushToKindleUrlMessage $dto */
-        $dto = $this->serializer->deserialize($msg->body, CreatePushToKindleUrlMessage::class, 'json');
+        $dto = $this->encrypterSerializer->deserialize($msg->body, CreatePushToKindleUrlMessage::class, 'json');
 
         $this->pushToKindlePipeline->createPushToKindleUrl($dto->jobId);
     }

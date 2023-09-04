@@ -14,12 +14,12 @@ class PushToKindleProducer implements PushToKindleProducerInterface
     public function __construct(
         #[Autowire(service: 'old_sound_rabbit_mq.push_to_kindle_url_producer')]
         private readonly Producer $producer,
-        private readonly SerializerInterface $serializer,
+        private readonly SerializerInterface $encrypterSerializer,
     ) {
     }
 
     public function publishPushToKindle(JobId $jobId): void
     {
-        $this->producer->publish($this->serializer->serialize(new CreatePushToKindleUrlMessage($jobId), 'json'));
+        $this->producer->publish($this->encrypterSerializer->serialize(new CreatePushToKindleUrlMessage($jobId), 'json'));
     }
 }
