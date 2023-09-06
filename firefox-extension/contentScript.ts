@@ -103,8 +103,11 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
                     });
                 })
                 .catch((error) => {
-                    console.error('Error', error);
-                    browser.runtime.sendMessage({success: false});
+                    console.error('Error', error, process.env.SYMFONY_ENDPOINT_URL);
+                    browser.runtime.sendMessage({
+                        success: false,
+                        title: document.title,
+                    });
                 });
         });
 })();

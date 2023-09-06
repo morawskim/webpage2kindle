@@ -9,6 +9,7 @@ interface ResultSuccess {
 
 interface ResultFailed {
     success: false;
+    title: string;
 }
 
 function isSupportedProtocol(urlString: string) {
@@ -21,14 +22,6 @@ function isSupportedProtocol(urlString: string) {
 
 async function notify(message: ResultSuccess|ResultFailed) {
     if (message.success) {
-        browser.notifications.create({
-            type: 'basic',
-            iconUrl: 'icons/icon-48.png',
-            title: `Link is ready (${message.title})`,
-            message: message.pushToKindleUrl,
-            priority: 0,
-        });
-
         const tabs = await browser.tabs.query({ url: message.tabUrl});
         if (tabs.length) {
             const tabId = tabs[0].id;
@@ -54,7 +47,7 @@ async function notify(message: ResultSuccess|ResultFailed) {
         browser.notifications.create({
             type: 'basic',
             iconUrl: 'icons/icon-48.png',
-            title: 'Error during creating url to pushtokindle',
+            title: `Error during creating url to pushtokindle for ${message.title}`,
             message: 'Check console',
             priority: 0,
         });
