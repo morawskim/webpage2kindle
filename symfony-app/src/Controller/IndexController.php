@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Job\Domain\GetNewestJobsInterface;
 use App\Job\Domain\Job;
 use App\Job\Domain\JobId;
+use App\Job\Domain\JobProviderInterface;
 use App\Job\Domain\JobRepository;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Service\AsyncPushToKindleFacade;
@@ -85,16 +86,16 @@ class IndexController extends AbstractController
     }
 
     #[Route('/redirect/{jobId}', name: 'redirect_if_job_completed')]
-    public function redirectIfReady(string $jobId, JobRepository $jobRepository): Response
+    public function redirectIfReady(string $jobId, JobProviderInterface $jobProvider): Response
     {
         try {
             /** @var Job $job */
-            $job = $jobRepository->load($jobId);
+            $job = $jobProvider->getJob($jobId);
             if (!$job->isFailed() && $pushToKindleUrl = $job->getPushToKindleUrl()) {
                 return new RedirectResponse($pushToKindleUrl);
             }
 
-            $records = $jobRepository->getJobDetailsAsStream(new JobId($jobId));
+            $records = $jobProvider->getJobDetailsAsStream(new JobId($jobId));
             return $this->render('job_details.html.twig', ['records' => $records]);
 
         } catch (AggregateNotFoundException $e) {

@@ -10,6 +10,16 @@ services:
     prometheus_storage:
         class: Prometheus\Storage\InMemory
 
+    App\Infrastructure\RabbitMq\InMemoryProducer:
+        public: true
+    App\Web\Infrastructure\Producer\RabbitMq\NewJobProducer:
+        arguments:
+            $producer: '@App\Infrastructure\RabbitMq\InMemoryProducer'
+
+    App\Job\Domain\InMemoryJobProvider:
+        public: true
+    App\Job\Domain\JobProviderInterface: '@App\Job\Domain\InMemoryJobProvider'
+
     App\Job\PageContentFetcher\StaticPageContentFetcher: ~
     App\Job\PageContentFetcher\PageContentFetcherInterface: '@App\Job\PageContentFetcher\StaticPageContentFetcher'
 

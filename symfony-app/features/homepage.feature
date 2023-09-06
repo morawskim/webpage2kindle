@@ -6,14 +6,20 @@ Feature:
     Given I navigate to "/"
     Then the response should contains button "Process"
 
-  Scenario: Get readable version of page
+  Scenario: Create a new job
     Given I navigate to "/"
     When I submit form "Process" with url "http://example.com"
-    Then I will be redirected to external page "https://fake-push-to-kindle.com"
+    Then I will be waiting for processing "http://example.com"
 
-  Scenario: Get readable version of page passed as parameter
+  Scenario: Processed job
+    Given The job "5998c78c-bcff-4213-9113-04cef1527cc8" has been processed
+    When I open "/redirect/5998c78c-bcff-4213-9113-04cef1527cc8"
+    Then I will be redirected to external page "https://fake-push-to-kindle.com/5998c78c-bcff-4213-9113-04cef1527cc8"
+
+  Scenario: Create a new job with url passed as parameter
     Given I navigate to "/?url=https%3A%2F%2Fexample.com%2Fhello-world"
-    Then the url field should contain value "https://example.com/hello-world"
+    When I submit form "Process"
+    Then I will be waiting for processing "https://example.com/hello-world"
 
   Scenario: URL is empty
     Given I navigate to "/"

@@ -76,6 +76,9 @@ services:
     App\Job\PushToKindleUrlGenerator\PastePadUrlGenerator: ~
     App\Job\PushToKindleUrlGenerator\PushToKindleUrlGeneratorInterface: '@App\Job\PushToKindleUrlGenerator\PastePadUrlGenerator'
 
+    App\Job\Domain\JobProviderInterface: '@App\Job\Domain\JobRepository'
+
+
     prometheus_storage:
         class: Prometheus\Storage\Redis
         factory: 'App\Infrastructure\Prometheus\RedisAdapterFactory::fromSymfonyRedisDSN'

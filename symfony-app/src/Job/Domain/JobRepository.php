@@ -3,6 +3,7 @@
 namespace App\Job\Domain;
 
 use App\Job\Event\EventHumanDescriptionInterface;
+use Broadway\Domain\AggregateRoot;
 use Broadway\Domain\DomainMessage;
 use Broadway\EventHandling\EventBus;
 use Broadway\EventSourcing\AggregateFactory\PublicConstructorAggregateFactory;
@@ -10,7 +11,7 @@ use Broadway\EventSourcing\EventSourcingRepository;
 use Broadway\EventStore\EventStore;
 use Broadway\UuidGenerator\UuidGeneratorInterface;
 
-class JobRepository extends EventSourcingRepository
+class JobRepository extends EventSourcingRepository implements JobProviderInterface
 {
     private UuidGeneratorInterface $uuidGenerator;
     private EventStore $eventStore;
@@ -36,6 +37,11 @@ class JobRepository extends EventSourcingRepository
     public function createNextJobId(): JobId
     {
         return new JobId($this->uuidGenerator->generate());
+    }
+
+    public function getJob(string $id): AggregateRoot
+    {
+        return $this->load($id);
     }
 
     /**
