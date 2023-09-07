@@ -20,22 +20,6 @@ old_sound_rabbit_mq:
             exchange_options: { name: 'pipeline', type: direct }
             default_content_type: 'application/json'
             default_routing_key: 'push_to_kindle_url'
-    consumers:
-        new_job:
-            connection:       default
-            exchange_options: { name: 'new_job', type: direct }
-            queue_options:    { name: 'new_job'}
-            callback:         App\Consumer\NewJobConsumer
-        fetch_page_content:
-            connection:       default
-            exchange_options: { name: 'fetch_page_content', type: direct }
-            queue_options:    { name: 'fetch_page_content'}
-            callback:         App\Consumer\FetchPageContentConsumer
-        push_to_kindle_url:
-            connection:       default
-            exchange_options: { name: 'push_to_kindle_url', type: direct }
-            queue_options:    { name: 'push_to_kindle_url'}
-            callback:         App\Consumer\CreatePushToKindleUrlConsumer
     multiple_consumers:
         pipeline:
             connection: default
