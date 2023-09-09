@@ -2,6 +2,7 @@
 
 namespace App\Consumer;
 
+use App\Job\Exception\CannotCreatePastePadUrlException;
 use App\Job\PushToKindlePipelineService;
 use App\Web\Application\Message\CreatePushToKindleUrlMessage;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
@@ -21,6 +22,9 @@ class CreatePushToKindleUrlConsumer implements ConsumerInterface
         /** @var CreatePushToKindleUrlMessage $dto */
         $dto = $this->encrypterSerializer->deserialize($msg->body, CreatePushToKindleUrlMessage::class, 'json');
 
-        $this->pushToKindlePipeline->createPushToKindleUrl($dto->jobId);
+        try {
+            $this->pushToKindlePipeline->createPushToKindleUrl($dto->jobId);
+        } catch (CannotCreatePastePadUrlException $e) {
+        }
     }
 }

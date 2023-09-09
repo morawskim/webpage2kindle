@@ -10,6 +10,7 @@ use App\Job\Command\SetWebPageContentCommand;
 use App\Job\Domain\Job;
 use App\Job\Domain\JobId;
 use App\Job\Domain\JobRepository;
+use App\Job\Exception\CannotCreatePastePadUrlException;
 use App\Job\Exception\CannotCreateReadableVersionException;
 use App\Job\Exception\CannotGetPageContentException;
 use App\Job\PageContentFetcher\PageContentFetcherInterface;
@@ -84,13 +85,23 @@ class PushToKindlePipelineService
         }
     }
 
+    /**
+     * @throws CannotCreatePastePadUrlException
+     */
     public function createPushToKindleUrl(JobId $jobId): string
     {
         /** @var Job $job */
         $job = $this->jobRepository->load($jobId);
-        $kindleUrl = $this->kindleUrlGenerator->createUrl($job);
-        $this->commandBus->dispatch(new SetPushToKindleUrlCommand($jobId, $kindleUrl));
+        try {
+            $kindleUrl = $this->kindleUrlGenerator->createUrl($job);
+            $this->commandBus->dispatch(new SetPushToKindleUrlCommand($jobId, $kindleUrl));
 
-        return $kindleUrl;
+            return $kindleUrl;
+        } catch (CannotCreatePastePadUrlException $e) {
+            $this->commandBus->dispatch(new MarkJobAsFailedCommand($jobId, $e->getMessage()));
+            $this->logger->error($e);
+
+            throw $e;
+        }
     }
 }
