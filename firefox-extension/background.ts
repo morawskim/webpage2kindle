@@ -66,3 +66,4 @@ browser.browserAction.onClicked.addListener((tab) => {
         .then(() => console.info('The script has been registered'))
         .catch((error: unknown) => console.error('Cannot register script', error));
 });
+

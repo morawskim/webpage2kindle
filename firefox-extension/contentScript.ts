@@ -71,14 +71,20 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
     // at the moment pushtokindle not support img tags with dataurl
     // convertImagesToDataUrl(document.querySelectorAll('img'))
     Promise.resolve()
-        .then(function () {
+        .then(async function () {
+            const record =  await browser.storage.sync.get({url: process.env.SYMFONY_ENDPOINT_URL!});
+
+            return Promise.resolve(record["url"]);
+        })
+        .then(function (url) {
+            console.log(`Url to webservice "${url}"`);
             const body = document.body.outerHTML;
 
             const el = document.createElement('div')
             el.textContent = body;
             document.body.appendChild(el);
 
-            fetch(process.env.SYMFONY_ENDPOINT_URL!, {
+            fetch(url, {
                 body: new URLSearchParams({
                     "body": body,
                     "url": window.location.toString(),

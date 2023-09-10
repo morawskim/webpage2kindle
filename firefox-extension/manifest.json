@@ -2,7 +2,7 @@
   "description": "Send body content of webpage to external service for improve readability",
   "manifest_version": 2,
   "name": "webpage2kindle",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "homepage_url": "https://github.com/morawskim/webpage2kindle/tree/main/firefox-extension",
   "icons": {
     "48": "icons/icon-48.png"
@@ -12,8 +12,13 @@
     "activeTab",
     "notifications",
     "tabs",
+    "storage",
     "<all_urls>"
   ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
   "browser_action": {
     "default_icon": "icons/icon-48.png",
     "default_title": "webpage2kindle"
@@ -22,5 +27,10 @@
     "scripts": [
       "background.js"
     ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{d8ade355-3d9f-444f-abf8-95f6e43837c3}"
+    }
   }
 }

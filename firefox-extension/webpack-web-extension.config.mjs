@@ -12,6 +12,7 @@ export default {
     entry: {
         background: path.resolve(__dirname, "background.ts"),
         contentScript: path.resolve(__dirname, "contentScript.ts"),
+        options: path.resolve(__dirname, "options.js"),
     },
     output: {
         path: path.join(__dirname, "dist"),
@@ -35,6 +36,7 @@ export default {
             patterns: [
                 {from: "icons/", to: "icons/", },
                 {from: "manifest.json", to: ".", },
+                {from: "options.html", to: ".", },
             ]
         }),
         new webpack.EnvironmentPlugin({

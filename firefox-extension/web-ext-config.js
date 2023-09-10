@@ -8,6 +8,5 @@ module.exports = {
     artifactsDir: "./dist/web-ext-artifacts",
     sign: {
         channel: "unlisted",
-        id: "{d8ade355-3d9f-444f-abf8-95f6e43837c3}",
     }
 };
