@@ -1,5 +1,17 @@
 # See full configuration at https://github.com/bestit/flagception-bundle
 flagception:
     features:
-        demo_123:
-            default: true
+        sync_mode:
+            default: '%env(FEATURE_SYNC_MODE)%'
+
+when@dev:
+    flagception:
+        activators:
+            # Cookie settings
+            cookie:
+                # Enable cookie activator (default: false)
+                enable: true
+                # Cookie name - should be a secret key (default: 'flagception')
+                name: 'flagception'
+                # Cookie value separator for using with mutiple features (default: ',')
+                separator: ','

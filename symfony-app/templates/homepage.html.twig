@@ -8,7 +8,14 @@
             {{ message }}
         </div>
     {% endfor %}
-    <form method="post" action="{{ path('push_to_kindle_async_and_wait') }}">
+
+    {% if feature('sync_mode') %}
+        {% set action = path('push_to_kindle_synchronous') %}
+    {% else %}
+        {% set action = path('push_to_kindle_async_and_wait') %}
+    {% endif %}
+
+    <form method="post" action="{{ action }}">
         <div class="mb-3">
             <label for="urlInput" class="form-label">Url to process</label>
             <input required name="url" type="url" class="form-control" id="urlInput" autofocus value="{{ url }}">
