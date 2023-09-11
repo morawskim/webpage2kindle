@@ -15,4 +15,5 @@ return [
     HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['all' => true],
     Nelexa\RequestDtoBundle\RequestDtoBundle::class => ['all' => true],
     Chrisguitarguy\RequestId\ChrisguitarguyRequestIdBundle::class => ['all' => true],
+    Flagception\Bundle\FlagceptionBundle\FlagceptionBundle::class => ['all' => true],
 ];
