@@ -16,4 +16,5 @@ return [
     Nelexa\RequestDtoBundle\RequestDtoBundle::class => ['all' => true],
     Chrisguitarguy\RequestId\ChrisguitarguyRequestIdBundle::class => ['all' => true],
     Flagception\Bundle\FlagceptionBundle\FlagceptionBundle::class => ['all' => true],
+    Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
 ];
