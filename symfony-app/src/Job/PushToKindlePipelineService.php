@@ -2,6 +2,9 @@
 
 namespace App\Job;
 
+use App\Domain\Contract\SSEPublisherInterface;
+use App\Domain\Dto\SSE\PageFetched;
+use App\Domain\Dto\SSE\UrlCreated;
 use App\Job\Command\CreateJobCommand;
 use App\Job\Command\CreateJobToProcessWebPageContentCommand;
 use App\Job\Command\MarkJobAsFailedCommand;
@@ -28,6 +31,7 @@ class PushToKindlePipelineService
         private readonly PushToKindleUrlGeneratorInterface $kindleUrlGenerator,
         private readonly LoggerInterface $logger,
         private readonly CreateReadablePageContentInterface $createReadablePageContent,
+        private readonly SSEPublisherInterface $SSEPublisher,
     ) {
     }
 
@@ -53,6 +57,7 @@ class PushToKindlePipelineService
         try {
             $content = $this->pageContentFetcher->getPageContent($job->getUrlToFetch());
             $this->commandBus->dispatch(new SetWebPageContentCommand($jobId, $content));
+            $this->SSEPublisher->publish(new PageFetched($jobId));
         } catch (CannotGetPageContentException $e) {
             $this->commandBus->dispatch(new MarkJobAsFailedCommand($jobId, $e->getMessage()));
             $this->logger->error($e);
@@ -95,6 +100,7 @@ class PushToKindlePipelineService
         try {
             $kindleUrl = $this->kindleUrlGenerator->createUrl($job);
             $this->commandBus->dispatch(new SetPushToKindleUrlCommand($jobId, $kindleUrl));
+            $this->SSEPublisher->publish(new UrlCreated($jobId, $kindleUrl));
 
             return $kindleUrl;
         } catch (CannotCreatePastePadUrlException $e) {

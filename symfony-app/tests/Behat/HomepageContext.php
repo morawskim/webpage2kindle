@@ -3,6 +3,7 @@
 namespace App\Tests\Behat;
 
 use App\Infrastructure\RabbitMq\InMemoryProducer;
+use App\Infrastructure\SSE\InMemoryPublisher;
 use App\Job\Domain\InMemoryJobProvider;
 use App\Job\Domain\Job;
 use App\Job\Domain\JobId;
@@ -166,6 +167,12 @@ class HomepageContext implements Context
                 'The published message does not contain expected URL ("%s") to process',
                 $url
             ));
+        }
+
+        /** @var InMemoryPublisher $inMemory */
+        $inMemoryPublisher = $this->client->getKernel()->getContainer()->get(InMemoryPublisher::class);
+        if (1 !== $inMemoryPublisher->count()) {
+            throw new \RuntimeException('The SSE event has not been published');
         }
     }
 

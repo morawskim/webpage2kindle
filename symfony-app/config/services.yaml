@@ -77,7 +77,7 @@ services:
     App\Job\PushToKindleUrlGenerator\PushToKindleUrlGeneratorInterface: '@App\Job\PushToKindleUrlGenerator\PastePadUrlGenerator'
 
     App\Job\Domain\JobProviderInterface: '@App\Job\Domain\JobRepository'
-
+    App\Domain\Contract\SSEPublisherInterface: '@App\Infrastructure\SSE\SymfonyMercurePublisher'
 
     prometheus_storage:
         class: Prometheus\Storage\Redis

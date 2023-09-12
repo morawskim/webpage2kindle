@@ -2,6 +2,7 @@
 
 namespace App\Web\Infrastructure\Producer\RabbitMq;
 
+use App\Domain\Contract\SSEPublisherInterface;
 use App\Job\Domain\JobId;
 use App\Web\Application\Message\CreatePushToKindleUrlMessage;
 use App\Web\Domain\Contract\PushToKindleProducerInterface;
@@ -15,6 +16,7 @@ class PushToKindleProducer implements PushToKindleProducerInterface
         #[Autowire(service: 'old_sound_rabbit_mq.push_to_kindle_url_producer')]
         private readonly Producer $producer,
         private readonly SerializerInterface $encrypterSerializer,
+        private readonly SSEPublisherInterface $SSEPublisher,
     ) {
     }
 

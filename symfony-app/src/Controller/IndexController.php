@@ -82,7 +82,7 @@ class IndexController extends AbstractController
     {
         $records = $jobRepository->getJobDetailsAsStream(new JobId($jobId));
 
-        return $this->render('job_details.html.twig', ['records' => $records]);
+        return $this->render('job_details.html.twig', ['records' => $records, 'jobId' => $jobId]);
     }
 
     #[Route('/redirect/{jobId}', name: 'redirect_if_job_completed')]
@@ -96,7 +96,7 @@ class IndexController extends AbstractController
             }
 
             $records = $jobProvider->getJobDetailsAsStream(new JobId($jobId));
-            return $this->render('job_details.html.twig', ['records' => $records]);
+            return $this->render('job_details.html.twig', ['records' => $records, 'jobId' => $jobId]);
 
         } catch (AggregateNotFoundException $e) {
             throw $this->createNotFoundException();

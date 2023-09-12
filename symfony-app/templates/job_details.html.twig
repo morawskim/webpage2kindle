@@ -16,4 +16,23 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <script>
+        const eventSource = new EventSource("{{ mercure('job://' ~ jobId)|escape('js') }}");
+        eventSource.onmessage = event => {
+            const obj = JSON.parse(event.data);
+            console.log(obj);
+            switch (obj.type) {
+                case 'new_job':
+                    break;
+                case 'page_fetched':
+                    break;
+                case 'url_created':
+                    if (obj?.data?.url) {
+                        window.location.href = obj.data.url;
+                    }
+                    break;
+            }
+        }
+    </script>
 {% endblock %}

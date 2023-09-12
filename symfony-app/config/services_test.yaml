@@ -20,6 +20,10 @@ services:
         public: true
     App\Job\Domain\JobProviderInterface: '@App\Job\Domain\InMemoryJobProvider'
 
+    App\Infrastructure\SSE\InMemoryPublisher:
+        public: true
+    App\Domain\Contract\SSEPublisherInterface: '@App\Infrastructure\SSE\InMemoryPublisher'
+
     App\Job\PageContentFetcher\StaticPageContentFetcher: ~
     App\Job\PageContentFetcher\PageContentFetcherInterface: '@App\Job\PageContentFetcher\StaticPageContentFetcher'
 
