@@ -8,14 +8,17 @@ services:
         - WITH_XDEBUG=1
     volumes:
       - ./symfony-app:/app
+      - ./symfony-app/Caddyfile:/etc/Caddyfile
     ports:
       - "4200:80"
     environment:
-      SERVER_NAME: http://localhost
+      SERVER_NAME: ":80"
       XDEBUG_TRIGGER: "default_no_matter"
       XDEBUG_MODE: develop,debug
       XDEBUG_CONFIG: "client_host=${MY_IP:-172.17.0.1} discover_client_host=0 client_port=9000"
       PHP_IDE_CONFIG: "serverName=${DEV_SERVER_NAME:-webpage2content}"
+      MERCURE_PUBLISHER_JWT_KEY: "!publisherKeyOnlyForDev"
+      MERCURE_SUBSCRIBER_JWT_KEY: "!subscriberKeyOnlyForDev"
 #  consumer:
 #    build:
 #      context: ./symfony-app
