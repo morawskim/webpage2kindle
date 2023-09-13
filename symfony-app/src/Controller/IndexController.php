@@ -82,24 +82,20 @@ class IndexController extends AbstractController
     {
         $records = $jobRepository->getJobDetailsAsStream(new JobId($jobId));
 
-        return $this->render('job_details.html.twig', ['records' => $records, 'jobId' => $jobId]);
+        return $this->render('job_details.html.twig', ['records' => $records]);
     }
 
     #[Route('/redirect/{jobId}', name: 'redirect_if_job_completed')]
     public function redirectIfReady(string $jobId, JobProviderInterface $jobProvider): Response
     {
+        $records = [];
         try {
             /** @var Job $job */
             $job = $jobProvider->getJob($jobId);
-            if (!$job->isFailed() && $pushToKindleUrl = $job->getPushToKindleUrl()) {
-                return new RedirectResponse($pushToKindleUrl);
-            }
-
             $records = $jobProvider->getJobDetailsAsStream(new JobId($jobId));
-            return $this->render('job_details.html.twig', ['records' => $records, 'jobId' => $jobId]);
-
         } catch (AggregateNotFoundException $e) {
-            throw $this->createNotFoundException();
         }
+
+        return $this->render('redirect.html.twig', ['records' => $records, 'jobId' => $jobId]);
     }
 }

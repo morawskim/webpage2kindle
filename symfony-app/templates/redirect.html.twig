@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table id="notification-table" class="table table-stripped mt-3">
+        <thead><tr><th>Created at</th><th>Message</th></tr></thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const el = document.querySelector('#notification-table tbody');
+
+        function appendRow(message) {
+            const row = document.createElement('tr');
+            const dateColumn = document.createElement('td');
+            const messageColumn = document.createElement('td');
+            const now = new Date();
+
+            dateColumn.textContent = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+            messageColumn.textContent = message;
+
+            row.append(dateColumn, messageColumn);
+            el.appendChild(row)
+        }
+
+        const eventSource = new EventSource("{{ mercure('job://' ~ jobId)|escape('js') }}");
+        eventSource.onmessage = event => {
+            const obj = JSON.parse(event.data);
+            console.log(obj);
+            switch (obj.type) {
+                case 'new_job':
+                    appendRow('The job to process url has been sent');
+                    break;
+                case 'page_fetched':
+                    appendRow('The page content has been fetched');
+                    break;
+                case 'url_created':
+                    appendRow('The URL has been generated. Redirect to external service');
+                    if (obj?.data?.url) {
+                        window.location.href = obj.data.url;
+                    }
+                    break;
+            }
+        }
+    </script>
+{% endblock %}
+
