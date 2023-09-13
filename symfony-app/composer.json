@@ -6,7 +6,11 @@
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
+        "ext-redis": "*",
+        "ext-sockets": "*",
         "broadway/broadway-bundle": "^0.6.1",
         "broadway/event-store-dbal": "^0.6.0",
         "chrisguitarguy/request-id-bundle": "^5.1",

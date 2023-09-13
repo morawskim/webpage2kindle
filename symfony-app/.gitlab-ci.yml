@@ -6,7 +6,7 @@ stages:
   - docker
 
 variables:
-  PHP_EXTENSIONS: apcu sockets pdo_sqlite sqlite3
+  PHP_EXTENSIONS: sockets pdo_sqlite sqlite3
 
 composer:
   stage: prepare
