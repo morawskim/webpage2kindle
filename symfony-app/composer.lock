@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c4092699a47a318a0ecb9f8584fb2bd",
+    "content-hash": "9d954a5b5db640f011cc03fc0bb45c7d",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2945,68 +2945,6 @@
                 }
             ],
             "time": "2023-06-21T08:46:11+00:00"
-        },
-        {
-            "name": "nelexa/request-dto-bundle",
-            "version": "1.3.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Ne-Lexa/RequestDtoBundle.git",
-                "reference": "aa572d1d2505baf27706c8561e8ae6e0e2cb8cc9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Ne-Lexa/RequestDtoBundle/zipball/aa572d1d2505baf27706c8561e8ae6e0e2cb8cc9",
-                "reference": "aa572d1d2505baf27706c8561e8ae6e0e2cb8cc9",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 | ^8.0",
-                "symfony/dependency-injection": "^4.4 | ^5.1 | ^6.0",
-                "symfony/http-kernel": "^4.4 | ^5.1 | ^6.0",
-                "symfony/property-access": "^4.4 | ^5.1 | ^6.0",
-                "symfony/property-info": "^4.4 | ^5.1 | ^6.0",
-                "symfony/serializer": "^4.4 | ^5.1 | ^6.0",
-                "symfony/validator": "^4.4 | ^5.1 | ^6.0"
-            },
-            "conflict": {
-                "symfony/framework-bundle": "<4.4 | 5.0.*"
-            },
-            "require-dev": {
-                "doctrine/annotations": "^1.10",
-                "ext-json": "*",
-                "ext-simplexml": "*",
-                "symfony/browser-kit": "^4.4 | ^5.1 | ^6.0",
-                "symfony/css-selector": "^4.4 | ^5.1 | ^6.0",
-                "symfony/framework-bundle": "^4.4 | ^5.1 | ^6.0",
-                "symfony/mime": "^4.4 | ^5.1 | ^6.0",
-                "symfony/phpunit-bridge": "^4.4 | ^5.1 | ^6.0",
-                "symfony/var-dumper": "^4.4 | ^5.1 | ^6.0"
-            },
-            "suggest": {
-                "doctrine/annotations": "For support @Assert annotations"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Nelexa\\RequestDtoBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "This Symfony Bundle provides request objects support for Symfony controller actions",
-            "keywords": [
-                "bundle",
-                "dto",
-                "request"
-            ],
-            "support": {
-                "issues": "https://github.com/Ne-Lexa/RequestDtoBundle/issues",
-                "source": "https://github.com/Ne-Lexa/RequestDtoBundle/tree/1.3.4"
-            },
-            "time": "2022-06-21T07:01:55+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

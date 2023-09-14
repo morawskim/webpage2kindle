@@ -6,11 +6,10 @@ use App\Job\Domain\JobId;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface, CacheableSupportsMethodInterface
+class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     public function normalize(mixed $object, string $format = null, array $context = [])
     {
@@ -40,8 +39,10 @@ class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface, Cac
         return $type === JobId::class;
     }
 
-    public function hasCacheableSupportsMethod(): bool
+    public function getSupportedTypes(?string $format): array
     {
-        return true;
+        return [
+            JobId::class => true,
+        ];
     }
 }
