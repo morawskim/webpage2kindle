@@ -59,6 +59,7 @@ class Encrypter
     {
         $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher));
 
+        // @phpstan-ignore-next-line
         if (false === $iv) {
             throw new \RuntimeException('unable to generate random bytes');
         }

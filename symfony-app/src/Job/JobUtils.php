@@ -6,6 +6,9 @@ class JobUtils
 {
     private const SEPARATOR = "\n\n";
 
+    /**
+     * @return string[]
+     */
     public static function extractWebPageContentAndTitle(string $jobWebContent): array
     {
         return explode(self::SEPARATOR, $jobWebContent, 2);

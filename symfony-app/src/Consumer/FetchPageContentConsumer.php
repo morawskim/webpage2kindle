@@ -6,10 +6,11 @@ use App\Job\Exception\CannotGetPageContentException;
 use App\Job\PushToKindlePipelineService;
 use App\Web\Application\Message\FetchPageContentMessage;
 use App\Web\Domain\Contract\PushToKindleProducerInterface;
+use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class FetchPageContentConsumer
+class FetchPageContentConsumer implements ConsumerInterface
 {
     public function __construct(
         private readonly PushToKindlePipelineService $pushToKindlePipeline,
@@ -18,7 +19,7 @@ class FetchPageContentConsumer
     ) {
     }
 
-    public function execute(AMQPMessage $msg): void
+    public function execute(AMQPMessage $msg): int
     {
         try {
             /** @var FetchPageContentMessage $dto */
@@ -28,5 +29,7 @@ class FetchPageContentConsumer
             $this->pushToKindleProducer->publishPushToKindle($dto->jobId);
         } catch (CannotGetPageContentException $e) {
         }
+
+        return ConsumerInterface::MSG_ACK;
     }
 }

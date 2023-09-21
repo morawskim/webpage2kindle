@@ -11,10 +11,13 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface
 {
+    /**
+     * @phpstan-ignore-next-line
+     */
     public function normalize(mixed $object, string $format = null, array $context = [])
     {
         if (!$object instanceof JobId) {
-            throw new InvalidArgumentException('The object must be an instance of "%s".', JobId::class);
+            throw new InvalidArgumentException(sprintf('The object must be an instance of "%s".', JobId::class));
         }
 
         return (string) $object;
@@ -25,6 +28,9 @@ class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface
         return $data instanceof JobId;
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
     {
         if ('' === $data || null === $data) {
@@ -39,6 +45,9 @@ class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface
         return $type === JobId::class;
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     public function getSupportedTypes(?string $format): array
     {
         return [

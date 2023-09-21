@@ -50,7 +50,7 @@ class IndexController extends AbstractController
     }
 
     #[Route("/async-and-wait", name: 'push_to_kindle_async_and_wait', methods: ['POST'])]
-    public function asyncAndWait(Request $request, AsyncPushToKindleFacade $asyncPushToKindleFacade)
+    public function asyncAndWait(Request $request, AsyncPushToKindleFacade $asyncPushToKindleFacade): Response
     {
         $url = $request->request->get('url');
 

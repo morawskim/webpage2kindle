@@ -8,6 +8,7 @@ use OutOfRangeException;
 
 class InMemoryProducer implements ProducerInterface, Countable
 {
+    /** @var array<mixed>  */
     private array $data = [];
 
     public function publish($msgBody, $routingKey = '', $additionalProperties = array())
@@ -20,7 +21,10 @@ class InMemoryProducer implements ProducerInterface, Countable
         return count($this->data);
     }
 
-    public function getData(int $index)
+    /**
+     * @return array<mixed>
+     */
+    public function getData(int $index): array
     {
         if (!isset($this->data[$index])) {
             throw new OutOfRangeException(sprintf('The index "%d" does not exist in array', $index));

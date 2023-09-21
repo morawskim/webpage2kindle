@@ -44,9 +44,6 @@ class JobRepository extends EventSourcingRepository implements JobProviderInterf
         return $this->load($id);
     }
 
-    /**
-     * @return JobChangelog[]
-     */
     public function getJobDetailsAsStream(JobId $jobId): array
     {
         $records = [];

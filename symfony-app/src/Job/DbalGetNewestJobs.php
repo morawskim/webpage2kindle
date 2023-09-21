@@ -72,6 +72,9 @@ class DbalGetNewestJobs implements GetNewestJobsInterface
         return $this->connection->executeQuery($query, $bindValues, $bindValueTypes);
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     private function prepareVisitEventsStatementWhereAndBindValues(Criteria $criteria): array
     {
         if ($criteria->getAggregateRootTypes()) {
@@ -89,6 +92,7 @@ class DbalGetNewestJobs implements GetNewestJobsInterface
             if ($this->useBinary) {
                 $bindValues['uuids'] = [];
                 foreach ($criteria->getAggregateRootIds() as $id) {
+                    // @phpstan-ignore-next-line
                     $bindValues['uuids'][] = $this->convertIdentifierToStorageValue($id);
                 }
                 $bindValueTypes['uuids'] = Connection::PARAM_STR_ARRAY;
@@ -122,6 +126,7 @@ class DbalGetNewestJobs implements GetNewestJobsInterface
     {
         if ($this->useBinary) {
             try {
+                // @phpstan-ignore-next-line
                 return $this->binaryUuidConverter::fromBytes($id);
             } catch (\Exception $e) {
                 throw new InvalidIdentifierException('Could not convert binary storage value to UUID.');
@@ -131,6 +136,11 @@ class DbalGetNewestJobs implements GetNewestJobsInterface
         return $id;
     }
 
+    /**
+     * @param array{uuid: string, metadata: string, payload: string, recorded_on: string, playhead: int|string} $row
+     *
+     * @return DomainMessage
+     */
     private function deserializeEvent(array $row): DomainMessage
     {
         return new DomainMessage(

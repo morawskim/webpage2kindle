@@ -16,7 +16,6 @@ class PushToKindleProducer implements PushToKindleProducerInterface
         #[Autowire(service: 'old_sound_rabbit_mq.push_to_kindle_url_producer')]
         private readonly Producer $producer,
         private readonly SerializerInterface $encrypterSerializer,
-        private readonly SSEPublisherInterface $SSEPublisher,
     ) {
     }
 

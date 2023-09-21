@@ -4,6 +4,9 @@ namespace App\Domain\Dto\SSE;
 
 use App\Job\Domain\JobId;
 
+/**
+ * @phpstan-import-type EventAsArray from BaseEvent
+ */
 class PageFetched extends BaseEvent
 {
     public function __construct(private readonly JobId $jobId)
@@ -15,6 +18,9 @@ class PageFetched extends BaseEvent
         return $this->jobId;
     }
 
+    /**
+     * @return EventAsArray
+     */
     public function jsonSerialize(): array
     {
         return [

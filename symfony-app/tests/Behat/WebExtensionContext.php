@@ -9,8 +9,6 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class WebExtensionContext implements Context
 {
-    private Crawler $response;
-
     public function __construct(private KernelBrowser $client)
     {
     }
@@ -23,7 +21,7 @@ class WebExtensionContext implements Context
         $params = [];
         parse_str($requestBody, $params);
 
-        $this->response = $this->client->request(
+        $this->client->request(
             'POST',
             $path,
             $params,

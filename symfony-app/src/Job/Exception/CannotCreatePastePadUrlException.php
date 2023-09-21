@@ -2,7 +2,7 @@
 
 namespace App\Job\Exception;
 
-class CannotCreatePastePadUrlException extends \RuntimeException
+final class CannotCreatePastePadUrlException extends \RuntimeException
 {
     public static function wrongResponseCode(int $statusCode): self
     {

@@ -30,6 +30,8 @@ class GoReadabilityApiPageContentFetcher implements PageContentFetcherInterface
                 $msg = $e->getResponse()->getContent(false);
                 throw CannotGetPageContentException::default($msg, $e);
             }
+
+            throw $e;
         }
     }
 }

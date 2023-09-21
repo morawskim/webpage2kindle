@@ -23,7 +23,7 @@ class HomepageContext implements Context
     /**
      * @Given /^I navigate to "([^"]*)"$/
      */
-    public function iNavigateTo($path): void
+    public function iNavigateTo(string $path): void
     {
         $this->response = $this->client->request('GET', $path);
         if (200 !== $this->client->getResponse()->getStatusCode()) {
@@ -38,7 +38,7 @@ class HomepageContext implements Context
     /**
      * @Then /^the response should contains button "([^"]*)"$/
      */
-    public function theResponseShouldContainsButton($txt): void
+    public function theResponseShouldContainsButton(string $txt): void
     {
         $count = $this->response->filterXPath("//button[text()='{$txt}']")->count();
 
@@ -50,7 +50,7 @@ class HomepageContext implements Context
     /**
      * @Then /^the response should contains link "([^"]*)" to download extension$/
      */
-    public function theResponseShouldContainsLink($link): void
+    public function theResponseShouldContainsLink(string $link): void
     {
         if (1 !== $this->response->selectLink($link)->count()) {
             throw new \RuntimeException('Link not found');
@@ -67,7 +67,7 @@ class HomepageContext implements Context
     /**
      * @When /^I submit form "([^"]*)" with url "([^"]*)"$/
      */
-    public function iSubmitFormWithUrl($txt, $url): void
+    public function iSubmitFormWithUrl(string $txt, string $url): void
     {
         $this->response = $this->client->submitForm($txt, ['url' => $url]);
     }
@@ -75,7 +75,7 @@ class HomepageContext implements Context
     /**
      * @When /^I submit form "([^"]*)"$/
      */
-    public function iSubmitForm($txt)
+    public function iSubmitForm(string $txt): void
     {
         $this->response = $this->client->submitForm($txt);
     }
@@ -102,7 +102,7 @@ class HomepageContext implements Context
     /**
      * @Given /^I will see flash message "(.*?)"$/
      */
-    public function iWillSeeFlashMessage($message): void
+    public function iWillSeeFlashMessage(string $message): void
     {
         if (1 !== $this->response->filter('.alert')->count()) {
             throw new \RuntimeException('Flash message element not found');
@@ -124,7 +124,7 @@ class HomepageContext implements Context
     /**
      * @Then /^the url field should contain value "([^"]*)"$/
      */
-    public function theUrlFieldShouldContainValue($url): void
+    public function theUrlFieldShouldContainValue(string $url): void
     {
         $field = $this->response->filter("input#urlInput");
 
@@ -179,7 +179,7 @@ class HomepageContext implements Context
     /**
      * @Given /^The job "([^"]*)" has been processed$/
      */
-    public function theJobHasBeenProcessed($jobId)
+    public function theJobHasBeenProcessed(string $jobId): void
     {
         $job = Job::newJob(new JobId($jobId), 'https://example.com');
         $job->setPushToKindleUrl('https://fake-push-to-kindle.com/' . $jobId);
@@ -192,7 +192,7 @@ class HomepageContext implements Context
     /**
      * @When /^I open "([^"]*)"$/
      */
-    public function iOpen($path)
+    public function iOpen(string $path): void
     {
         $this->client->request('GET', $path);
     }

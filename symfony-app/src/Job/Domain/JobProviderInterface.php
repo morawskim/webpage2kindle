@@ -12,5 +12,8 @@ interface JobProviderInterface
      */
     public function getJob(string $id): AggregateRoot;
 
+    /**
+     * @return JobChangelog[]
+     */
     public function getJobDetailsAsStream(JobId $jobId): array;
 }

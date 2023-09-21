@@ -2,7 +2,7 @@
 
 namespace App\Job\Exception;
 
-class CannotCreateReadableVersionException extends \RuntimeException
+final class CannotCreateReadableVersionException extends \RuntimeException
 {
     public static function default(\Throwable $previous): self
     {

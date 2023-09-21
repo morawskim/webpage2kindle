@@ -7,6 +7,7 @@ use App\Domain\Dto\SSE\BaseEvent;
 
 class InMemoryPublisher implements SSEPublisherInterface, \Countable
 {
+    /** @var array<mixed> */
     private array $data = [];
 
     public function publish(BaseEvent $data): void

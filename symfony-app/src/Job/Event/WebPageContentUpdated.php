@@ -5,6 +5,9 @@ namespace App\Job\Event;
 use App\Job\Domain\JobId;
 use Broadway\Serializer\Serializable;
 
+/**
+ * @phpstan-type EventArray array{jobId: string, content: string}
+ */
 class WebPageContentUpdated implements Serializable, EventHumanDescriptionInterface
 {
     public function __construct(private readonly JobId $jobId, private readonly string $content)
@@ -21,11 +24,17 @@ class WebPageContentUpdated implements Serializable, EventHumanDescriptionInterf
         return $this->content;
     }
 
+    /**
+     * @param EventArray $data
+     */
     public static function deserialize(array $data): self
     {
         return new self(new JobId($data['jobId']), $data['content']);
     }
 
+    /**
+     * @return EventArray $data
+     */
     public function serialize(): array
     {
         return [

@@ -24,5 +24,7 @@ class NewJobConsumer implements ConsumerInterface
 
         $this->pushToKindlePipeline->addNewJob($dto->jobId, $dto->url);
         $this->fetchPageContentProducer->publishFetchPageContent($dto->jobId);
+
+        return ConsumerInterface::MSG_ACK;
     }
 }

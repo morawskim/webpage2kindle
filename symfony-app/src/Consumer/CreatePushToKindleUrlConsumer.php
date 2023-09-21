@@ -17,7 +17,7 @@ class CreatePushToKindleUrlConsumer implements ConsumerInterface
     ) {
     }
 
-    public function execute(AMQPMessage $msg): void
+    public function execute(AMQPMessage $msg): int
     {
         /** @var CreatePushToKindleUrlMessage $dto */
         $dto = $this->encrypterSerializer->deserialize($msg->body, CreatePushToKindleUrlMessage::class, 'json');
@@ -26,5 +26,7 @@ class CreatePushToKindleUrlConsumer implements ConsumerInterface
             $this->pushToKindlePipeline->createPushToKindleUrl($dto->jobId);
         } catch (CannotCreatePastePadUrlException $e) {
         }
+
+        return ConsumerInterface::MSG_ACK;
     }
 }

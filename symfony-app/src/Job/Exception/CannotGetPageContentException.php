@@ -2,7 +2,7 @@
 
 namespace App\Job\Exception;
 
-class CannotGetPageContentException extends \RuntimeException
+final class CannotGetPageContentException extends \RuntimeException
 {
     public static function default(string $message, \Throwable $previous): self
     {

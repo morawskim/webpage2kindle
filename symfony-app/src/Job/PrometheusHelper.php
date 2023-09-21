@@ -29,6 +29,9 @@ class PrometheusHelper
         )->incBy($bytes, [$adapter]);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function publishRequestMetrics(array $data, float $duration, int $memoryPeakBytes): void
     {
         $histogram = $this->collectorRegistry->getOrRegisterHistogram(
