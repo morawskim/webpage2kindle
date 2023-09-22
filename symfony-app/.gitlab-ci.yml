@@ -26,6 +26,14 @@ composer:
     expire_in: 30 days
     when: on_success
 
+phpstan:
+  stage: qa
+  image: jakzal/phpqa:alpine
+  script:
+    - phpstan analyse
+  dependencies:
+    - composer
+
 behat:
   stage: qa
   image: thecodingmachine/php:8.2-v4-cli-node16
