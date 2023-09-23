@@ -30,6 +30,7 @@ phpstan:
   stage: qa
   image: jakzal/phpqa:alpine
   script:
+    - cd symfony-app/
     - phpstan analyse
   dependencies:
     - composer
