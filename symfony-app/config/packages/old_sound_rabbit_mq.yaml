@@ -20,23 +20,32 @@ old_sound_rabbit_mq:
             exchange_options: { name: 'pipeline', type: direct }
             default_content_type: 'application/json'
             default_routing_key: 'push_to_kindle_url'
+    consumers:
+        failed:
+            connection: default
+            exchange_options: { name: 'failed-jobs', type: direct }
+            queue_options: { name: 'failed-jobs', routing_keys: ['*'] }
+            callback: App\Consumer\FailedJob
     multiple_consumers:
         pipeline:
             connection: default
             exchange_options: { name: 'pipeline', type: direct }
             queues:
                 new_job:
-                    name: new_job
+                    name: new_job2
                     callback: App\Consumer\NewJobConsumer
                     routing_keys:
                         - new_job
+                    arguments: {'x-dead-letter-exchange': ['S', 'failed-jobs'], 'x-message-ttl': ['I', 60000]} # 60 seconds
                 fetch_page_content:
-                    name: fetch_page_content
+                    name: fetch_page_content2
                     callback: App\Consumer\FetchPageContentConsumer
                     routing_keys:
                         - fetch_page_content
+                    arguments: {'x-dead-letter-exchange': ['S', 'failed-jobs'], 'x-message-ttl': ['I', 120000]} # 120 seconds
                 push_to_kindle_url:
-                    name: push_to_kindle_url
+                    name: push_to_kindle_url2
                     callback:  App\Consumer\CreatePushToKindleUrlConsumer
                     routing-keys:
                         - push_to_kindle_url
+                    arguments: {'x-dead-letter-exchange': ['S', 'failed-jobs'], 'x-message-ttl': ['I', 90000]} # 90 seconds
