@@ -5,7 +5,7 @@
     "sign": "web-ext sign"
   },
   "devDependencies": {
-    "@types/webextension-polyfill": "^0.10.0",
+    "@types/webextension-polyfill": "^0.10.4",
     "copy-webpack-plugin": "^11.0.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.4",
