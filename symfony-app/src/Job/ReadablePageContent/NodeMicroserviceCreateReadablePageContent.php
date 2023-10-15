@@ -5,6 +5,7 @@ namespace App\Job\ReadablePageContent;
 use App\Job\Exception\CannotCreateReadableVersionException;
 use Symfony\Component\HttpClient\HttpOptions;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class NodeMicroserviceCreateReadablePageContent implements CreateReadablePageContentInterface
@@ -22,7 +23,7 @@ class NodeMicroserviceCreateReadablePageContent implements CreateReadablePageCon
             $body = $this->nodeMicroserviceClient->request('POST', '/process-webpage', $options)->toArray();
 
             return $body['body'];
-        } catch (ServerExceptionInterface $e) {
+        } catch (ServerExceptionInterface|TimeoutExceptionInterface $e) {
             throw CannotCreateReadableVersionException::default($e);
         }
     }

@@ -6,6 +6,7 @@ use App\Job\Exception\CannotGetPageContentException;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\HttpOptions;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class GoReadabilityApiPageContentFetcher implements PageContentFetcherInterface
@@ -32,6 +33,8 @@ class GoReadabilityApiPageContentFetcher implements PageContentFetcherInterface
             }
 
             throw $e;
+        } catch (TimeoutExceptionInterface $e) {
+            throw CannotGetPageContentException::default('Timout reached', $e);
         }
     }
 }
