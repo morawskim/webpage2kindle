@@ -60,7 +60,6 @@ class PushToKindlePipelineService
             $this->SSEPublisher->publish(new PageFetched($jobId));
         } catch (CannotGetPageContentException $e) {
             $this->commandBus->dispatch(new MarkJobAsFailedCommand($jobId, $e->getMessage()));
-            $this->logger->error($e);
             throw $e;
         }
     }
