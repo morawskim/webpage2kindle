@@ -10,4 +10,11 @@ final class CannotCreatePastePadUrlException extends \RuntimeException
             sprintf('Cannot create PastePad URL. Expected 302 status code, got %d', $statusCode),
         );
     }
+
+    public static function timeout(): self
+    {
+        return new static(
+            'Timeout reached for creating PastePad URL'
+        );
+    }
 }
