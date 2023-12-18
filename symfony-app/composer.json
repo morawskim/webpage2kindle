@@ -22,7 +22,7 @@
         "php-amqplib/rabbitmq-bundle": "^2.11",
         "promphp/prometheus_client_php": "^2.6",
         "ramsey/uuid": "^4.4",
-        "runtime/frankenphp-symfony": "^0.1.1",
+        "runtime/frankenphp-symfony": "^0.2.0",
         "sentry/sentry-symfony": "^4.3",
         "symfony/asset": "6.4.*",
         "symfony/console": "6.4.*",
