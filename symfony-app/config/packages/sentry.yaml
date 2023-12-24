@@ -4,8 +4,10 @@ when@prod:
         options:
             error_types: 'E_ALL & ~E_DEPRECATED'
             traces_sampler: 'App\Service\SentrySampleRateRule'
+            ignore_exceptions:
+                - Symfony\Component\Security\Core\Exception\AccessDeniedException
             integrations:
-                - 'Sentry\Integration\IgnoreErrorsIntegration'
+                - 'App\Infrastructure\Sentry\IgnoreHttpClientExceptionsIntegration'
 #        If you are using Monolog, you also need these additional configuration and services to log the errors correctly:
 #        https://docs.sentry.io/platforms/php/guides/symfony/#monolog-integration
         register_error_listener: false
@@ -29,9 +31,4 @@ when@prod:
             arguments:
                 - '@Sentry\State\HubInterface'
                 - !php/const Monolog\Logger::DEBUG
-        Sentry\Integration\IgnoreErrorsIntegration:
-            arguments:
-                $options:
-                    ignore_exceptions:
-                        - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-                        - Symfony\Component\Security\Core\Exception\AccessDeniedException
+        App\Infrastructure\Sentry\IgnoreHttpClientExceptionsIntegration: ~
