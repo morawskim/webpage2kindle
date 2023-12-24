@@ -56,7 +56,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $schemaManager = $this->connection->createSchemaManager();
 
@@ -67,6 +67,6 @@ EOT
             $output->writeln('<info>Broadway event store schema already exists</info>');
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
