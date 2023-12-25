@@ -4,7 +4,8 @@ old_sound_rabbit_mq:
             url: '%env(RABBITMQ_URL)%'
             connection_timeout: 3
             read_write_timeout: 120
-            keepalive: true
+            keepalive: false
+            heartbeat: 60
     producers:
         # use 'old_sound_rabbit_mq.<name>_producer' service to send data.
         new_job:
@@ -23,12 +24,18 @@ old_sound_rabbit_mq:
             exchange_options: { name: 'pipeline', type: direct }
             default_content_type: 'application/json'
             default_routing_key: 'push_to_kindle_url'
+        failed:
+            connection:       default
+            exchange_options: { name: 'failed-jobs', type: direct }
+            default_content_type: 'application/json'
+            default_routing_key: 'test'
     consumers:
         failed:
             connection: default
             exchange_options: { name: 'failed-jobs', type: direct }
-            queue_options: { name: 'failed-jobs', routing_keys: ['*'] }
+            queue_options: { name: 'failed-jobs' }
             callback: App\Consumer\FailedJob
+            #todo mmo check failed conumser and stdin producer
     multiple_consumers:
         pipeline:
             connection: default
