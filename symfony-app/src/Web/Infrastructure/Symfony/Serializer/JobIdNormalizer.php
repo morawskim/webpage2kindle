@@ -23,6 +23,9 @@ class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface
         return (string) $object;
     }
 
+    /**
+     * @param array<string, mixed> $context
+     */
     public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof JobId;
@@ -40,14 +43,14 @@ class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface
         return new JobId($data);
     }
 
+    /**
+     * @param array<string, mixed> $context
+     */
     public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return $type === JobId::class;
     }
 
-    /**
-     * @phpstan-ignore-next-line
-     */
     public function getSupportedTypes(?string $format): array
     {
         return [
