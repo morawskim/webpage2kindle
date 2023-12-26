@@ -6,7 +6,7 @@
     "repositories": [
         {"type": "vcs", "url": "https://github.com/arnedesmedt/RequestIdBundle"},
         {"type": "vcs", "url": "https://github.com/morawskim/broadway-bundle"},
-        {"type": "path", "url":  "./RabbitMqBundle"},
+        {"type": "vcs", "url": "https://github.com/morawskim/RabbitMqBundle"},
         {"type": "vcs", "url": "https://github.com/Jeroeny/SymfonyExtension"}
     ],
     "require": {

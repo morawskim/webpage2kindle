@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7d86a1719178994705d416f686b873d",
+    "content-hash": "64e7469c73b9ec7b92d69eaa77189c4a",
     "packages": [
         {
             "name": "arnedesmedt/request-id-bundle",
@@ -3155,10 +3155,16 @@
         {
             "name": "php-amqplib/rabbitmq-bundle",
             "version": "dev-symfony7",
-            "dist": {
-                "type": "path",
-                "url": "./RabbitMqBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morawskim/RabbitMqBundle.git",
                 "reference": "955bb991c3767be1565bb1651470a217286882be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/morawskim/RabbitMqBundle/zipball/955bb991c3767be1565bb1651470a217286882be",
+                "reference": "955bb991c3767be1565bb1651470a217286882be",
+                "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
@@ -3223,9 +3229,10 @@
                 "symfony4",
                 "symfony5"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/morawskim/RabbitMqBundle/tree/symfony7"
+            },
+            "time": "2023-12-18T16:13:56+00:00"
         },
         {
             "name": "php-http/client-common",
