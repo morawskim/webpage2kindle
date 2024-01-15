@@ -2013,16 +2013,16 @@
         },
         {
             "name": "flagception/flagception-bundle",
-            "version": "4.4.1",
+            "version": "4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/playox/flagception-bundle.git",
-                "reference": "9b61860f238727d2b93771c49accabf2a59655a7"
+                "reference": "f98520e4ba42207b9df91a266c26aa148137eaba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/playox/flagception-bundle/zipball/9b61860f238727d2b93771c49accabf2a59655a7",
-                "reference": "9b61860f238727d2b93771c49accabf2a59655a7",
+                "url": "https://api.github.com/repos/playox/flagception-bundle/zipball/f98520e4ba42207b9df91a266c26aa148137eaba",
+                "reference": "f98520e4ba42207b9df91a266c26aa148137eaba",
                 "shasum": ""
             },
             "require": {
@@ -2081,9 +2081,9 @@
             ],
             "support": {
                 "issues": "https://github.com/playox/flagception-bundle/issues",
-                "source": "https://github.com/playox/flagception-bundle/tree/4.4.1"
+                "source": "https://github.com/playox/flagception-bundle/tree/4.4.2"
             },
-            "time": "2023-11-29T22:35:30+00:00"
+            "time": "2024-01-15T13:28:08+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
