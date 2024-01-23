@@ -1,7 +1,4 @@
 {
-    "arnedesmedt/request-id-bundle": {
-        "version": "dev-feature/update-to-symfony-7"
-    },
     "broadway/broadway-bundle": {
         "version": "0.6",
         "recipe": {
@@ -25,6 +22,9 @@
         "files": [
             "config/packages/broadway_event_store_dbal.yaml"
         ]
+    },
+    "chrisguitarguy/request-id-bundle": {
+        "version": "v6.0.0-RC1"
     },
     "doctrine/annotations": {
         "version": "1.14",

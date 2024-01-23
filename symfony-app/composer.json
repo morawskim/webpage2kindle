@@ -4,7 +4,6 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": [
-        {"type": "vcs", "url": "https://github.com/arnedesmedt/RequestIdBundle"},
         {"type": "vcs", "url": "https://github.com/morawskim/broadway-bundle"},
         {"type": "vcs", "url": "https://github.com/morawskim/RabbitMqBundle"},
         {"type": "vcs", "url": "https://github.com/Jeroeny/SymfonyExtension"}
@@ -19,7 +18,7 @@
         "ext-sockets": "*",
         "broadway/broadway-bundle": "dev-symfony7",
         "broadway/event-store-dbal": "^0.6.0",
-        "arnedesmedt/request-id-bundle": "dev-feature/update-to-symfony-7",
+        "chrisguitarguy/request-id-bundle": "6.0.0-RC1@dev",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
