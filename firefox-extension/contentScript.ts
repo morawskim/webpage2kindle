@@ -7,6 +7,28 @@ declare global {
     }
 }
 
+interface ConfigItem {
+    selector: string
+}
+
+
+class Configuration {
+    constructor(private data: {[key: string]: ConfigItem}) {
+    }
+
+    getSelectorForDomain(domain: string) {
+        if (this.hasSelectorForDomain(domain)) {
+            return this.data[domain].selector || '';
+        }
+
+        return '';
+    }
+
+    hasSelectorForDomain(domain: string) {
+        return this.data.hasOwnProperty(domain);
+    }
+}
+
 function createLoaderElement() {
     const loader = document.createElement('div');
     const style = loader.style;
@@ -23,6 +45,16 @@ function createLoaderElement() {
     loader.textContent = 'Loading ...';
 
     return loader;
+}
+
+function getConfiguration(configUrl: string): Promise<Configuration> {
+    return fetch(configUrl)
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            return new Configuration(data);
+        })
+        .catch()
 }
 
 function toDataURL(image: HTMLImageElement): string {
@@ -72,17 +104,26 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
     // convertImagesToDataUrl(document.querySelectorAll('img'))
     Promise.resolve()
         .then(async function () {
-            const record =  await browser.storage.sync.get({url: process.env.SYMFONY_ENDPOINT_URL!});
+            const record =  await browser.storage.sync.get({
+                url: process.env.SYMFONY_ENDPOINT_URL!,
+                configUrl: '',
+            });
 
-            return Promise.resolve(record["url"]);
+            return Promise.resolve([record["url"], record["configUrl"]]);
         })
-        .then(function (url) {
+        .then(async function ([url, configUrl]) {
             console.log(`Url to webservice "${url}"`);
-            const body = document.body.outerHTML;
+            console.log(`Url to JSON config document "${configUrl}"`);
+            let body = document.body.outerHTML!;
 
-            const el = document.createElement('div')
-            el.textContent = body;
-            document.body.appendChild(el);
+            if (configUrl) {
+                const domain = location.hostname;
+                const configuration = await getConfiguration(configUrl);
+                if (configuration.hasSelectorForDomain(domain)) {
+                    console.log(`Use selector from JSON config for domain ${domain}`);
+                    body = document.querySelector(configuration.getSelectorForDomain(domain))?.outerHTML || body;
+                }
+            }
 
             fetch(url, {
                 body: new URLSearchParams({
