@@ -96,8 +96,9 @@ class IndexController extends AbstractController
                 return new RedirectResponse($pushToKindleUrl);
             }
         } catch (AggregateNotFoundException $e) {
+            $job = null;
         }
 
-        return $this->render('redirect.html.twig', ['jobId' => $jobId]);
+        return $this->render('redirect.html.twig', ['jobId' => $jobId, 'job' => $job]);
     }
 }

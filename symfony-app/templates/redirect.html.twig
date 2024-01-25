@@ -1,6 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if not job %}
+    <div class="alert alert-warning mt-3" role="alert">
+        The job has not been yet created.
+    </div>
+    {% endif %}
+
+    {% if job and job.isFailed %}
+        <div class="alert alert-danger mt-3" role="alert">
+            The job has failed: "{{ job.failedReason }}"
+        </div>
+    {% endif %}
+
     <table id="notification-table" class="table table-stripped mt-3">
         <thead><tr><th>Created at</th><th>Message</th></tr></thead>
         <tbody></tbody>
