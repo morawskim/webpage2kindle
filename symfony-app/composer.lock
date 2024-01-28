@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84087093d040cc7a9c4ccb461c94f347",
+    "content-hash": "911d1b7ab6d7d4e584e98a54649f5f82",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -10008,42 +10008,41 @@
         },
         {
             "name": "friends-of-behat/symfony-extension",
-            "version": "dev-sf7",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Jeroeny/SymfonyExtension.git",
-                "reference": "a1f9821b548e62c35c97d899afab27614c76e679"
+                "url": "https://github.com/FriendsOfBehat/SymfonyExtension.git",
+                "reference": "92653f5c8a5d14300434411eb76aed584802e722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jeroeny/SymfonyExtension/zipball/a1f9821b548e62c35c97d899afab27614c76e679",
-                "reference": "a1f9821b548e62c35c97d899afab27614c76e679",
+                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/92653f5c8a5d14300434411eb76aed584802e722",
+                "reference": "92653f5c8a5d14300434411eb76aed584802e722",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.6.1",
-                "php": "^7.4 || ^8.0",
-                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.4 || ^7.0",
-                "symfony/http-kernel": "^4.4 || ^5.4 || ^6.4 || ^7.0",
-                "symfony/proxy-manager-bridge": "^4.4 || ^5.4 || ^6.4 || ^7.0"
+                "php": "^8.1",
+                "symfony/dependency-injection": "^6.2 || ^7.0",
+                "symfony/http-kernel": "^6.2 || ^7.0"
             },
             "require-dev": {
+                "behat/mink": "^1.9",
+                "behat/mink-browserkit-driver": "^2.0",
                 "behat/mink-selenium2-driver": "^1.3",
-                "friends-of-behat/mink": "^1.9",
-                "friends-of-behat/mink-browserkit-driver": "^1.5",
                 "friends-of-behat/mink-extension": "^2.5",
                 "friends-of-behat/page-object-extension": "^0.3.2",
                 "friends-of-behat/service-container-extension": "^1.1",
                 "sylius-labs/coding-standard": ">=4.1.1, <=4.2.1",
-                "symfony/browser-kit": "^4.4 || ^5.4 || ^6.4 || ^7.0",
-                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.4 || ^7.0",
-                "symfony/process": "^4.4 || ^5.4 || ^6.4 || ^7.0",
-                "symfony/yaml": "^4.4 || ^5.4 || ^6.4 || ^7.0",
+                "symfony/browser-kit": "^6.2 || ^7.0",
+                "symfony/framework-bundle": "^6.2 || ^7.0",
+                "symfony/process": "^6.2 || ^7.0",
+                "symfony/yaml": "^6.2 || ^7.0",
                 "vimeo/psalm": "4.30.0"
             },
             "suggest": {
-                "friends-of-behat/mink": "^1.9",
-                "friends-of-behat/mink-browserkit-driver": "^1.5",
+                "behat/mink": "^1.9",
+                "behat/mink-browserkit-driver": "^2.0",
                 "friends-of-behat/mink-extension": "^2.5"
             },
             "type": "symfony-bundle",
@@ -10057,24 +10056,7 @@
                     "FriendsOfBehat\\SymfonyExtension\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "analyse": [
-                    "@composer validate --ansi --strict",
-                    "vendor/bin/ecs check --ansi --no-progress-bar src tests || true",
-                    "vendor/bin/psalm src --no-progress"
-                ],
-                "fix": [
-                    "vendor/bin/ecs check --ansi --no-progress-bar src tests --fix"
-                ],
-                "test": [
-                    "vendor/bin/behat -f progress --strict -vvv --no-interaction --colors"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -10087,9 +10069,10 @@
             ],
             "description": "Integrates Behat with Symfony.",
             "support": {
-                "source": "https://github.com/Jeroeny/SymfonyExtension/tree/sf7"
+                "issues": "https://github.com/FriendsOfBehat/SymfonyExtension/issues",
+                "source": "https://github.com/FriendsOfBehat/SymfonyExtension/tree/v2.5.0"
             },
-            "time": "2023-12-04T15:48:27+00:00"
+            "time": "2024-01-11T14:57:03+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -10460,8 +10443,7 @@
         "chrisguitarguy/request-id-bundle": 20,
         "hwi/oauth-bundle": 20,
         "php-amqplib/rabbitmq-bundle": 20,
-        "behat/behat": 20,
-        "friends-of-behat/symfony-extension": 20
+        "behat/behat": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -5,8 +5,7 @@
     "prefer-stable": true,
     "repositories": [
         {"type": "vcs", "url": "https://github.com/morawskim/broadway-bundle"},
-        {"type": "vcs", "url": "https://github.com/morawskim/RabbitMqBundle"},
-        {"type": "vcs", "url": "https://github.com/Jeroeny/SymfonyExtension"}
+        {"type": "vcs", "url": "https://github.com/morawskim/RabbitMqBundle"}
     ],
     "require": {
         "php": ">=8.1",
@@ -106,7 +105,7 @@
     },
     "require-dev": {
         "behat/behat": "dev-master",
-        "friends-of-behat/symfony-extension": "dev-sf7",
+        "friends-of-behat/symfony-extension": "^2.5",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*"
     }
