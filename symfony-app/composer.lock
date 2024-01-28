@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "911d1b7ab6d7d4e584e98a54649f5f82",
+    "content-hash": "bccda608e33cc4876706c45e15e14996",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3156,16 +3156,16 @@
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
-            "version": "dev-symfony7",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/morawskim/RabbitMqBundle.git",
-                "reference": "955bb991c3767be1565bb1651470a217286882be"
+                "url": "https://github.com/php-amqplib/RabbitMqBundle.git",
+                "reference": "a80937c30214ffb36683c27edb226ed59492bd08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/morawskim/RabbitMqBundle/zipball/955bb991c3767be1565bb1651470a217286882be",
-                "reference": "955bb991c3767be1565bb1651470a217286882be",
+                "url": "https://api.github.com/repos/php-amqplib/RabbitMqBundle/zipball/a80937c30214ffb36683c27edb226ed59492bd08",
+                "reference": "a80937c30214ffb36683c27edb226ed59492bd08",
                 "shasum": ""
             },
             "require": {
@@ -3208,11 +3208,7 @@
                     "/Tests/"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "OldSound\\RabbitMqBundle\\Tests\\": "Tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3223,7 +3219,7 @@
             ],
             "description": "Integrates php-amqplib with Symfony & RabbitMq. Formerly emag-tech-labs/rabbitmq-bundle, oldsound/rabbitmq-bundle.",
             "keywords": [
-                "amqp",
+                "AMQP",
                 "message",
                 "queue",
                 "rabbitmq",
@@ -3232,9 +3228,10 @@
                 "symfony5"
             ],
             "support": {
-                "source": "https://github.com/morawskim/RabbitMqBundle/tree/symfony7"
+                "issues": "https://github.com/php-amqplib/RabbitMqBundle/issues",
+                "source": "https://github.com/php-amqplib/RabbitMqBundle/tree/2.14.0"
             },
-            "time": "2023-12-18T16:13:56+00:00"
+            "time": "2024-01-10T14:06:07+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -10442,7 +10439,6 @@
         "broadway/broadway-bundle": 20,
         "chrisguitarguy/request-id-bundle": 20,
         "hwi/oauth-bundle": 20,
-        "php-amqplib/rabbitmq-bundle": 20,
         "behat/behat": 20
     },
     "prefer-stable": true,
