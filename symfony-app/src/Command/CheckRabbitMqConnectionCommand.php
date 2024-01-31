@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use PhpAmqpLib\Exception\AMQPIOException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -39,11 +40,18 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->producer->getChannel()->queue_declare(
-            'tmp', false, false, false, true
-        );
-
-        $this->producer->getChannel()->queue_delete('tmp');
+        try {
+            $this->producer->getChannel()->queue_declare(
+                'tmp',
+                false,
+                false,
+                false,
+                true
+            );
+            $this->producer->getChannel()->queue_delete('tmp');
+        } catch (AMQPIOException $e) {
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }
