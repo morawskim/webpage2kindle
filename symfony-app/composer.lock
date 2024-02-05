@@ -3725,16 +3725,16 @@
         },
         {
             "name": "promphp/prometheus_client_php",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PromPHP/prometheus_client_php.git",
-                "reference": "ad2a85fa52a7b9f6e6d84095cd34d1cb6f0a06bc"
+                "reference": "a09ea80ec1ec26dd1d4853e9af2a811e898dbfeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/ad2a85fa52a7b9f6e6d84095cd34d1cb6f0a06bc",
-                "reference": "ad2a85fa52a7b9f6e6d84095cd34d1cb6f0a06bc",
+                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/a09ea80ec1ec26dd1d4853e9af2a811e898dbfeb",
+                "reference": "a09ea80ec1ec26dd1d4853e9af2a811e898dbfeb",
                 "shasum": ""
             },
             "require": {
@@ -3786,9 +3786,9 @@
             "description": "Prometheus instrumentation library for PHP applications.",
             "support": {
                 "issues": "https://github.com/PromPHP/prometheus_client_php/issues",
-                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.9.0"
+                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.10.0"
             },
-            "time": "2023-12-20T06:22:58+00:00"
+            "time": "2024-02-01T13:28:34+00:00"
         },
         {
             "name": "psr/cache",
