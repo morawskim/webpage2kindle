@@ -14,6 +14,10 @@ class SentrySampleRateRule
             return 1.0;
         }
 
+        if (PHP_SAPI === 'cli') {
+            return 0;
+        }
+
         if ('prometheus_metrics' === ($context->getTransactionContext()?->getData()['route'] ?? '')) {
             return 0.1;
         }
