@@ -3,6 +3,7 @@
 namespace App\Infrastructure\RabbitMq;
 
 use OldSound\RabbitMqBundle\RabbitMq\AMQPConnectionFactory;
+use PhpAmqpLib\Connection\Heartbeat\PCNTLHeartbeatSender;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
@@ -23,6 +24,11 @@ class ConnectionFactory extends AMQPConnectionFactory
 
         if ($connection instanceof DebugAMQPStreamConnection) {
             $connection->setLogger($this->logger);
+        }
+
+        if (PHP_SAPI === 'cli') {
+            $sender = new PCNTLHeartbeatSender($connection);
+            $sender->register();
         }
 
         return $connection;
