@@ -16,7 +16,7 @@
         "ext-sockets": "*",
         "broadway/broadway-bundle": "dev-symfony7",
         "broadway/event-store-dbal": "^0.6.0",
-        "chrisguitarguy/request-id-bundle": "6.0.0-RC1@dev",
+        "chrisguitarguy/request-id-bundle": "^6.0",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
