@@ -19,7 +19,7 @@
         "chrisguitarguy/request-id-bundle": "^6.0",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.12",
+        "doctrine/orm": "^3.0",
         "flagception/flagception-bundle": "^4.4",
         "hwi/oauth-bundle": "^2.0@dev",
         "php-amqplib/rabbitmq-bundle": "^2.14",
