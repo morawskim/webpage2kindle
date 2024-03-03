@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MessageProcessingTimeSubscriber implements EventSubscriberInterface
 {
+    /** @var array<int, array{string, string, int}> */
     private array $map = [];
 
     public function __construct(private readonly PrometheusHelper $prometheusHelper)

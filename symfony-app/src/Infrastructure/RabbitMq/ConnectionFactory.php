@@ -13,7 +13,6 @@ use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
 class ConnectionFactory extends AMQPConnectionFactory
 {
     public function __construct(
-        private LoggerInterface $logger,
         #[AutowireDecorated]
         private AMQPConnectionFactory $inner,
     ) {

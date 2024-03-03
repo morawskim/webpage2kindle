@@ -63,6 +63,9 @@ class PrometheusHelper
         )->inc([$webExtensionVersion]);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function publishMessageProcessingTime(array $data, float $duration): void
     {
         $histogram = $this->collectorRegistry->getOrRegisterHistogram(
