@@ -4,6 +4,7 @@ default:
             contexts:
                 - App\Tests\Behat\HomepageContext
                 - App\Tests\Behat\WebExtensionContext
+                - App\Tests\Behat\MessageProcessingTimeContext
 
     extensions:
         FriendsOfBehat\SymfonyExtension:

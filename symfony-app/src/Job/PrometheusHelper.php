@@ -62,4 +62,17 @@ class PrometheusHelper
             ['version']
         )->inc([$webExtensionVersion]);
     }
+
+    public function publishMessageProcessingTime(array $data, float $duration): void
+    {
+        $histogram = $this->collectorRegistry->getOrRegisterHistogram(
+            $this->metricNamespace,
+            'message_processing_time',
+            'Processing time (ms)',
+            array_keys($data),
+            [50, 150, 250, 400, 500, 700, 900, 1000, 1200, 1500, 2500, 4000]
+        );
+
+        $histogram->observe($duration, array_values($data));
+    }
 }
