@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     env(APP_PASSWORD): 'hashedsecretpassword__encoded-in-base64'
-    old_sound_rabbit_mq.connection.class: App\Infrastructure\RabbitMq\DebugAMQPStreamConnection
 
 services:
     # default configuration for services in *this* file
