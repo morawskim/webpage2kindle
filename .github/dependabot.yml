@@ -8,6 +8,12 @@ updates:
     commit-message:
       prefix: "[dependabot]"
       prefix-development: "[dependabot-dev]"
+    open-pull-requests-limit: 10
+    groups:
+      firefox-extension-dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"
   - package-ecosystem: npm
     directory: "/node-readability"
     schedule:
@@ -16,6 +22,12 @@ updates:
     commit-message:
       prefix: "[dependabot]"
       prefix-development: "[dependabot-dev]"
+    open-pull-requests-limit: 10
+    groups:
+      node-readability-dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"
   - package-ecosystem: composer
     directory: "/symfony-app"
     schedule:
@@ -24,6 +36,12 @@ updates:
     commit-message:
       prefix: "[dependabot]"
       prefix-development: "[dependabot-dev]"
+    open-pull-requests-limit: 50
+    groups:
+      app-dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"
   - package-ecosystem: gomod
     directory: "/go-readability-api"
     schedule:
@@ -32,6 +50,12 @@ updates:
     commit-message:
       prefix: "[dependabot]"
       prefix-development: "[dependabot-dev]"
+    open-pull-requests-limit: 10
+    groups:
+      go-readability-api-dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"
 
   - package-ecosystem: "docker"
     directory: "/symfony-app"
