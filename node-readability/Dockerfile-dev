@@ -1,1 +1,1 @@
-FROM node:21.6-slim
+FROM node:21.7-slim
