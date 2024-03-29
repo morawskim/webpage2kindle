@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c98a47fffde8a817dc8cae350e1df0f",
+    "content-hash": "b603d1d2f6dd72276ce115fc98dc8b3e",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -219,16 +219,16 @@
         },
         {
             "name": "broadway/broadway-bundle",
-            "version": "dev-symfony7",
+            "version": "0.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/morawskim/broadway-bundle.git",
-                "reference": "43df14b13dadeebcddcadd2fdb90a99f0cb26730"
+                "url": "https://github.com/broadway/broadway-bundle.git",
+                "reference": "a172d195ec05b39eaab27221e46a9a08e0dc447d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/morawskim/broadway-bundle/zipball/43df14b13dadeebcddcadd2fdb90a99f0cb26730",
-                "reference": "43df14b13dadeebcddcadd2fdb90a99f0cb26730",
+                "url": "https://api.github.com/repos/broadway/broadway-bundle/zipball/a172d195ec05b39eaab27221e46a9a08e0dc447d",
+                "reference": "a172d195ec05b39eaab27221e46a9a08e0dc447d",
                 "shasum": ""
             },
             "require": {
@@ -240,8 +240,8 @@
             "require-dev": {
                 "broadway/broadway-saga": "^1.0",
                 "friendsofphp/php-cs-fixer": "^3.0",
-                "matthiasnoback/symfony-config-test": "^4.0",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+                "matthiasnoback/symfony-config-test": "^4.0 || ^5.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.0 || ^5.0",
                 "monolog/monolog": "~2.0",
                 "phpstan/phpstan": "@stable",
                 "phpstan/phpstan-symfony": "^1.0",
@@ -265,11 +265,7 @@
                     "Broadway\\Bundle\\BroadwayBundle\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Broadway\\Bundle\\BroadwayBundle\\": "test/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -307,9 +303,10 @@
                 "event sourcing"
             ],
             "support": {
-                "source": "https://github.com/morawskim/broadway-bundle/tree/symfony7"
+                "issues": "https://github.com/broadway/broadway-bundle/issues",
+                "source": "https://github.com/broadway/broadway-bundle/tree/0.7.0"
             },
-            "time": "2023-12-18T17:43:05+00:00"
+            "time": "2024-03-28T10:17:47+00:00"
         },
         {
             "name": "broadway/event-store-dbal",
@@ -10319,7 +10316,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "broadway/broadway-bundle": 20,
         "hwi/oauth-bundle": 20,
         "behat/behat": 20
     },

@@ -3,9 +3,6 @@
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "repositories": [
-        {"type": "vcs", "url": "https://github.com/morawskim/broadway-bundle"}
-    ],
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
@@ -14,7 +11,7 @@
         "ext-json": "*",
         "ext-redis": "*",
         "ext-sockets": "*",
-        "broadway/broadway-bundle": "dev-symfony7",
+        "broadway/broadway-bundle": "^0.7",
         "broadway/event-store-dbal": "^0.6.0",
         "chrisguitarguy/request-id-bundle": "^6.0",
         "doctrine/doctrine-bundle": "^2.7",
