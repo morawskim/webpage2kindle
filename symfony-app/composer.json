@@ -23,7 +23,7 @@
         "promphp/prometheus_client_php": "^2.6",
         "ramsey/uuid": "^4.4",
         "runtime/frankenphp-symfony": "^0.2",
-        "sentry/sentry-symfony": "^4.3",
+        "sentry/sentry-symfony": "^5.0",
         "symfony/asset": "7.0.*",
         "symfony/console": "7.0.*",
         "symfony/dotenv": "7.0.*",
