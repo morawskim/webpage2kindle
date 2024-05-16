@@ -8,5 +8,6 @@ RUN npm install --omit=dev
 
 FROM node:22.1-slim
 COPY --from=build /app/dist /app/
+COPY --from=build /app/instrument.mjs /app/instrument.mjs
 COPY --from=build /app/node_modules /app/node_modules/
-CMD [ "node", "/app/microservice.js" ]
+CMD [ "node", "--import", "/app/instrument.mjs",  "/app/microservice.js" ]
