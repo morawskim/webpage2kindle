@@ -6,7 +6,8 @@ stages:
   - docker
 
 variables:
-  PHP_EXTENSIONS: sockets pdo_sqlite sqlite3
+  PHP_EXTENSIONS: sockets pdo_sqlite sqlite3 sodium
+  MERCURE_PUBLISHER_JWT_KEY: "!publisherKeyOnlyForDevSomePaddingToFulfilLengthRequirements"
 
 composer:
   stage: prepare

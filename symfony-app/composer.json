@@ -19,7 +19,6 @@
         "doctrine/orm": "^3.0",
         "flagception/flagception-bundle": "^4.4",
         "hwi/oauth-bundle": "^2.0@dev",
-        "lcobucci/jwt": "~4.0.3",
         "php-amqplib/rabbitmq-bundle": "^2.14",
         "promphp/prometheus_client_php": "^2.6",
         "ramsey/uuid": "^4.4",
