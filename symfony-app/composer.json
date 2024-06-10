@@ -33,7 +33,7 @@
         "symfony/lock": "7.1.*",
         "symfony/mercure-bundle": "^0.3.7",
         "symfony/monolog-bundle": "^3.8",
-        "symfony/process": "7.0.*",
+        "symfony/process": "7.1.*",
         "symfony/property-access": "7.1.*",
         "symfony/proxy-manager-bridge": "6.4.*",
         "symfony/rate-limiter": "7.1.*",
