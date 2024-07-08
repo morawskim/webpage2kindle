@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6c9d636e6e956c11ecb9a4fcc3dfca9",
+    "content-hash": "d8f07c4650f45806a66c1174027aa671",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1850,22 +1850,22 @@
         },
         {
             "name": "flagception/flagception-bundle",
-            "version": "4.4.2",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/playox/flagception-bundle.git",
-                "reference": "f98520e4ba42207b9df91a266c26aa148137eaba"
+                "reference": "2ccba9a3f5b7557b4142075f9dc50e4eebddce8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/playox/flagception-bundle/zipball/f98520e4ba42207b9df91a266c26aa148137eaba",
-                "reference": "f98520e4ba42207b9df91a266c26aa148137eaba",
+                "url": "https://api.github.com/repos/playox/flagception-bundle/zipball/2ccba9a3f5b7557b4142075f9dc50e4eebddce8c",
+                "reference": "2ccba9a3f5b7557b4142075f9dc50e4eebddce8c",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "^1.7 | ^2.0",
                 "flagception/flagception": "^1.5",
-                "php": "^7.1.3 | ^8.0",
+                "php": "^8.0",
                 "symfony/config": "^4.4 | ^5.0 | ^6.0 | ^7.0",
                 "symfony/dependency-injection": "^4.4 | ^5.0 | ^6.0 | ^7.0",
                 "symfony/http-kernel": "^4.4 | ^5.0 | ^6.0 | ^7.0",
@@ -1918,9 +1918,9 @@
             ],
             "support": {
                 "issues": "https://github.com/playox/flagception-bundle/issues",
-                "source": "https://github.com/playox/flagception-bundle/tree/4.4.2"
+                "source": "https://github.com/playox/flagception-bundle/tree/5.0.0"
             },
-            "time": "2024-01-15T13:28:08+00:00"
+            "time": "2024-07-04T08:17:37+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
@@ -9170,16 +9170,16 @@
         },
         {
             "name": "friends-of-behat/symfony-extension",
-            "version": "v2.5.0",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/SymfonyExtension.git",
-                "reference": "92653f5c8a5d14300434411eb76aed584802e722"
+                "reference": "dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/92653f5c8a5d14300434411eb76aed584802e722",
-                "reference": "92653f5c8a5d14300434411eb76aed584802e722",
+                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd",
+                "reference": "dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd",
                 "shasum": ""
             },
             "require": {
@@ -9232,9 +9232,9 @@
             "description": "Integrates Behat with Symfony.",
             "support": {
                 "issues": "https://github.com/FriendsOfBehat/SymfonyExtension/issues",
-                "source": "https://github.com/FriendsOfBehat/SymfonyExtension/tree/v2.5.0"
+                "source": "https://github.com/FriendsOfBehat/SymfonyExtension/tree/v2.6.0"
             },
-            "time": "2024-01-11T14:57:03+00:00"
+            "time": "2024-07-03T15:49:43+00:00"
         },
         {
             "name": "masterminds/html5",

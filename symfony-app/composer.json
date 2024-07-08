@@ -17,7 +17,7 @@
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^3.0",
-        "flagception/flagception-bundle": "^4.4",
+        "flagception/flagception-bundle": "^5.0",
         "hwi/oauth-bundle": "^2.0@dev",
         "php-amqplib/rabbitmq-bundle": "^2.14",
         "promphp/prometheus_client_php": "^2.6",
