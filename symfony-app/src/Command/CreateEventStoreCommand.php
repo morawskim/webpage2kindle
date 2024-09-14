@@ -60,7 +60,7 @@ EOT
     {
         $schemaManager = $this->connection->createSchemaManager();
 
-        if ($table = $this->eventStore->configureSchema($schemaManager->createSchema())) {
+        if ($table = $this->eventStore->configureSchema($schemaManager->introspectSchema())) {
             $schemaManager->createTable($table);
             $output->writeln('<info>Created Broadway event store schema</info>');
         } else {
