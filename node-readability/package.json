@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@mozilla/readability": "^0.5.0",
-    "@sentry/node": "^8.35.0",
+    "@sentry/node": "^8.36.0",
     "@sentry/tracing": "^7.114.0",
     "dotenv": "^16.3.2",
     "express": "^4.21.1",
