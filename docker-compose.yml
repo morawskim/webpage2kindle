@@ -34,7 +34,9 @@ services:
       dockerfile: Dockerfile-dev
     volumes:
       - ./node-readability:/app
-    command: [ "npx", "ts-node-dev", "--import", "/app/instrument.mjs", "/app/microservice.ts" ]
+    command: [ "npx", "tsx", "watch", "--import", "/app/instrument.mjs", "/app/microservice.ts" ]
+    ports:
+      - "3000:3000"
   rabbitmq:
     image: rabbitmq:3.9.5-management
     ports:

@@ -1,0 +1,10 @@
+POST http://localhost:3000/process-webpage
+Content-Type: application/x-www-form-urlencoded
+Accept': application/json
+X-Extension-Version: dev
+
+url = http://example.com &
+title = Testbody2 &
+body = "{{articleBody}}"
+
+###

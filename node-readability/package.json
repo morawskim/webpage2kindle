@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@mozilla/readability": "^0.5.0",
     "@sentry/node": "^8.42.0",
