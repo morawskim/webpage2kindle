@@ -26,7 +26,7 @@ class Producer
      * @param array<mixed> $headers
      * @return void
      */
-    public function publish($msgBody, $routingKey = null, $additionalProperties = array(), array $headers = null)
+    public function publish($msgBody, $routingKey = null, $additionalProperties = array(), ?array $headers = null)
     {
     }
 }

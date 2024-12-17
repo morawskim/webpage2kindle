@@ -14,7 +14,7 @@ class CheckRabbitMqConnectionCommand extends Command
     public function __construct(
         #[Autowire(service: 'old_sound_rabbit_mq.fetch_page_content_producer')]
         private readonly Producer $producer,
-        string $name = null
+        ?string $name = null
     ) {
         parent::__construct($name);
     }

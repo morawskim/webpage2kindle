@@ -14,7 +14,7 @@ class ProducerRequestIdStamp extends Producer
         $this->requestIdStorage = $requestIdStorage;
     }
 
-    public function publish($msgBody, $routingKey = null, $additionalProperties = array(), array $headers = null)
+    public function publish($msgBody, $routingKey = null, $additionalProperties = array(), ?array $headers = null)
     {
         if (empty($headers)) {
             $headers = [];
