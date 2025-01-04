@@ -54,7 +54,7 @@ async function notify(message: ResultSuccess|ResultFailed) {
     }
 }
 
-browser.runtime.onMessage.addListener(notify);
+browser.runtime.onMessage.addListener(notify as any);
 browser.browserAction.onClicked.addListener((tab) => {
     if (!tab.url || !isSupportedProtocol(tab.url)) {
         console.info(`The url ("${tab.url}") of your active tab is not supported`);

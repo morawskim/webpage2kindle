@@ -109,7 +109,7 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
                 configUrl: '',
             });
 
-            return Promise.resolve([record["url"], record["configUrl"]]);
+            return Promise.resolve<[string, string]>([record["url"] as string, record["configUrl"] as string]);
         })
         .then(async function ([url, configUrl]) {
             console.log(`Url to webservice "${url}"`);
