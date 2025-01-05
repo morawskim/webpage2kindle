@@ -12,7 +12,7 @@ services:
     ports:
       - "4200:80"
     environment:
-      SERVER_NAME: "http://localhost:80"
+      SERVER_NAME: "http://localhost:80 http://127.0.0.1:80"
       XDEBUG_TRIGGER: "default_no_matter"
       XDEBUG_MODE: develop,debug
       XDEBUG_CONFIG: "client_host=${MY_IP:-172.17.0.1} discover_client_host=0 client_port=9000"

@@ -8,40 +8,40 @@
 	}
 }
 
-{$SERVER_NAME:http://localhost:80}
+{$SERVER_NAME:http://localhost:80 http://127.0.0.1:80} {
+    log
+    route {
+        mercure {
+            # Publisher JWT key
+            publisher_jwt {$MERCURE_PUBLISHER_JWT_KEY}
+            # Subscriber JWT key
+            subscriber_jwt {$MERCURE_SUBSCRIBER_JWT_KEY}
+            # Allow anonymous subscribers (double-check that it's what you want)
+            anonymous
+        }
 
-log
-route {
-    mercure {
-        # Publisher JWT key
-        publisher_jwt {$MERCURE_PUBLISHER_JWT_KEY}
-        # Subscriber JWT key
-        subscriber_jwt {$MERCURE_SUBSCRIBER_JWT_KEY}
-        # Allow anonymous subscribers (double-check that it's what you want)
-        anonymous
+        root * public/
+
+        # Add trailing slash for directory requests
+        @canonicalPath {
+            file {path}/index.php
+            not path */
+        }
+        redir @canonicalPath {path}/ 308
+
+        # If the requested file does not exist, try index files
+        @indexFiles file {
+            try_files {path} {path}/index.php index.php
+            split_path .php
+        }
+        rewrite @indexFiles {http.matchers.file.relative}
+
+        # FrankenPHP!
+        @phpFiles path *.php
+        php @phpFiles
+        encode zstd gzip
+        file_server
+
+        respond 404
     }
-
-    root * public/
-
-	# Add trailing slash for directory requests
-	@canonicalPath {
-		file {path}/index.php
-		not path */
-	}
-	redir @canonicalPath {path}/ 308
-
-	# If the requested file does not exist, try index files
-	@indexFiles file {
-		try_files {path} {path}/index.php index.php
-		split_path .php
-	}
-	rewrite @indexFiles {http.matchers.file.relative}
-
-	# FrankenPHP!
-	@phpFiles path *.php
-	php @phpFiles
-	encode zstd gzip
-	file_server
-
-	respond 404
 }
