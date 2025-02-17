@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/go-shiori/go-readability v0.0.0-20250215073538-7ece303db41c
-	github.com/spf13/cobra v1.9.0
+	github.com/spf13/cobra v1.9.1
 )
 
 require (
