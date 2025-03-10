@@ -1,8 +1,8 @@
 {
   "type": "module",
   "dependencies": {
-    "@mozilla/readability": "^0.5.0",
-    "@sentry/node": "^9.3.0",
+    "@mozilla/readability": "^0.6.0",
+    "@sentry/node": "^9.5.0",
     "@sentry/tracing": "^7.120.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
