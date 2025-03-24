@@ -1,4 +1,4 @@
-FROM node:23.9-slim as build
+FROM node:23.10-slim as build
 
 COPY . /app
 WORKDIR /app
@@ -6,7 +6,7 @@ RUN npm ci
 RUN npx tsc
 RUN npm install --omit=dev
 
-FROM node:23.9-slim
+FROM node:23.10-slim
 COPY --from=build /app/dist /app/
 COPY --from=build /app/instrument.mjs /app/instrument.mjs
 COPY --from=build /app/node_modules /app/node_modules/
