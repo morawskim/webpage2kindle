@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7be2a07900d5d5438d3e47adada4263",
+    "content-hash": "b44f3e10c5cb29e84b3d43118cfb77af",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2681,16 +2681,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v3.7.2",
+            "version": "v3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "738a73eb0019b6c99d9bc25d7a0c0dd8f56a5199"
+                "reference": "5db9a68435fdde9ba4248a8fd2fae6d07b442b65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/738a73eb0019b6c99d9bc25d7a0c0dd8f56a5199",
-                "reference": "738a73eb0019b6c99d9bc25d7a0c0dd8f56a5199",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/5db9a68435fdde9ba4248a8fd2fae6d07b442b65",
+                "reference": "5db9a68435fdde9ba4248a8fd2fae6d07b442b65",
                 "shasum": ""
             },
             "require": {
@@ -2756,22 +2756,22 @@
             ],
             "support": {
                 "issues": "https://github.com/php-amqplib/php-amqplib/issues",
-                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.7.2"
+                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.7.1"
             },
-            "time": "2024-11-21T09:21:41+00:00"
+            "time": "2024-09-03T19:18:03+00:00"
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
-            "version": "2.17.3",
+            "version": "2.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/RabbitMqBundle.git",
-                "reference": "76ca2c9b9efddad5ade150b656efe10119a81acf"
+                "reference": "fc816b77d3dee4045f8044b70059942832b079b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/RabbitMqBundle/zipball/76ca2c9b9efddad5ade150b656efe10119a81acf",
-                "reference": "76ca2c9b9efddad5ade150b656efe10119a81acf",
+                "url": "https://api.github.com/repos/php-amqplib/RabbitMqBundle/zipball/fc816b77d3dee4045f8044b70059942832b079b3",
+                "reference": "fc816b77d3dee4045f8044b70059942832b079b3",
                 "shasum": ""
             },
             "require": {
@@ -2835,9 +2835,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-amqplib/RabbitMqBundle/issues",
-                "source": "https://github.com/php-amqplib/RabbitMqBundle/tree/2.17.3"
+                "source": "https://github.com/php-amqplib/RabbitMqBundle/tree/2.17.2"
             },
-            "time": "2025-01-08T09:24:19+00:00"
+            "time": "2024-10-29T16:00:15+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -9606,5 +9606,5 @@
         "ext-sockets": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
