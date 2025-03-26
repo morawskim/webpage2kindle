@@ -3,7 +3,7 @@ old_sound_rabbit_mq:
         default:
             url: '%env(RABBITMQ_URL)%'
             connection_timeout: 3
-            read_write_timeout: 120
+            read_write_timeout: 180
             keepalive: false
             heartbeat: 60
     producers:
@@ -40,6 +40,8 @@ old_sound_rabbit_mq:
         pipeline:
             connection: default
             exchange_options: { name: 'pipeline', type: direct }
+            timeout_wait: 90
+            idle_timeout: 300
             queues:
                 new_job:
                     name: new_job2
