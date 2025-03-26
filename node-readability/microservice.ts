@@ -17,7 +17,7 @@ app.post('/process-webpage', (req: Request, res: Response) => {
     const articleContent = (article && article.content) ? `<h1>${title}</h1>` + article.content : '';
 
     const responseObject = {
-        'success': !!(article && article.content.length),
+        'success': !!(article && "string" === typeof article.content && article.content.length),
         'body': articleContent,
     };
 
