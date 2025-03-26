@@ -4,7 +4,6 @@ namespace App\Job\Domain;
 
 use App\Job\Event\EventHumanDescriptionInterface;
 use Broadway\Domain\AggregateRoot;
-use Broadway\Domain\DomainMessage;
 use Broadway\EventHandling\EventBus;
 use Broadway\EventSourcing\AggregateFactory\PublicConstructorAggregateFactory;
 use Broadway\EventSourcing\EventSourcingRepository;
@@ -48,7 +47,6 @@ class JobRepository extends EventSourcingRepository implements JobProviderInterf
     {
         $records = [];
 
-        /** @var DomainMessage[] $domainEventStream */
         $domainEventStream = $this->eventStore->load($jobId);
         foreach ($domainEventStream as $item) {
             $payload = $item->getPayload();
