@@ -2,9 +2,9 @@
   "type": "module",
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
-    "@sentry/node": "^9.35.0",
+    "@sentry/node": "^9.42.1",
     "@sentry/tracing": "^7.120.3",
-    "dotenv": "^17.0.1",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsdom": "^26.1.0"
   },
