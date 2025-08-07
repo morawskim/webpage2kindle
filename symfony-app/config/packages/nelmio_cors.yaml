@@ -12,3 +12,9 @@ nelmio_cors:
           allow_methods: [ 'POST' ]
           max_age: 3600
         '^/': null
+
+when@dev:
+  nelmio_cors:
+    paths:
+      '^/web-extension':
+        allow_private_network: true
