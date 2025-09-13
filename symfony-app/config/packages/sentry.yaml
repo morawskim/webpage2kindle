@@ -8,27 +8,32 @@ when@prod:
                 - Symfony\Component\Security\Core\Exception\AccessDeniedException
             integrations:
                 - 'App\Infrastructure\Sentry\IgnoreHttpClientExceptionsIntegration'
+            enable_logs: true
 #        If you are using Monolog, you also need these additional configuration and services to log the errors correctly:
 #        https://docs.sentry.io/platforms/php/guides/symfony/#monolog-integration
         register_error_listener: false
         register_error_handler: false
     monolog:
         handlers:
-            sentry:
-                type: sentry
-                level: !php/const Monolog\Logger::ERROR
-                hub_id: Sentry\State\HubInterface
-            # this one acts like fingers_crossed
-            sentry_breadcrumbs:
-                type: service
-                name: sentry_breadcrumbs
-                id: Sentry\Monolog\BreadcrumbHandler
+            stderr:
+              type: stream
+              path: php://stderr
+              level: info
+              formatter: monolog.formatter.json
+            main:
+              type: fingers_crossed
+              action_level: error
+              handler: sentry_logs
+              excluded_http_codes: [ 404, 405 ]
+              buffer_size: 50 # How many messages should be saved? Prevent memory leaks
+            sentry_logs:
+              type: service
+              id: Sentry\SentryBundle\Monolog\LogsHandler
     services:
+        Sentry\SentryBundle\Monolog\LogsHandler:
+          arguments:
+          - !php/const Monolog\Logger::DEBUG
         Monolog\Processor\PsrLogMessageProcessor:
-            tags: { name: monolog.processor, handler: sentry }
+            tags: { name: monolog.processor, handler: sentry_logs }
         App\Service\SentrySampleRateRule: ~
-        Sentry\Monolog\BreadcrumbHandler:
-            arguments:
-                - '@Sentry\State\HubInterface'
-                - !php/const Monolog\Logger::DEBUG
         App\Infrastructure\Sentry\IgnoreHttpClientExceptionsIntegration: ~
