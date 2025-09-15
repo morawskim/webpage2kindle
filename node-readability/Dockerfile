@@ -1,4 +1,4 @@
-FROM node:24.7-slim as build
+FROM node:24.8-slim as build
 
 COPY . /app
 WORKDIR /app
@@ -6,7 +6,7 @@ RUN npm ci
 RUN npx tsc
 RUN npm install --omit=dev
 
-FROM node:24.7-slim
+FROM node:24.8-slim
 COPY --from=build /app/dist /app/
 COPY --from=build /app/instrument.mjs /app/instrument.mjs
 COPY --from=build /app/node_modules /app/node_modules/
