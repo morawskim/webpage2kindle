@@ -1,1 +1,1 @@
-FROM node:24.8-slim
+FROM node:24.9-slim
