@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -12,6 +13,12 @@ import (
 
 	readability "github.com/go-shiori/go-readability"
 	"github.com/spf13/cobra"
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
+	"go.opentelemetry.io/otel/propagation"
+	"go.opentelemetry.io/otel/sdk/trace"
 )
 
 const index = `<!DOCTYPE HTML>
@@ -33,6 +40,19 @@ const index = `<!DOCTYPE HTML>
 </html>`
 
 func main() {
+	ctx := context.Background()
+	client := otlptracehttp.NewClient()
+	traceExporter, err := otlptrace.New(ctx, client)
+
+	if err != nil {
+		log.Fatalf("failed to initialize exporter: %e", err)
+	}
+	tp := trace.NewTracerProvider(
+		trace.WithBatcher(traceExporter),
+	)
+	otel.SetTracerProvider(tp)
+	otel.SetTextMapPropagator(propagation.TraceContext{})
+
 	rootCmd := &cobra.Command{
 		Use:   "go-readability [flags] [source]",
 		Run:   rootCmdHandler,
@@ -48,7 +68,7 @@ func main() {
 		panic(errFlag)
 	}
 
-	err := rootCmd.Execute()
+	err = rootCmd.Execute()
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -58,8 +78,7 @@ func rootCmdHandler(cmd *cobra.Command, args []string) {
 	// Start HTTP server
 	httpListen, _ := cmd.Flags().GetString("http")
 	if httpListen != "" {
-		http.HandleFunc("/", httpHandler)
-		log.Println("Starting HTTP server at", httpListen)
+		http.Handle("/", otelhttp.NewHandler(http.HandlerFunc(httpHandler), "Main"))
 		log.Fatal(http.ListenAndServe(httpListen, nil))
 	}
 
