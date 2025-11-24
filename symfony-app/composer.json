@@ -38,7 +38,7 @@
         "symfony/framework-bundle": "7.3.*",
         "symfony/http-client": "7.3.*",
         "symfony/lock": "7.3.*",
-        "symfony/mercure-bundle": "^0.3.7",
+        "symfony/mercure-bundle": "^0.4.1",
         "symfony/monolog-bundle": "^3.8",
         "symfony/process": "7.3.*",
         "symfony/property-access": "7.3.*",
