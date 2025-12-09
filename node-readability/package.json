@@ -2,14 +2,14 @@
   "type": "module",
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
-    "@sentry/node": "^10.27.0",
+    "@sentry/node": "^10.29.0",
     "@sentry/tracing": "^7.120.4",
     "dotenv": "^17.2.3",
-    "express": "^5.2.0",
-    "jsdom": "^27.2.0"
+    "express": "^5.2.1",
+    "jsdom": "^27.3.0"
   },
   "devDependencies": {
-    "@types/express": "^5.0.5",
+    "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/jsdom": "^27.0.0",
     "jest": "^30.2.0",
