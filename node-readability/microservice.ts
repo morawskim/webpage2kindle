@@ -2,6 +2,7 @@ import { Readability } from '@mozilla/readability';
 import { JSDOM } from 'jsdom';
 import express, { Express, Request, Response } from 'express';
 import * as Sentry from "@sentry/node";
+import {removeCssInlineAndExternalLinks} from "./helpers";
 
 const port = 3000;
 const app: Express = express();
@@ -9,7 +10,7 @@ app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 app.post('/process-webpage', (req: Request, res: Response) => {
     const {body, url, title} = req.body;
-    const doc = new JSDOM(body, {
+    const doc = new JSDOM(removeCssInlineAndExternalLinks(body), {
         url: url,
     });
     const reader = new Readability(doc.window.document);
