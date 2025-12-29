@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d415772bf1259df5817031929ab9bb8",
+    "content-hash": "75696fc0f92b94c61393326142aded7c",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -660,16 +660,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "4.4.0",
+            "version": "4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "e8c5163fbec0f34e357431bd1e5fc4056cdf4fdc"
+                "reference": "3d544473fb93f5c25b483ea4f4ce99f8c4d9d44c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e8c5163fbec0f34e357431bd1e5fc4056cdf4fdc",
-                "reference": "e8c5163fbec0f34e357431bd1e5fc4056cdf4fdc",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/3d544473fb93f5c25b483ea4f4ce99f8c4d9d44c",
+                "reference": "3d544473fb93f5c25b483ea4f4ce99f8c4d9d44c",
                 "shasum": ""
             },
             "require": {
@@ -746,7 +746,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/4.4.0"
+                "source": "https://github.com/doctrine/dbal/tree/4.4.1"
             },
             "funding": [
                 {
@@ -762,7 +762,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-29T12:17:09+00:00"
+            "time": "2025-12-04T10:11:03+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1451,16 +1451,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.5.8",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "78dd074266e8b47a83bcf60ab5fe06c91a639168"
+                "reference": "d4e9276e79602b1eb4c4029c6c999b0d93478e2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/78dd074266e8b47a83bcf60ab5fe06c91a639168",
-                "reference": "78dd074266e8b47a83bcf60ab5fe06c91a639168",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/d4e9276e79602b1eb4c4029c6c999b0d93478e2f",
+                "reference": "d4e9276e79602b1eb4c4029c6c999b0d93478e2f",
                 "shasum": ""
             },
             "require": {
@@ -1533,9 +1533,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.5.8"
+                "source": "https://github.com/doctrine/orm/tree/3.6.0"
             },
-            "time": "2025-11-29T23:11:02+00:00"
+            "time": "2025-12-19T20:36:14+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -3256,16 +3256,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v3.7.3",
+            "version": "v3.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "9f50fe69a9f1a19e2cb25596a354d705de36fe59"
+                "reference": "381b6f7c600e0e0c7463cdd7f7a1a3bc6268e5fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/9f50fe69a9f1a19e2cb25596a354d705de36fe59",
-                "reference": "9f50fe69a9f1a19e2cb25596a354d705de36fe59",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/381b6f7c600e0e0c7463cdd7f7a1a3bc6268e5fd",
+                "reference": "381b6f7c600e0e0c7463cdd7f7a1a3bc6268e5fd",
                 "shasum": ""
             },
             "require": {
@@ -3331,35 +3331,35 @@
             ],
             "support": {
                 "issues": "https://github.com/php-amqplib/php-amqplib/issues",
-                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.7.3"
+                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.7.4"
             },
-            "time": "2025-02-18T20:11:13+00:00"
+            "time": "2025-11-23T17:00:56+00:00"
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
-            "version": "2.17.4",
+            "version": "2.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/RabbitMqBundle.git",
-                "reference": "84f6c284daddd350b1b9ba3a4efabcb7c9c03479"
+                "reference": "64fe6d4b8614f38e0178b5c5c56dfac7cf2c5c02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/RabbitMqBundle/zipball/84f6c284daddd350b1b9ba3a4efabcb7c9c03479",
-                "reference": "84f6c284daddd350b1b9ba3a4efabcb7c9c03479",
+                "url": "https://api.github.com/repos/php-amqplib/RabbitMqBundle/zipball/64fe6d4b8614f38e0178b5c5c56dfac7cf2c5c02",
+                "reference": "64fe6d4b8614f38e0178b5c5c56dfac7cf2c5c02",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0",
-                "php-amqplib/php-amqplib": "^2.12.2|^3.0",
-                "psr/log": "^1.0 || ^2.0 || ^3.0",
-                "symfony/config": "^4.4|^5.3|^6.0|^7.0",
-                "symfony/console": "^4.4|^5.3|^6.0|^7.0",
-                "symfony/dependency-injection": "^4.4|^5.3|^6.0|^7.0",
-                "symfony/event-dispatcher": "^4.4|^5.3|^6.0|^7.0",
-                "symfony/framework-bundle": "^4.4|^5.3|^6.0|^7.0",
-                "symfony/http-kernel": "^4.4|^5.3|^6.0|^7.0",
-                "symfony/yaml": "^4.4|^5.3|^6.0|^7.0"
+                "php": "^8.2",
+                "php-amqplib/php-amqplib": "^2.12.2 || ^3.0",
+                "psr/log": "^2.0 || ^3.0",
+                "symfony/config": "^6.0 || ^7.0",
+                "symfony/console": "^6.0 || ^7.0",
+                "symfony/dependency-injection": "^6.0 || ^7.0",
+                "symfony/event-dispatcher": "^6.0 || ^7.0",
+                "symfony/framework-bundle": "^6.0 || ^7.0",
+                "symfony/http-kernel": "^6.0 || ^7.0",
+                "symfony/yaml": "^6.0 || ^7.0"
             },
             "replace": {
                 "emag-tech-labs/rabbitmq-bundle": "self.version",
@@ -3369,7 +3369,7 @@
                 "phpstan/phpstan": "^1.2",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpunit/phpunit": "^9.5",
-                "symfony/serializer": "^4.4|^5.3|^6.0|^7.0"
+                "symfony/serializer": "^6.0 || ^7.0"
             },
             "suggest": {
                 "ext-pcntl": "*",
@@ -3410,9 +3410,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-amqplib/RabbitMqBundle/issues",
-                "source": "https://github.com/php-amqplib/RabbitMqBundle/tree/2.17.4"
+                "source": "https://github.com/php-amqplib/RabbitMqBundle/tree/2.18.0"
             },
-            "time": "2025-08-03T22:35:15+00:00"
+            "time": "2025-12-24T17:25:13+00:00"
         },
         {
             "name": "php-http/discovery",
@@ -3495,16 +3495,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.47",
+            "version": "3.0.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "9d6ca36a6c2dd434765b1071b2644a1c683b385d"
+                "reference": "64065a5679c50acb886e82c07aa139b0f757bb89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/9d6ca36a6c2dd434765b1071b2644a1c683b385d",
-                "reference": "9d6ca36a6c2dd434765b1071b2644a1c683b385d",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/64065a5679c50acb886e82c07aa139b0f757bb89",
+                "reference": "64065a5679c50acb886e82c07aa139b0f757bb89",
                 "shasum": ""
             },
             "require": {
@@ -3585,7 +3585,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.47"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.48"
             },
             "funding": [
                 {
@@ -3601,7 +3601,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-06T01:07:24+00:00"
+            "time": "2025-12-15T11:51:42+00:00"
         },
         {
             "name": "promphp/prometheus_client_php",
@@ -4337,16 +4337,16 @@
         },
         {
             "name": "runtime/frankenphp-symfony",
-            "version": "0.2.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-runtime/frankenphp-symfony.git",
-                "reference": "56822c3631d9522a3136a4c33082d006bdfe4bad"
+                "reference": "873ce3b2ca032373c237f2f271be489d05735278"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-runtime/frankenphp-symfony/zipball/56822c3631d9522a3136a4c33082d006bdfe4bad",
-                "reference": "56822c3631d9522a3136a4c33082d006bdfe4bad",
+                "url": "https://api.github.com/repos/php-runtime/frankenphp-symfony/zipball/873ce3b2ca032373c237f2f271be489d05735278",
+                "reference": "873ce3b2ca032373c237f2f271be489d05735278",
                 "shasum": ""
             },
             "require": {
@@ -4356,7 +4356,7 @@
                 "symfony/runtime": "^5.4 || ^6.0 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^10.5.58"
             },
             "type": "library",
             "autoload": {
@@ -4377,7 +4377,7 @@
             "description": "FrankenPHP runtime for Symfony",
             "support": {
                 "issues": "https://github.com/php-runtime/frankenphp-symfony/issues",
-                "source": "https://github.com/php-runtime/frankenphp-symfony/tree/0.2.0"
+                "source": "https://github.com/php-runtime/frankenphp-symfony/tree/1.0.0"
             },
             "funding": [
                 {
@@ -4385,7 +4385,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-12T12:06:11+00:00"
+            "time": "2025-12-18T07:44:23+00:00"
         },
         {
             "name": "sentry/sentry",
@@ -4477,16 +4477,16 @@
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "5.8.2",
+            "version": "5.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "fb03d506c575cd1cb5274774d0dd968938150982"
+                "reference": "e82559a078b26c8f8592289e98a25b203527a9c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/fb03d506c575cd1cb5274774d0dd968938150982",
-                "reference": "fb03d506c575cd1cb5274774d0dd968938150982",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/e82559a078b26c8f8592289e98a25b203527a9c6",
+                "reference": "e82559a078b26c8f8592289e98a25b203527a9c6",
                 "shasum": ""
             },
             "require": {
@@ -4563,7 +4563,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-symfony/issues",
-                "source": "https://github.com/getsentry/sentry-symfony/tree/5.8.2"
+                "source": "https://github.com/getsentry/sentry-symfony/tree/5.8.3"
             },
             "funding": [
                 {
@@ -4575,7 +4575,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-12-04T12:34:17+00:00"
+            "time": "2025-12-18T09:26:49+00:00"
         },
         {
             "name": "symfony/asset",
@@ -8347,16 +8347,16 @@
         },
         {
             "name": "symfony/runtime",
-            "version": "v7.3.4",
+            "version": "v7.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/runtime.git",
-                "reference": "3550e2711e30bfa5d808514781cd52d1cc1d9e9f"
+                "reference": "9146981807ca9f0491dea6ccabe36a48e4b12cc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/runtime/zipball/3550e2711e30bfa5d808514781cd52d1cc1d9e9f",
-                "reference": "3550e2711e30bfa5d808514781cd52d1cc1d9e9f",
+                "url": "https://api.github.com/repos/symfony/runtime/zipball/9146981807ca9f0491dea6ccabe36a48e4b12cc0",
+                "reference": "9146981807ca9f0491dea6ccabe36a48e4b12cc0",
                 "shasum": ""
             },
             "require": {
@@ -8406,7 +8406,7 @@
                 "runtime"
             ],
             "support": {
-                "source": "https://github.com/symfony/runtime/tree/v7.3.4"
+                "source": "https://github.com/symfony/runtime/tree/v7.3.8"
             },
             "funding": [
                 {
@@ -8426,7 +8426,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-11T15:31:28+00:00"
+            "time": "2025-12-05T13:52:21+00:00"
         },
         {
             "name": "symfony/security-bundle",
