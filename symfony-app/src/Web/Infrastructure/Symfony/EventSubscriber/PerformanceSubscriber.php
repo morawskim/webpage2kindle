@@ -25,14 +25,10 @@ class PerformanceSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $data['route'] = $event->getRequest()->get('_route') ?? $event->getRequest()->getPathInfo();
+        // prevent storing a lot of unique entries in prometheus when user try to open not existing page
+        $data['route'] = $event->getRequest()->get('_route') ?? 'unknown-route';
         $data['method'] = $event->getRequest()->getRealMethod();
         $data['status_code'] = $event->getResponse()->getStatusCode();
-
-        // prevent storing a lot of unique entries in prometheus when user try to open not existing page
-        if (404 === $data['status_code'] && null === $event->getRequest()->get('_route')) {
-            $data['route'] = 'unknown-route';
-        }
 
         $duration = ceil((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000);
         $memoryPeak = memory_get_peak_usage(true);
