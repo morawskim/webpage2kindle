@@ -10,10 +10,10 @@
     "copy-webpack-plugin": "^14.0.0",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
-    "web-ext": "^9.3.0",
+    "web-ext": "^9.4.0",
     "web-ext-plugin": "^2.12.0",
     "webextension-polyfill": "^0.12.0",
-    "webpack": "^5.105.3",
+    "webpack": "^5.105.4",
     "webpack-cli": "^6.0.1"
   }
 }
