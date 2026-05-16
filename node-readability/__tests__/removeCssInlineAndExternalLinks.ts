@@ -1,4 +1,4 @@
-import {removeCssInlineAndExternalLinks} from "../helpers";
+import {removeCssInlineAndExternalLinks} from "../helpers.js";
 
 test('test remove inline and external CSS', () => {
     const body = `

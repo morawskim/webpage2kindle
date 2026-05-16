@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "module": "commonjs",
+    "moduleResolution": "nodenext",
+    "module": "NodeNext",
     "strict": true,
     "esModuleInterop": true,
     "outDir": "./dist"

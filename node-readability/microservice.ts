@@ -2,7 +2,7 @@ import { Readability } from '@mozilla/readability';
 import { JSDOM } from 'jsdom';
 import express, { Express, Request, Response } from 'express';
 import * as Sentry from "@sentry/node";
-import {removeCssInlineAndExternalLinks} from "./helpers";
+import {removeCssInlineAndExternalLinks} from "./helpers.js";
 
 const port = 3000;
 const app: Express = express();
