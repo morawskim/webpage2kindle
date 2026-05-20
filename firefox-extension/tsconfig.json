@@ -7,5 +7,6 @@
     "outDir": "dist/",
     "noEmitOnError": true,
     "resolveJsonModule": true,
+    "types": ["node"],
   }
 }
