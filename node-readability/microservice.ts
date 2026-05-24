@@ -3,10 +3,12 @@ import { JSDOM } from 'jsdom';
 import express, { Express, Request, Response } from 'express';
 import * as Sentry from "@sentry/node";
 import {removeCssInlineAndExternalLinks} from "./helpers.js";
+import morgan from 'morgan';
 
 const port = 3000;
 const app: Express = express();
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
+app.use(morgan('combined'));
 
 app.post('/process-webpage', (req: Request, res: Response) => {
     const {body, url, title} = req.body;
