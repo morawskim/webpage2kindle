@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "301317462a99f4a1172cd321cea05fd9",
+    "content-hash": "6f7cd58adeb18aad4ea36ae374bfb490",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2915,6 +2915,71 @@
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
             "time": "2025-09-17T23:10:12+00:00"
+        },
+        {
+            "name": "open-telemetry/opentelemetry-auto-pdo",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opentelemetry-php/contrib-auto-pdo.git",
+                "reference": "c5a824b3f46f3c1eca653149f59c06edb7fb94ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opentelemetry-php/contrib-auto-pdo/zipball/c5a824b3f46f3c1eca653149f59c06edb7fb94ac",
+                "reference": "c5a824b3f46f3c1eca653149f59c06edb7fb94ac",
+                "shasum": ""
+            },
+            "require": {
+                "ext-opentelemetry": "*",
+                "ext-pdo": "*",
+                "open-telemetry/api": "^1.0",
+                "open-telemetry/sem-conv": "^1.36",
+                "php": "^8.2",
+                "symfony/polyfill-mbstring": "^1.31"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "open-telemetry/sdk": "^1.0",
+                "open-telemetry/test-utils": "^0.2.0",
+                "phan/phan": "^5.0",
+                "php-http/mock-client": "*",
+                "phpstan/phpstan": "^1.1",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-phpunit": "^0.19.2",
+                "vimeo/psalm": "6.4.0"
+            },
+            "suggest": {
+                "ext-mbstring": "For better performance than symfony/polyfill-mbstring"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "_register.php"
+                ],
+                "psr-4": {
+                    "OpenTelemetry\\Contrib\\Instrumentation\\PDO\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "OpenTelemetry auto-instrumentation for PDO",
+            "homepage": "https://opentelemetry.io/docs/languages/php/",
+            "keywords": [
+                "instrumentation",
+                "open-telemetry",
+                "opentelemetry",
+                "otel",
+                "pdo",
+                "tracing"
+            ],
+            "support": {
+                "source": "https://github.com/opentelemetry-php/contrib-auto-pdo/tree/0.4.0"
+            },
+            "time": "2026-03-24T16:33:16+00:00"
         },
         {
             "name": "open-telemetry/opentelemetry-auto-symfony",
@@ -11043,6 +11108,6 @@
         "ext-redis": "*",
         "ext-sockets": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
 }
