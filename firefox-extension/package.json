@@ -9,12 +9,12 @@
     "@types/node": "^25.9.1",
     "@types/webextension-polyfill": "^0.12.5",
     "copy-webpack-plugin": "^14.0.0",
-    "ts-loader": "^9.5.7",
+    "ts-loader": "^9.6.0",
     "typescript": "^6.0.3",
-    "web-ext": "^10.2.0",
+    "web-ext": "^10.3.0",
     "web-ext-plugin": "^2.13.0",
     "webextension-polyfill": "^0.12.0",
     "webpack": "^5.107.2",
-    "webpack-cli": "^7.0.2"
+    "webpack-cli": "^7.0.3"
   }
 }
