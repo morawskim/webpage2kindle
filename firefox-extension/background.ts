@@ -61,9 +61,12 @@ browser.browserAction.onClicked.addListener((tab) => {
         return;
     }
 
-    console.info('The extension script will be registered');
-    browser.tabs.executeScript({ file: '/contentScript.js' })
-        .then(() => console.info('The script has been registered'))
-        .catch((error: unknown) => console.error('Cannot register script', error));
+    console.info('The extension script will create readable version of the page', tab.url);
+    if (tab.id) {
+        browser.tabs.executeScript(tab.id, {
+            code: `window.postMessage({ type: "webpage2kindle.createReadableVersion", }, "*"); `
+        })
+        .then(() => console.info('The message has been send'))
+        .catch((error: unknown) => console.error('Cannot sendMessage', error));
+    }
 });
-

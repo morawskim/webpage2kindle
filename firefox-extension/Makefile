@@ -1,3 +1,5 @@
+SYMFONY_ENDPOINT_URL := http://127.0.0.1:4200/web-extension
+
 .PHONY: build chromium
 build:
 	test -n "$(SYMFONY_ENDPOINT_URL)"  # $$SYMFONY_ENDPOINT_URL eg https://example.com/web-extension

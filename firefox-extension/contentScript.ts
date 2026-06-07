@@ -87,19 +87,8 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
     return Promise.all(promises);
 }
 
-(function () {
-    /**
-     * Check and set a global guard variable.
-     * If this content script is injected into the same page again,
-     * it will do nothing next time.
-     */
-    if (window.hasRun) {
-        return;
-    }
-    window.hasRun = true;
-    console.log(`Init webpage2kindle web browser extension (version: ${webExtensionManifest.version})`);
+function createReadableVersion() {
     document.body.appendChild(createLoaderElement());
-
     // at the moment pushtokindle not support img tags with dataurl
     // convertImagesToDataUrl(document.querySelectorAll('img'))
     Promise.resolve()
@@ -157,4 +146,26 @@ function convertImagesToDataUrl(nodes: NodeListOf<HTMLImageElement>) {
                     });
                 });
         });
+}
+
+(function () {
+    /**
+     * Check and set a global guard variable.
+     * If this content script is injected into the same page again,
+     * it will do nothing next time.
+     */
+    if (window.hasRun) {
+        return;
+    }
+
+    window.addEventListener("message", event => {
+        console.debug("[webpage2kindle] message event handler", event.data);
+
+        if (event.data?.type === "webpage2kindle.createReadableVersion") {
+            createReadableVersion();
+        }
+    });
+
+    window.hasRun = true;
+    console.log(`Init webpage2kindle web browser extension (version: ${webExtensionManifest.version})`);
 })();

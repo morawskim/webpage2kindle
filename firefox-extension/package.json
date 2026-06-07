@@ -1,7 +1,7 @@
 {
   "scripts": {
     "build": "webpack --config webpack-web-extension.config.mjs",
-    "start:firefox": "web-ext run  --source-dir ./dist/",
+    "start:firefox": "web-ext run  --source-dir ./dist/ --browser-console --arg='--remote-debugging-port=9222'",
     "start:chrome": "web-ext run --verbose -t chromium --chromium-binary=/usr/bin/google-chrome --source-dir ./dist/",
     "sign": "web-ext sign"
   },
