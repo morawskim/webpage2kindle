@@ -16,7 +16,7 @@ class SymfonyMercurePublisher implements SSEPublisherInterface
     public function publish(BaseEvent $data): void
     {
         $this->hub->publish(
-            new Update(sprintf('job://%s', $data->getJobId()), json_encode($data)),
+            new Update(['Webpage2Kindle', sprintf('job://%s', $data->getJobId())], json_encode($data)),
         );
     }
 }

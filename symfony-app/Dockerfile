@@ -1,11 +1,10 @@
-FROM dunglas/frankenphp:main-php8.2
-ENV FRANKENPHP_CONFIG="worker ./public/index.php"
+FROM dunglas/frankenphp:1-php8.5-alpine
 ENV APP_RUNTIME=Runtime\\FrankenPhpSymfony\\Runtime
 
 ARG WITH_XDEBUG=0
 RUN install-php-extensions sockets redis pcntl sodium opentelemetry
-COPY Caddyfile /etc/Caddyfile
+RUN test $WITH_XDEBUG -eq 1 && install-php-extensions xdebug-^3.5 || true
+COPY Caddyfile /etc/frankenphp/Caddyfile
 COPY --chown=www-data:www-data . /app
-RUN test $WITH_XDEBUG -eq 1 && install-php-extensions xdebug-^3.3 || true
 
 RUN /app/bin/console broadway:event-store:create
