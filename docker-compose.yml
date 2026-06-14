@@ -8,11 +8,10 @@ services:
         - WITH_XDEBUG=1
     volumes:
       - ./symfony-app:/app
-      - ./symfony-app/Caddyfile:/etc/Caddyfile
+      - ./symfony-app/Caddyfile:/etc/frankenphp/Caddyfile
     ports:
       - "4200:80"
     environment:
-      SERVER_NAME: "http://localhost:80 http://127.0.0.1:80"
       MAX_REQUESTS: "5"
       FRANKENPHP_CONFIG: "worker /app/public/index.php"
       XDEBUG_TRIGGER: "default_no_matter"
@@ -25,6 +24,8 @@ services:
       OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
       OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4318
       OTEL_SERVICE_NAME: webpage2kindle
+      # OTel for frankenphp, requires also OTEL_SERVICE_NAME and OTEL_EXPORTER_OTLP_ENDPOINT
+      OTEL_TRACES_EXPORTER: otlp
 #  consumer:
 #    build:
 #      context: ./symfony-app
