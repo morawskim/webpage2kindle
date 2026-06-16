@@ -20,9 +20,20 @@ function isSupportedProtocol(urlString: string) {
     return supportedProtocols.indexOf(url.protocol) !== -1;
 }
 
+function getUrlWithoutHash(url: string): string {
+    const tabUrl = URL.parse(url);
+    if (tabUrl) {
+        tabUrl.hash = '';
+        return tabUrl.toString();
+    }
+
+    return '';
+}
+
 async function notify(message: ResultSuccess|ResultFailed) {
+    console.log('[webpage2kindle] Received result', message);
     if (message.success) {
-        const tabs = await browser.tabs.query({ url: message.tabUrl});
+        const tabs = await browser.tabs.query({ url: getUrlWithoutHash(message.tabUrl)});
         if (tabs.length) {
             const tabId = tabs[0].id;
 

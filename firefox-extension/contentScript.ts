@@ -130,7 +130,7 @@ function createReadableVersion() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data.pushToKindleUrl);
+                    console.log("[webpage2kindle] success", data);
                     browser.runtime.sendMessage({
                         success: true,
                         pushToKindleUrl: data.pushToKindleUrl,
