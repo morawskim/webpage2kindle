@@ -2,7 +2,7 @@
   "type": "module",
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
-    "@sentry/node": "^10.58.0",
+    "@sentry/node": "^10.59.0",
     "@sentry/tracing": "^7.120.4",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
