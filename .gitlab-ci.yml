@@ -47,3 +47,17 @@ goreadability_pipeline:
     include:
       - local: go-readability-api/.gitlab-ci.yml
     strategy: depend
+
+#webextension_pipeline:
+#  stage: prepare
+#  rules:
+#    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
+#      changes:
+#        - firefox-extension/**/*
+#    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web"
+#      when: manual
+#      allow_failure: true
+#  trigger:
+#    include:
+#      - local: firefox-extension/.gitlab-ci.yml
+#    strategy: depend

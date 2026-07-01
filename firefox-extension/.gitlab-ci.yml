@@ -1,0 +1,18 @@
+stages:
+  - qa
+
+e2e-puppeteer:
+  stage: qa
+  image: cypress/browsers:24.18.0
+  script:
+    - echo "192.168.XX.YYY kindle.morawskim.pl" | tee -a /etc/hosts # albo dodac do hosts w gitlab-ci vm
+    - cd firefox-extension/
+    - npm ci
+    - SYMFONY_ENDPOINT_URL=https://kindle.morawskim.pl/web-extension npm run build
+    # moze setsid
+    - nohup ./node_modules/.bin/web-ext run  --source-dir ./dist/ --browser-console --arg='--remote-debugging-port=9222' --arg='-headless' > webext-firefox.log 2>&1 &
+    - echo $! > web-ext.pid
+    - node e2e/test-web-extension.mjs
+    - kill -TERM $(cat web-ext.pid)
+#
+# docker run -v $PWD:/project --rm -it cypress/browsers:24.18.0 bash
