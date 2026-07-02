@@ -31,7 +31,7 @@ try {
     console.log('Success');
 } catch (err) {
     failed = true;
-    console.error(`Something wrong. Check console.logs in output and screenshot ${screenshotPath}`);
+    console.error(`Something wrong. Check console.logs in output and screenshot ${screenshotPath}`, err);
 } finally {
     await page.screenshot({
         path: screenshotPath,

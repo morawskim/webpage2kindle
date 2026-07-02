@@ -1,0 +1,21 @@
+stages:
+  - qa
+
+e2e-puppeteer:
+  stage: qa
+  image: cypress/browsers:24.18.0
+  script:
+    - cd firefox-extension/
+    - npm ci
+    - SYMFONY_ENDPOINT_URL=https://kindle.morawskim.pl:32443/web-extension npm run build
+    - ./node_modules/.bin/web-ext run  --source-dir ./dist/ --browser-console --arg='--remote-debugging-port=9222' --arg='--headless' > webext-firefox.log 2>&1 &
+    - sleep 5
+    - node e2e/test-web-extension.mjs
+  after_script:
+    - test -f firefox-extension/webext-firefox.log && cat firefox-extension/webext-firefox.log
+  artifacts:
+    paths:
+      - firefox-extension/webext-firefox.log
+      - firefox-extension/screenshot.png
+  tags:
+    - priv-docker
