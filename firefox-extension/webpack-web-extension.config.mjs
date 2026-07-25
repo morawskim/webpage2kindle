@@ -26,9 +26,25 @@ export default {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader",
                 exclude: /node_modules/,
+                use: {
+                    loader: "swc-loader",
+                    options: {
+                        jsc: {
+                            parser: {
+                                syntax: "typescript",
+                            },
+                            target: "es2022",
+                        },
+                    },
+                },
             },
+            //waiting for TS7.1?
+            // {
+            //     test: /\.tsx?$/,
+            //     loader: "ts-loader",
+            //     exclude: /node_modules/,
+            // },
         ],
     },
     plugins: [
