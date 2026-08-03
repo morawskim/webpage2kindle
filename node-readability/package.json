@@ -2,11 +2,11 @@
   "type": "module",
   "dependencies": {
     "@mozilla/readability": "^0.6.0",
-    "@sentry/node": "^10.68.0",
+    "@sentry/node": "^10.69.0",
     "@sentry/tracing": "^7.120.4",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "jsdom": "^30.0.0",
+    "jsdom": "^30.0.1",
     "morgan": "^1.11.0"
   },
   "devDependencies": {
