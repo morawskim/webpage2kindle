@@ -21,7 +21,7 @@ chrisguitarguy_request_id:
   # The service key of an object that implements
   # Chrisguitarguy\RequestId\RequestIdGenerator
   # optional, defaults to a UUID v4 based generator
-  generator_service: ~
+  generator_service: "App\\Service\\RequestIdGenerator"
 
   # Whether or not to add the monolog process (see below), defaults to true
   enable_monolog: true
