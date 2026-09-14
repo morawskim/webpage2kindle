@@ -6,8 +6,8 @@
     "sign": "web-ext sign"
   },
   "devDependencies": {
-    "@swc/core": "^1.16.1",
-    "@types/node": "^26.4.1",
+    "@swc/core": "^1.16.2",
+    "@types/node": "^26.5.1",
     "@types/webextension-polyfill": "^0.12.6",
     "copy-webpack-plugin": "^14.0.0",
     "puppeteer-core": "^25.10.0",
