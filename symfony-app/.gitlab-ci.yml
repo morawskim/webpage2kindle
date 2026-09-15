@@ -38,7 +38,7 @@ phpstan:
 
 behat:
   stage: qa
-  image: thecodingmachine/php:8.2-v4-cli-node16
+  image: thecodingmachine/php:8.5-v5-cli-node24
   script:
     - cd symfony-app/
     - bin/console --env=test broadway:event-store:create
