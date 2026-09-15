@@ -45,6 +45,11 @@ behat:
     - ./vendor/bin/behat
   dependencies:
     - composer
+  artifacts:
+    paths:
+      - symfony-app/var/log/test.log
+    expire_in: 30 days
+    when: on_failure
 
 docker/main:
   extends: .docker

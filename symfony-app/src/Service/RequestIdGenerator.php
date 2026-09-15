@@ -7,7 +7,7 @@ use Ramsey\Uuid\UuidFactoryInterface;
 
 class RequestIdGenerator implements \Chrisguitarguy\RequestId\RequestIdGenerator
 {
-    private $factory;
+    private UuidFactoryInterface $factory;
 
     public function __construct(?UuidFactoryInterface $factory=null)
     {

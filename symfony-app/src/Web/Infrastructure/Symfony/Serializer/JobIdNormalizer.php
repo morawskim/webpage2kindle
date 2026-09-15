@@ -31,9 +31,6 @@ class JobIdNormalizer implements NormalizerInterface, DenormalizerInterface
         return $data instanceof JobId;
     }
 
-    /**
-     * @phpstan-ignore-next-line
-     */
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if ('' === $data || null === $data) {
