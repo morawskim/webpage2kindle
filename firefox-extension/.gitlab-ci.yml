@@ -7,7 +7,7 @@ e2e-puppeteer:
   script:
     - cd firefox-extension/
     - npm ci
-    - SYMFONY_ENDPOINT_URL=https://kindle.morawskim.pl:32443/web-extension npm run build
+    - SWC_NATIVE_BINDING_CACHE=/tmp/.swc_cache SYMFONY_ENDPOINT_URL=https://kindle.morawskim.pl:32443/web-extension npm run build
     - ./node_modules/.bin/web-ext run  --source-dir ./dist/ --browser-console --arg='--remote-debugging-port=9222' --arg='--headless' > webext-firefox.log 2>&1 &
     - sleep 5
     - node e2e/test-web-extension.mjs
