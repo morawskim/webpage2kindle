@@ -2,18 +2,20 @@
 
 namespace App\Command;
 
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
-use PhpAmqpLib\Exception\AMQPIOException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpTransport;
+use Symfony\Component\Messenger\Exception\TransportException;
+use Symfony\Component\Messenger\Transport\InMemory\InMemoryTransport;
 
 class CheckRabbitMqConnectionCommand extends Command
 {
     public function __construct(
-        #[Autowire(service: 'old_sound_rabbit_mq.fetch_page_content_producer')]
-        private readonly Producer $producer,
+        #[Autowire(service: 'messenger.transport.fetch_page_content')]
+        private readonly AmqpTransport|InMemoryTransport $transport,
+
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -41,15 +43,8 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $this->producer->getChannel()->queue_declare(
-                'tmp',
-                false,
-                false,
-                false,
-                true
-            );
-            $this->producer->getChannel()->queue_delete('tmp');
-        } catch (AMQPIOException $e) {
+            $this->transport->getMessageCount();
+        } catch (TransportException $e) {
             return Command::FAILURE;
         }
 

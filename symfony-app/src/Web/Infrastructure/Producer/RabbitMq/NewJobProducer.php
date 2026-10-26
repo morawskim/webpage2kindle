@@ -8,17 +8,13 @@ use App\Job\Domain\JobId;
 use App\Job\Domain\JobRepository;
 use App\Web\Application\Message\NewJobMessage;
 use App\Web\Domain\Contract\NewJobProducerInterface;
-use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class NewJobProducer implements NewJobProducerInterface
 {
     public function __construct(
         private readonly JobRepository $jobRepository,
-        #[Autowire(service: 'old_sound_rabbit_mq.new_job_producer')]
-        private readonly ProducerInterface $producer,
-        private readonly SerializerInterface $encrypterSerializer,
+        private readonly MessageBusInterface $messageBus,
         private readonly SSEPublisherInterface $SSEPublisher,
     ) {
     }
@@ -28,9 +24,7 @@ class NewJobProducer implements NewJobProducerInterface
         $jobId = $this->jobRepository->createNextJobId();
         $dto = new NewJobMessage($jobId, $url);
 
-        $this->producer->publish(
-            $this->encrypterSerializer->serialize($dto, 'json'),
-        );
+        $this->messageBus->dispatch($dto);
         $this->SSEPublisher->publish(new NewJob($jobId));
 
         return $jobId;

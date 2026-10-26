@@ -10,11 +10,9 @@ services:
     prometheus_storage:
         class: Prometheus\Storage\InMemory
 
-    App\Infrastructure\RabbitMq\InMemoryProducer:
+    App\Infrastructure\Symfony\Messenger\InMemoryMessageBus:
         public: true
-    App\Web\Infrastructure\Producer\RabbitMq\NewJobProducer:
-        arguments:
-            $producer: '@App\Infrastructure\RabbitMq\InMemoryProducer'
+    Symfony\Component\Messenger\MessageBusInterface: '@App\Infrastructure\Symfony\Messenger\InMemoryMessageBus'
 
     App\Job\Domain\InMemoryJobProvider:
         public: true

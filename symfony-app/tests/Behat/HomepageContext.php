@@ -2,8 +2,8 @@
 
 namespace App\Tests\Behat;
 
-use App\Infrastructure\RabbitMq\InMemoryProducer;
 use App\Infrastructure\SSE\InMemoryPublisher;
+use App\Infrastructure\Symfony\Messenger\InMemoryMessageBus;
 use App\Job\Domain\InMemoryJobProvider;
 use App\Job\Domain\Job;
 use App\Job\Domain\JobId;
@@ -155,14 +155,14 @@ class HomepageContext implements Context
             throw new \RuntimeException(sprintf('The actual location is "%s" not "%s"', $location, '/redirecct/<job-id>'));
         }
 
-        /** @var InMemoryProducer $inMemory */
-        $inMemory = $this->client->getKernel()->getContainer()->get(InMemoryProducer::class);
+        /** @var InMemoryMessageBus $inMemory */
+        $inMemory = $this->client->getKernel()->getContainer()->get(InMemoryMessageBus::class);
 
         if (1 !== $inMemory->count()) {
             throw new \RuntimeException('The message has not been published to create readable version of webpage');
         }
 
-        if (false === str_contains($inMemory->getData(0)[0], json_encode($url))) {
+        if (false === str_contains(json_encode($inMemory->getData(0)), json_encode($url))) {
             throw new \RuntimeException(sprintf(
                 'The published message does not contain expected URL ("%s") to process',
                 $url

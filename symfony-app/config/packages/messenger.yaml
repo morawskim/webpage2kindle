@@ -1,0 +1,58 @@
+framework:
+    messenger:
+        serializer:
+            default_serializer: App\Infrastructure\Messenger\Serializer\EncryptedMessengerSerializer
+
+        transports:
+            new_job:
+                dsn: '%env(RABBITMQ_URL)%'
+                options:
+                    exchange:
+                        name: pipeline
+                        type: direct
+                        default_publish_routing_key: new_job
+                    queues:
+                        new_job2:
+                            binding_keys: [new_job]
+                            arguments:
+                                x-dead-letter-exchange: failed-jobs
+                                x-message-ttl: 60000
+            fetch_page_content:
+                dsn: '%env(RABBITMQ_URL)%'
+                options:
+                    exchange:
+                        name: pipeline
+                        type: direct
+                        default_publish_routing_key: fetch_page_content
+                    queues:
+                        fetch_page_content2:
+                            binding_keys: [fetch_page_content]
+                            arguments:
+                                x-dead-letter-exchange: failed-jobs
+                                x-message-ttl: 120000
+            push_to_kindle_url:
+                dsn: '%env(RABBITMQ_URL)%'
+                options:
+                    exchange:
+                        name: pipeline
+                        type: direct
+                        default_publish_routing_key: push_to_kindle_url
+                    queues:
+                        push_to_kindle_url2:
+                            binding_keys: [push_to_kindle_url]
+                            arguments:
+                                x-dead-letter-exchange: failed-jobs
+                                x-message-ttl: 90000
+
+        routing:
+            'App\Web\Application\Message\NewJobMessage': new_job
+            'App\Web\Application\Message\FetchPageContentMessage': fetch_page_content
+            'App\Web\Application\Message\CreatePushToKindleUrlMessage': push_to_kindle_url
+
+when@test:
+    framework:
+        messenger:
+            transports:
+                new_job: 'in-memory://'
+                fetch_page_content: 'in-memory://'
+                push_to_kindle_url: 'in-memory://'
