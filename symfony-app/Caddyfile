@@ -10,6 +10,7 @@
     #worker /path/to/your/worker.php
     {$FRANKENPHP_CONFIG}
     max_requests {$MAX_REQUESTS:10}
+    php_ini session.upload_progress.enabled Off
   }
 }
 
