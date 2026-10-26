@@ -14,7 +14,7 @@
   }
 }
 
-{$SERVER_NAME::80} {
+{$SERVER_NAME:http://localhost:80 http://127.0.0.1:80} {
     log
     root {$SERVER_ROOT:public/}
     encode zstd br gzip
