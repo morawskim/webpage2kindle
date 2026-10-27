@@ -23,6 +23,7 @@
     }
 
     mercure {
+        protocol_version_compatibility 8
         # Publisher JWT key
         publisher_jwt {$MERCURE_PUBLISHER_JWT_KEY}
         # Subscriber JWT key
