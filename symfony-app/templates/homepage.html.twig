@@ -15,7 +15,7 @@
         {% set action = path('push_to_kindle_async_and_wait') %}
     {% endif %}
 
-    <form method="post" action="{{ action }}">
+    <form id="processWebpageForm" method="post" action="{{ action }}">
         <div class="mb-3">
             <label for="urlInput" class="form-label">Url to process</label>
             <input required name="url" type="url" class="form-control" id="urlInput" autofocus value="{{ url }}">
@@ -30,6 +30,35 @@
         <br />
         <a href="javascript:{{ include('bookmark.js.twig')|raw|replace({"\r": '', "\n": ''})}}">Webpage2Kindle Bookmark</a>
     </div>
+
+    <script>
+        (async () => {
+            if (document.modelContext) {
+                await document.modelContext.registerTool({
+                    name: 'create_readable_content',
+                    description: 'Create readable content from webpage',
+                    inputSchema: {
+                        type: 'object',
+                        properties: {
+                            url: { type: 'string' },
+                        },
+                        required: ['url'],
+                    },
+                    execute: async ({ url }) => {
+                        const msg = `Create a readable content for ${url}`;
+
+                        const input = document.querySelector('#urlInput');
+                        input.value = url;
+                        const form = document.querySelector('#processWebpageForm');
+                        form.submit();
+
+                        return msg;
+                    },
+                });
+            }
+        })()
+    </script>
+
 
     {% if not is_granted('IS_AUTHENTICATED') %}
         <a class="mt-3" href="{{ path('hwi_oauth_service_redirect', {'service': 'auth0' }) }}" style="color: #EB5424; border: 1px solid #EB5424; display: inline-flex; padding: 0 0.5em; text-decoration: none;">
