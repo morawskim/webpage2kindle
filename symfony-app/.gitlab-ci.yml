@@ -6,7 +6,7 @@ stages:
   - docker
 
 variables:
-  PHP_EXTENSIONS: sockets pdo_sqlite sqlite3
+  PHP_EXTENSIONS: sockets pdo_sqlite sqlite3 opentelemetry
   MERCURE_PUBLISHER_JWT_KEY: "!publisherKeyOnlyForDevSomePaddingToFulfilLengthRequirements"
 
 composer:
@@ -16,7 +16,7 @@ composer:
     - composer config -g cache-dir "$CI_PROJECT_DIR/.composer-cache"
   script:
     - cd symfony-app/
-    - composer install --ignore-platform-reqs --optimize-autoloader --no-interaction --no-progress --no-ansi
+    - composer install --ignore-platform-reqs --optimize-autoloader --no-interaction --no-progress --no-ansi --no-scripts
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:

@@ -81,3 +81,20 @@ services:
       ports:
         - 6831:6831/udp
         - 16686:16686 # Jaeger UI
+  cli:
+    image: thecodingmachine/php:8.5-v5-cli-node24
+    command: bash
+    volumes:
+      - ./:/app
+    user: ${MY_UID:-1000}
+    tty: true
+    working_dir: /app
+    environment:
+      PHP_EXTENSIONS: xdebug redis sockets pdo_sqlite amqp opentelemetry
+      MERCURE_PUBLISHER_JWT_KEY: "!publisherKeyOnlyForDevSomePaddingToFulfilLengthRequirements"
+      MERCURE_SUBSCRIBER_JWT_KEY: "!subscriberKeyOnlyForDevPaddingToFulfilLengthRequirements"
+      XDEBUG_TRIGGER: "default_no_matter"
+      XDEBUG_MODE: develop,debug
+      XDEBUG_CONFIG: "client_host=${MY_IP:-172.17.0.1} discover_client_host=0 client_port=9000"
+      PHP_IDE_CONFIG: "serverName=${DEV_SERVER_NAME:-webpage2kindle-cli}"
+  #      COMPOSER_AUTH: '{"github-oauth": {"github.com": "${COMPOSER_GITHUB_OAUTH}"}}'
