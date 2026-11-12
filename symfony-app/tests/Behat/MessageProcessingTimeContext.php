@@ -31,9 +31,7 @@ class MessageProcessingTimeContext implements Context
         });
     }
 
-    /**
-     * @Given /^The afterEvent has not been called$/
-     */
+    #[\Behat\Step\Given('/^The afterEvent has not been called$/')]
     public function theAfterEventHasNotBeenCalled(): void
     {
         $message = new AMQPMessage('', []);
@@ -47,9 +45,7 @@ class MessageProcessingTimeContext implements Context
         );
     }
 
-    /**
-     * @When /^The another message has been processed$/
-     */
+    #[\Behat\Step\When('/^The another message has been processed$/')]
     public function theAnotherMessageHasBeenProcessed(): void
     {
         $message = new AMQPMessage('', []);
@@ -70,9 +66,7 @@ class MessageProcessingTimeContext implements Context
         );
     }
 
-    /**
-     * @Then /^We should store one metric$/
-     */
+    #[\Behat\Step\Then('/^We should store one metric$/')]
     public function weShouldStoreOneMetric(): void
     {
         $metrics = $this->prometheusStorage->collect();

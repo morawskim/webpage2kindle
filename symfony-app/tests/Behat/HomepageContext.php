@@ -20,9 +20,7 @@ class HomepageContext implements Context
     {
     }
 
-    /**
-     * @Given /^I navigate to "([^"]*)"$/
-     */
+    #[\Behat\Step\Given('/^I navigate to "([^"]*)"$/')]
     public function iNavigateTo(string $path): void
     {
         $this->response = $this->client->request('GET', $path);
@@ -35,9 +33,7 @@ class HomepageContext implements Context
         }
     }
 
-    /**
-     * @Then /^the response should contains button "([^"]*)"$/
-     */
+    #[\Behat\Step\Then('/^the response should contains button "([^"]*)"$/')]
     public function theResponseShouldContainsButton(string $txt): void
     {
         $count = $this->response->filterXPath("//button[text()='{$txt}']")->count();
@@ -47,9 +43,7 @@ class HomepageContext implements Context
         }
     }
 
-    /**
-     * @Then /^the response should contains link "([^"]*)" to download extension$/
-     */
+    #[\Behat\Step\Then('/^the response should contains link "([^"]*)" to download extension$/')]
     public function theResponseShouldContainsLink(string $link): void
     {
         if (1 !== $this->response->selectLink($link)->count()) {
@@ -64,25 +58,19 @@ class HomepageContext implements Context
         }
     }
 
-    /**
-     * @When /^I submit form "([^"]*)" with url "([^"]*)"$/
-     */
+    #[\Behat\Step\When('/^I submit form "([^"]*)" with url "([^"]*)"$/')]
     public function iSubmitFormWithUrl(string $txt, string $url): void
     {
         $this->response = $this->client->submitForm($txt, ['url' => $url]);
     }
 
-    /**
-     * @When /^I submit form "([^"]*)"$/
-     */
+    #[\Behat\Step\When('/^I submit form "([^"]*)"$/')]
     public function iSubmitForm(string $txt): void
     {
         $this->response = $this->client->submitForm($txt);
     }
 
-    /**
-     * @Then /^I will be redirected to external page "([^"]*)"$/
-     */
+    #[\Behat\Step\Then('/^I will be redirected to external page "([^"]*)"$/')]
     public function iWillBeRedirectedToExternalPage(string $expectedLocation): void
     {
         if ($this->client->getResponse()->getStatusCode() !== 302) {
@@ -99,9 +87,7 @@ class HomepageContext implements Context
         }
     }
 
-    /**
-     * @Given /^I will see flash message "(.*?)"$/
-     */
+    #[\Behat\Step\Given('/^I will see flash message "(.*?)"$/')]
     public function iWillSeeFlashMessage(string $message): void
     {
         if (1 !== $this->response->filter('.alert')->count()) {
@@ -113,17 +99,13 @@ class HomepageContext implements Context
         }
     }
 
-    /**
-     * @Given /^I follow redirects/
-     */
+    #[\Behat\Step\Given('/^I follow redirects/')]
     public function iFollowRedirection(): void
     {
         $this->client->followRedirects(true);
     }
 
-    /**
-     * @Then /^the url field should contain value "([^"]*)"$/
-     */
+    #[\Behat\Step\Then('/^the url field should contain value "([^"]*)"$/')]
     public function theUrlFieldShouldContainValue(string $url): void
     {
         $field = $this->response->filter("input#urlInput");
@@ -137,9 +119,7 @@ class HomepageContext implements Context
         }
     }
 
-    /**
-     * @Then /^I will be waiting for processing "([^"]*)"$/
-     */
+    #[\Behat\Step\Then('/^I will be waiting for processing "([^"]*)"$/')]
     public function iWillBeWaitingForProcessing(string $url): void
     {
         if ($this->client->getResponse()->getStatusCode() !== 302) {
@@ -176,9 +156,7 @@ class HomepageContext implements Context
         }
     }
 
-    /**
-     * @Given /^The job "([^"]*)" has been processed$/
-     */
+    #[\Behat\Step\Given('/^The job "([^"]*)" has been processed$/')]
     public function theJobHasBeenProcessed(string $jobId): void
     {
         $job = Job::newJob(new JobId($jobId), 'https://example.com');
@@ -189,9 +167,7 @@ class HomepageContext implements Context
         $inMemoryProvider->appendJob($job);
     }
 
-    /**
-     * @When /^I open "([^"]*)"$/
-     */
+    #[\Behat\Step\When('/^I open "([^"]*)"$/')]
     public function iOpen(string $path): void
     {
         $this->client->request('GET', $path);

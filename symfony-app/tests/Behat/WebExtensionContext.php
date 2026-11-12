@@ -13,9 +13,7 @@ class WebExtensionContext implements Context
     {
     }
 
-    /**
-     * @Given I send POST request to :path with body:
-     */
+    #[\Behat\Step\Given('I send POST request to :path with body:')]
     public function iSendPOSTRequestToWithBody(string $path, PyStringNode $requestBody): void
     {
         $params = [];
@@ -30,9 +28,7 @@ class WebExtensionContext implements Context
         );
     }
 
-    /**
-     * @Then I get a response with status ":httpResponseCode" and body:
-     */
+    #[\Behat\Step\Then('I get a response with status ":httpResponseCode" and body:')]
     public function iGetAResponseWithStatusAndBody(int $httpResponseCode, PyStringNode $expectedResponseBody): void
     {
         if ($httpResponseCode !== $actualHttpResponseCode = $this->client->getResponse()->getStatusCode()) {
