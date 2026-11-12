@@ -26,7 +26,7 @@ class PerformanceSubscriber implements EventSubscriberInterface
         }
 
         // prevent storing a lot of unique entries in prometheus when user try to open not existing page
-        $data['route'] = $event->getRequest()->get('_route') ?? 'unknown-route';
+        $data['route'] = $event->getRequest()->attributes->get('_route') ?? 'unknown-route';
         $data['method'] = $event->getRequest()->getRealMethod();
         $data['status_code'] = $event->getResponse()->getStatusCode();
 

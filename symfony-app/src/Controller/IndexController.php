@@ -15,14 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
     #[Route("/", name: 'homepage', methods: ['GET'])]
     public function home(Request $request): Response
     {
-        return $this->render('homepage.html.twig', ['url' => urldecode($request->get('url', ''))]);
+        return $this->render('homepage.html.twig', ['url' => urldecode($request->query->get('url', ''))]);
     }
 
     #[Route("/synchronous", name: 'push_to_kindle_synchronous', methods: ['POST'])]
