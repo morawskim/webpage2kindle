@@ -27,7 +27,6 @@
         "open-telemetry/opentelemetry-auto-pdo": "^0.6.0",
         "open-telemetry/opentelemetry-auto-symfony": "*",
         "open-telemetry/sdk": "*",
-        "php-amqplib/rabbitmq-bundle": "^2.14",
         "promphp/prometheus_client_php": "^2.6",
         "ramsey/uuid": "^4.4",
         "runtime/frankenphp-symfony": "^1.0",

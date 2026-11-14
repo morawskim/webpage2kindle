@@ -2,67 +2,43 @@
 
 namespace App\Tests\Behat;
 
-use App\Infrastructure\RabbitMq\MessageProcessingTimeSubscriber;
+use App\Infrastructure\Messenger\MessageProcessingTimeSubscriber;
 use Behat\Behat\Context\Context;
-use OldSound\RabbitMqBundle\Event\AfterProcessingMessageEvent;
-use OldSound\RabbitMqBundle\Event\BeforeProcessingMessageEvent;
-use OldSound\RabbitMqBundle\RabbitMq\Consumer;
-use PhpAmqpLib\Connection\AbstractConnection;
-use PhpAmqpLib\Message\AMQPMessage;
 use Prometheus\Storage\Adapter;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Event\WorkerMessageHandledEvent;
+use Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent;
+use Symfony\Component\Messenger\Stamp\ReceivedStamp;
 
 class MessageProcessingTimeContext implements Context
 {
-    private Consumer $fakeConsumer;
-
     public function __construct(
         #[Autowire(service: 'prometheus_storage')]
         private readonly Adapter $prometheusStorage,
         private readonly MessageProcessingTimeSubscriber $messageProcessingTimeSubscriber
     ) {
-        $this->fakeConsumer = new Consumer(new class extends AbstractConnection {
-            public function __construct() {}
-
-            public function connectOnConstruct(): bool
-            {
-                return false;
-            }
-        });
     }
 
     #[\Behat\Step\Given('/^The afterEvent has not been called$/')]
     public function theAfterEventHasNotBeenCalled(): void
     {
-        $message = new AMQPMessage('', []);
-        $message->setDeliveryInfo(1, false, 'exchange', 'routingKey');
-
         $this->messageProcessingTimeSubscriber->beforeProcessingMessage(
-            new BeforeProcessingMessageEvent(
-                $this->fakeConsumer,
-                $message
-            )
+            new WorkerMessageReceivedEvent($this->createEnvelope(), 'new_job')
         );
     }
 
     #[\Behat\Step\When('/^The another message has been processed$/')]
     public function theAnotherMessageHasBeenProcessed(): void
     {
-        $message = new AMQPMessage('', []);
-        $message->setDeliveryInfo(2, false, 'exchange', 'routingKey');
+        $envelope = $this->createEnvelope();
 
         $this->messageProcessingTimeSubscriber->beforeProcessingMessage(
-            new BeforeProcessingMessageEvent(
-                $this->fakeConsumer,
-                $message
-            )
+            new WorkerMessageReceivedEvent($envelope, 'new_job')
         );
 
         $this->messageProcessingTimeSubscriber->afterProcessingMessage(
-            new AfterProcessingMessageEvent(
-                $this->fakeConsumer,
-                $message
-            )
+            new WorkerMessageHandledEvent($envelope, 'new_job')
         );
     }
 
@@ -81,5 +57,10 @@ class MessageProcessingTimeContext implements Context
                 $metrics[1]->getName()
             ));
         }
+    }
+
+    private function createEnvelope(): Envelope
+    {
+        return new Envelope(new \stdClass(), [new ReceivedStamp('new_job')]);
     }
 }

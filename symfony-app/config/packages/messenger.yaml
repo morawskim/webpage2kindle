@@ -6,7 +6,13 @@ framework:
         transports:
             new_job:
                 dsn: '%env(RABBITMQ_URL)%'
+                retry_strategy:
+                    max_retries: 0
                 options:
+                    connect_timeout: 3
+                    read_timeout: 120
+                    write_timeout: 120
+                    heartbeat: 60
                     exchange:
                         name: pipeline
                         type: direct
@@ -19,7 +25,13 @@ framework:
                                 x-message-ttl: 60000
             fetch_page_content:
                 dsn: '%env(RABBITMQ_URL)%'
+                retry_strategy:
+                    max_retries: 0
                 options:
+                    connect_timeout: 3
+                    read_timeout: 120
+                    write_timeout: 120
+                    heartbeat: 60
                     exchange:
                         name: pipeline
                         type: direct
@@ -32,7 +44,13 @@ framework:
                                 x-message-ttl: 120000
             push_to_kindle_url:
                 dsn: '%env(RABBITMQ_URL)%'
+                retry_strategy:
+                    max_retries: 0
                 options:
+                    connect_timeout: 3
+                    read_timeout: 120
+                    write_timeout: 120
+                    heartbeat: 60
                     exchange:
                         name: pipeline
                         type: direct
@@ -43,6 +61,21 @@ framework:
                             arguments:
                                 x-dead-letter-exchange: failed-jobs
                                 x-message-ttl: 90000
+            failed:
+                dsn: '%env(RABBITMQ_URL)%'
+                retry_strategy:
+                    max_retries: 0
+                options:
+                    connect_timeout: 3
+                    read_timeout: 120
+                    write_timeout: 120
+                    heartbeat: 60
+                    exchange:
+                        name: failed-jobs
+                        type: direct
+                    queues:
+                        failed-jobs:
+                            binding_keys: [new_job, fetch_page_content, push_to_kindle_url]
 
         routing:
             'App\Web\Application\Message\NewJobMessage': new_job
@@ -56,3 +89,4 @@ when@test:
                 new_job: 'in-memory://'
                 fetch_page_content: 'in-memory://'
                 push_to_kindle_url: 'in-memory://'
+                failed: 'in-memory://'
